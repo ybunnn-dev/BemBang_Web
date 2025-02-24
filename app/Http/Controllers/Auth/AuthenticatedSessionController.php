@@ -31,7 +31,7 @@ class AuthenticatedSessionController extends Controller
         Log::info('Session Data:', session()->all());
         Log::info('Session ID:', ['id' => session()->getId()]);
 
-        return redirect()->intended(route('employee.home'));
+        return redirect()->intended(route('frontdesk.dashboard'));
     }
 
     /**

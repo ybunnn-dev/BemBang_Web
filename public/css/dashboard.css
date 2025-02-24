@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Righteous&display=swap');
+
+#dashboard-nav{
+    background-color: #A1E3F9;
+    color: #578FCA;
+}
+#dashboard-nav .icon{
+    color: #578FCA;
+}
+#rooms-nav, 
+#bookings-nav, 
+#reserve-nav, 
+#msg-nav, 
+#guest-nav{
+    background-color: #a1e3f900;
+}
+#dashboard-nav p{
+    
+    font-weight: 600;
+}
+#rooms-nav p, 
+#bookings-nav p, 
+#reserve-nav p, 
+#msg-nav p, 
+#guest-nav p{
+    font-weight: 500;
+}

@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Righteous&display=swap');
+#profile-icon{
+    position: absolute;
+    left: 82%;
+}
+#profile-icon .btn.btn-primary.dropdown-toggle {
+    height: 4rem;
+    background-color: transparent;
+    font-family: 'Popppins';
+    font-weight: 500;
+    width: 15rem;
+    border: none;
+    align-items: right;
+}
+#profile-icon .dropdown-menu{
+    margin-top: 2.5%;
+    width: 15rem;
+}
+#frontdesk-nav{
+    background: rgb(87,143,202);
+    background: -moz-linear-gradient(100deg, rgba(87,143,202,1) 8%, rgba(0,156,222,1) 32%, rgba(54,116,181,1) 92%) !important;
+    background: -webkit-linear-gradient(100deg, rgba(87,143,202,1) 8%, rgba(0,156,222,1) 32%, rgba(54,116,181,1) 92%) !important;
+    background: linear-gradient(100deg, rgba(87,143,202,1) 8%, rgba(0,156,222,1) 32%, rgba(54,116,181,1) 92%) !important;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#578fca",endColorstr="#3674b5",GradientType=1) !important;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3) !important;
+    height: 70px !important;
+}
+#frontdesk-nav .navbar-brand{
+    padding-top: 0%;
+    font-family: "Righteous";
+    color: #F7F7F7;
+    margin-left: 3.5%;
+    align-items: center;
+}
+#frontdesk-nav .navbar-brand img{
+    margin-left: 50%;
+    transform: translateX(-50%);
+}
+#frontdesk-nav .navbar-brand p{
+    font-size: 1rem;
+    line-height: 0;
+}
+.sidebar {
+    position: fixed !important;
+    left: 0px !important;
+    box-shadow: 4px 0px 8px rgba(0, 0, 0, 0.3) !important;
+    width: 15% !important;
+    height: 100% !important;
+}
+.content{
+    position: absolute !important;
+    padding-left: 0%;
+    left: 15%;
+    width: 85% !important;
+}
+.navbar-brand img{
+    width:2.5rem;
+    height: auto;
+}
+.nav-link.active{
+    font-family: 'Poppins';
+    font-weight: 500;
+    color: #697A8D;
+    font-size: 1rem;
+    margin-top: 0%;
+    padding-bottom: 0%;
+    margin-left: 50%;
+    width: 99%;
+    transform: translateX(-50%)
+}
+.nav-link.active:first-of-type {
+    margin-top: 17%;
+}
+.nav-link.active div{
+    height: 40% !important;
+}
+.nav-link.active .icon{
+    color: #697A8D;
+}
+#dashboard-nav,
+#rooms-nav, 
+#bookings-nav, 
+#reserve-nav, 
+#msg-nav, 
+#guest-nav{
+    width: 100%;
+    height: 2.9rem !important;
+    font-weight: 500;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center; /* Ensures SVG and text stay aligned */
+    gap: 8%; /* Adds spacing between SVG and text */
+    position: relative; /* Keeps it positioned properly */
+    padding-left: 7%;
+}
+
+#dashboard-nav p,
+#rooms-nav p,
+#bookings-nav p,
+#reserve-nav p,
+#msg-nav p,
+#guest-nav p {
+    margin: 0; /* Removes unwanted spacing */
+    line-height: 1; /* Ensures text doesn't take extra space */
+}
