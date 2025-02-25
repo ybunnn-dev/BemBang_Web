@@ -27,11 +27,7 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
         $request->session()->regenerate();
 
-        
-        Log::info('Session Data:', session()->all());
-        Log::info('Session ID:', ['id' => session()->getId()]);
-
-        return redirect()->intended(route('frontdesk.dashboard'));
+        return redirect()->route('role.redirect');
     }
 
     /**

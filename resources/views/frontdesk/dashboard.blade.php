@@ -5,5 +5,28 @@
 @endsection
 
 @section('content')
-    <h1>Welcome, {{ Auth::user()->name }}!</h1>
+    <div id="msg_content">
+    
+    </div>
+    <div id="info_content">
+    
+    </div>
+    <div id="calendar">
+    
+    </div>
+    <div id="incoming">
+
+    </div>
+    <div id="check-in">
+
+    </div>
+    <div id="book-now">
+
+    </div>
+    <div id="reserve-now">
+
+    </div>
+    <div id="scan-qr">
+
+    </div>
 @endsection

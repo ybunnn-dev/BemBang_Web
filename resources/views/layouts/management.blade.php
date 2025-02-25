@@ -16,12 +16,12 @@
 <body>
 
     <!-- Include Front Desk Top Bar -->
-    @include('partials.frontdesk-topbar')
+    @include('partials.management-topbar')
     
     <div class="container">
         <div class="sidebar">
             <!-- Include Front Desk Sidebar -->
-            @include('partials.frontdesk-sidebar')
+            @include('partials.management-sidebar')
         </div>
         <div class="content">
             @yield('content')

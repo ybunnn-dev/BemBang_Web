@@ -25,3 +25,83 @@
 #guest-nav p{
     font-weight: 500;
 }
+#msg_content {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Thin shadow on all sides */
+    width: 840px;
+    min-height: 200px; /* Ensure visibility */
+    background: white; /* Helps the shadow stand out */
+    border-radius: 5px; /* Optional: smooth edges */
+    position: fixed;
+    top: 19%;
+    left: 21%;
+}
+#info_content{
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Thin shadow on all sides */
+    width: 840px;
+    min-height: 260px; /* Ensure visibility */
+    background: white; /* Helps the shadow stand out */
+    border-radius: 5px; /* Optional: smooth edges */
+    position: fixed;
+    top: 48%;
+    left: 21%;
+}
+#calendar{
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Thin shadow on all sides */
+    width: 300px;
+    min-height: 270px; /* Ensure visibility */
+    background: white; /* Helps the shadow stand out */
+    border-radius: 5px; /* Optional: smooth edges */
+    position: fixed;
+    top: 19%;
+    left: 77.4%;
+}
+#incoming{
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Thin shadow on all sides */
+    width: 300px;
+    min-height: 290px; /* Ensure visibility */
+    background: white; /* Helps the shadow stand out */
+    border-radius: 5px; /* Optional: smooth edges */
+    position: fixed;
+    top: 58%;
+    left: 77.4%;
+}
+#check-in{
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Thin shadow on all sides */
+    width: 195px;
+    min-height: 90px; /* Ensure visibility */
+    background: white; /* Helps the shadow stand out */
+    border-radius: 5px; /* Optional: smooth edges */
+    position: fixed;
+    top: 85.5%;
+    left: 21%;
+}
+#book-now{
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Thin shadow on all sides */
+    width: 195px;
+    min-height: 90px; /* Ensure visibility */
+    background: white; /* Helps the shadow stand out */
+    border-radius: 5px; /* Optional: smooth edges */
+    position: fixed;
+    top: 85.5%;
+    left: 34.7%;
+}
+#reserve-now{
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Thin shadow on all sides */
+    width: 195px;
+    min-height: 90px; /* Ensure visibility */
+    background: white; /* Helps the shadow stand out */
+    border-radius: 5px; /* Optional: smooth edges */
+    position: fixed;
+    top: 85.5%;
+    left: 48.5%;
+}
+#scan-qr{
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Thin shadow on all sides */
+    width: 200px;
+    min-height: 90px; /* Ensure visibility */
+    background: white; /* Helps the shadow stand out */
+    border-radius: 5px; /* Optional: smooth edges */
+    position: fixed;
+    top: 85.5%;
+    left: 62.5%;
+}

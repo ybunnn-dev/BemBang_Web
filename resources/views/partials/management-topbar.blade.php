@@ -1,6 +1,6 @@
 <nav class="navbar navbar-light bg-light" id="frontdesk-nav">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#"><img src="{{ asset('images/logo.svg') }}"><p>FRONTDESK<p></a>
+    <a class="navbar-brand" href="#"><img src="{{ asset('images/logo.svg') }}"><p>MANAGEMENT<p></a>
   </div>
   <div class="dropdown" id="profile-icon">
     
@@ -8,7 +8,7 @@
     <button class="btn btn-primary d-flex align-items-center" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
         <div id="Profile1"></div>
         <svg width="1rem" height="1rem" viewBox="0 0 1024 1024" class="icon"  version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M903.232 256l56.768 50.432L512 768 64 306.432 120.768 256 512 659.072z" fill="#F7F7F7" /></svg>
-        <p id="rec">Receptionist</p>
+        <p id="rec">Manager</p>
         <p id="rec2">{{ Auth::user()->name }}</p>
     </button>
 

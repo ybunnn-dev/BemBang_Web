@@ -3,7 +3,13 @@
     position: absolute;
     left: 82%;
 }
-#profile-icon .btn.btn-primary.dropdown-toggle {
+#Profile1 {
+    width: 3.0rem; /* Adjust width */
+    height: 3.0rem; /* Adjust height */
+    background-color: blue; /* Example color */
+    border-radius: 50%; /* Makes it an ellipse */
+}
+#dropdownMenuButton{
     height: 4rem;
     background-color: transparent;
     font-family: 'Popppins';
@@ -11,6 +17,70 @@
     width: 15rem;
     border: none;
     align-items: right;
+}
+#dropdownMenuButton::after {
+    display: none !important; /* Removes Bootstrap's default arrow */
+}
+#rec{
+    position: absolute;
+    left: 32%;
+}
+#rec2{
+    position: absolute;
+    left: 32%;
+    top: 50%;
+    font-weight: 400;
+    font-size: 0.9rem;
+}
+#dropdownMenuButton svg{
+    position: absolute;
+    left: 85%;
+}
+.dropdown-menu{
+    height: 6.7rem !important;
+    width: 13.5rem !important;
+}
+#acc-sett{
+    margin-top: 0.1rem;
+    border-bottom: 0.4px solid #697A8D;
+}
+#logout-sec{
+    height: 2.8rem;
+    
+}
+#log-out-button{
+    display: flex;
+    align-items: center;
+    gap: 0.8rem; /* Adjust spacing between the icon and text */
+    height: 3.0rem;
+    padding: 0;
+}
+#log-out-button svg{
+    margin-left: 1rem;
+}
+#acc-sett{
+    display: flex;
+    align-items: center;
+    gap: 0rem; /* Adjust spacing between the icon and text */
+    height: 3.0rem;
+    padding: 0;
+}
+#acc-sett a{
+    font-family: 'Poppins';
+    font-weight: 600 !important;
+    color: #697A8D;
+}
+#acc-sett svg{
+    margin-left: 1rem;
+}
+#acc-sett a:hover{
+    background-color: transparent;
+}
+#logout-sec button p{
+    font-family: 'Poppins';
+    font-weight: 600 !important;
+    color: #697A8D;
+    margin-top: 5%;
 }
 #profile-icon .dropdown-menu{
     margin-top: 2.5%;
@@ -29,7 +99,7 @@
     padding-top: 0%;
     font-family: "Righteous";
     color: #F7F7F7;
-    margin-left: 3.5%;
+    margin-left: 5.3%;
     align-items: center;
 }
 #frontdesk-nav .navbar-brand img{
@@ -43,8 +113,8 @@
 .sidebar {
     position: fixed !important;
     left: 0px !important;
-    box-shadow: 4px 0px 8px rgba(0, 0, 0, 0.3) !important;
-    width: 15% !important;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3) !important;
+    width: 18% !important;
     height: 100% !important;
 }
 .content{
@@ -103,3 +173,4 @@
     margin: 0; /* Removes unwanted spacing */
     line-height: 1; /* Ensures text doesn't take extra space */
 }
+

@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Frontdesk\FrontdeskDashboardController;
+use App\Http\Controllers\RolesController;
 
 Route::get('/', function () {
     return view('auth/login');
@@ -12,21 +13,27 @@ Route::get('/', function () {
 
 Route::prefix('frontdesk')->middleware(['auth', 'verified'])->group(function () {
     Route::get('/', function () {
-        return redirect()->route('frontdesk.dashboard'); // Redirects to the dashboard
+        return redirect()->route('frontdesk.dashboard'); // Redirect to dashboard
     })->name('frontdesk');
 
     Route::get('/dashboard', [FrontdeskDashboardController::class, 'index'])
         ->name('frontdesk.dashboard');
 });
 
-Route::get('/management/dashboard', function () {
-    return view('management.dashboard'); // Uses layouts/management.blade.php
+// Management Dashboard Route with Authentication
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/management/dashboard', function () {
+        return view('management.dashboard'); // Uses layouts/management.blade.php
+    })->name('management.dashboard');
 });
 
 Route::get('/employee/home', function () {
     return view('employee.home'); // Use dot notation for views
 })->middleware(['auth', 'verified'])->name('employee.home'); // Use dot notation for route name
 
+Route::get('/redirect', [RolesController::class, 'redirectBasedOnRole'])
+    ->middleware(['auth', 'verified'])
+    ->name('role.redirect');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
