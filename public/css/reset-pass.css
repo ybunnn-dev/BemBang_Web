@@ -1,15 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Righteous&display=swap');
-body{
-    background: rgb(87,143,202);
-    background: -moz-linear-gradient(141deg, rgba(87,143,202,1) 32%, rgba(161,227,249,1) 69%, rgba(209,248,239,1) 100%);
-    background: -webkit-linear-gradient(141deg, rgba(87,143,202,1) 32%, rgba(161,227,249,1) 69%, rgba(209,248,239,1) 100%);
-    background: linear-gradient(141deg, rgba(87,143,202,1) 32%, rgba(161,227,249,1) 69%, rgba(209,248,239,1) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#578fca",endColorstr="#d1f8ef",GradientType=1);
+body {
+    background: rgb(87,143,202) !important;
+    background: -moz-linear-gradient(141deg, rgba(87,143,202,1) 32%, rgba(161,227,249,1) 69%, rgba(209,248,239,1) 100%) !important;
+    background: -webkit-linear-gradient(141deg, rgba(87,143,202,1) 32%, rgba(161,227,249,1) 69%, rgba(209,248,239,1) 100%) !important;
+    background: linear-gradient(141deg, rgba(87,143,202,1) 32%, rgba(161,227,249,1) 69%, rgba(209,248,239,1) 100%) !important;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#578fca",endColorstr="#d1f8ef",GradientType=1) !important;
 }
 #login-box{
     border-radius: 10px;
     height: 450px;
-    width: 400px;
+    width: 200px;
     font-family: 'Poppins' !important;
     background-color: white;
 }
@@ -19,19 +19,27 @@ body{
     left: 50%;
     transform: translate(-50%, -50%);
     width: 100%;
-    max-width: 800px; /* Adjust width */
+    max-width:400px; /* Adjust width */
     text-align: center;
 }
 #login-box h1{
-    margin-top: 60px;
+    margin-top: 50px;
     font-weight: 600;
     color: #566A7F;
 }
 #login-box p{
-    text-align: center;
-    margin-top: -10px;
+    margin-top: -20px;
     font-size: 14px;
     color: #697A8D;
+}
+#login-box a{
+    position: absolute;
+    top: 380px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: 600;
+    color: #697A8D;
+    font-size: 14px;
 }
 #logo-container {
     height: 450px;
@@ -68,12 +76,6 @@ body{
     transform: translateX(-50%);
     padding-bottom: 5px;
 }
-#formControlInput1{
-    margin-top: 30px;
-    margin-left: 50%;
-    transform: translateX(-50%);
-    padding-bottom: 5px;
-}
 #formControlInput:focus, #formControlInput1:focus {
     border-top: none;
     border-left: none;
@@ -84,7 +86,7 @@ body{
 }
 #login-box .btn-primary{
     position: absolute;
-    top: 340px;
+    top: 300px;
     left: 50%;
     height: 40px !important;
     transform: translateX(-50%);
@@ -109,39 +111,6 @@ body{
     font-family: "Righteous" !important;
     color: white;
     margin-top: -30px;
-}
-#msg-container h2{
-    position: absolute;
-    font-weight: 600;
-    text-align: left;
-    top: 75px;
-    left: 60px;
-    color: #566A7F;
-}
-#msg-container p{
-    width: 250px;
-    text-align: justify;
-    font-size: 16px;
-    position: absolute;
-    top: 190px;
-    left: 60px;
-    color: #697A8D;
-}
-#msg-container .btn-primary{
-    position: absolute;
-    top: 320px;
-    left: 195px;
-    height: 40px !important;
-    width: 270px !important;
-    border-radius: 0px !important;
-    font-weight: 600 !important;
-    background-color: #578FCA;
-    border: none !important;
-    border-radius: 5px !important;
-    color: white;
-}
-#msg-container {
-    transition: opacity 0.8s ease-in-out; /* Smooth fade effect */
 }
 .hidden {
     opacity: 0; /* Make it invisible */

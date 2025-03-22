@@ -4,10 +4,19 @@
     left: 82%;
 }
 #Profile1 {
-    width: 3.0rem; /* Adjust width */
+    width: 3.0rem;  /* Adjust width */
     height: 3.0rem; /* Adjust height */
-    background-color: blue; /* Example color */
-    border-radius: 50%; /* Makes it an ellipse */
+    border-radius: 50%; /* Makes it a circle */
+    overflow: hidden; /* Ensures the image doesn't overflow */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#Profile1 img {
+    width: 100%; /* Ensure the image fills the div */
+    height: 100%;
+    object-fit: cover; /* Crop and fit the image inside the div */
+    border-radius: 50%; /* Ensures the image is circular */
 }
 #dropdownMenuButton{
     height: 4rem;

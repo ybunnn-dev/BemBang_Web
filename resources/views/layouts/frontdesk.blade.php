@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title')</title>
     @yield('styles')
+    @yield('scripts')
     <link rel="icon" type="image/png" href="{{ asset('images/hotel-logo.svg') }}">
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
@@ -17,7 +18,6 @@
 
     <!-- Include Front Desk Top Bar -->
     @include('partials.frontdesk-topbar')
-    
     <div class="container">
         <div class="sidebar">
             <!-- Include Front Desk Sidebar -->
@@ -27,7 +27,5 @@
             @yield('content')
         </div>
     </div>
-
-    <script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>

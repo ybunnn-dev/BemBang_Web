@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -25,7 +24,7 @@
                 <p>Enter your e-mail and password</p>
                 <input type="email" name="email" class="form-control" id="formControlInput" placeholder="Enter E-mail" required>
                 <input type="password" name="password" class="form-control" id="formControlInput1" placeholder="Enter Your Password" required>
-                
+                <a id="forgot-pass" href="{{ route('password.request') }}">Forgot Password?</a>
                 <button type="submit" class="btn btn-primary" id="loginButton">LOGIN</button>
             </form>
             </div>
