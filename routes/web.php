@@ -20,6 +20,12 @@ Route::prefix('frontdesk')->middleware(['auth', 'verified'])->group(function () 
         ->name('frontdesk.dashboard');
 });
 
+
+Route::get('/view-rooms', function () {
+    return view('frontdesk.view_rooms'); // Points to frontdesk/view_rooms.blade.php
+})->name('frontdesk.view_rooms');
+
+
 // Management Dashboard Route with Authentication
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/management/dashboard', function () {

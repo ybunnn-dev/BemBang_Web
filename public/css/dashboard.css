@@ -3,6 +3,9 @@
 .container{
     background-color: #000000 !important;
 }
+#dashnav{
+    pointer-events: none !important;
+}
 h4{
     color: #566A7F !important;
     font-family: 'Poppins';
@@ -11,9 +14,11 @@ h4{
 #dashboard-nav{
     background-color: #A1E3F9;
     color: #578FCA;
+    pointer-events: none !important;
 }
 #dashboard-nav .icon{
     color: #578FCA;
+    pointer-events: none !important;
 }
 #rooms-nav, 
 #bookings-nav, 
@@ -23,7 +28,7 @@ h4{
     background-color: #a1e3f900;
 }
 #dashboard-nav p{
-    
+    pointer-events: none !important;
     font-weight: 600;
 }
 #rooms-nav p, 
