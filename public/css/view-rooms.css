@@ -56,13 +56,14 @@ h4{
     width: 1150px;
     margin-left: 100px;
     margin-top: 85px;
-    height: 340px;
+    height: 550px;
     background-color: #f7f7f7;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
     border-radius: 10px;
     display: flex;
     flex-direction: column;
     gap: 10px; /* Space between elements */
+
 
 }
 #content-card .input-group {
@@ -174,5 +175,23 @@ h4{
     color: #697A8D;
 }
 .table.table-hover td {
-    height: 50px;
+    height: 40px !important;
+    padding-bottom: 0px;
+}
+.status-div{
+    background-color: gray; 
+    text-align: center; 
+    font-family: 'Poppins'; 
+    color: #f7f7f7;
+    font-size: 12px;
+    border-radius: 15px;
+    width: 100px;
+}
+.table.table-hover tbody td:not(:nth-child(5)):not(:nth-child(6)),
+.table.table-hover tbody th:nth-child(1) {
+    padding-top: 20px; /* Adjust as needed */
+}
+.table-container{
+    margin-left: 20px;
+    width: 96.5%;
 }

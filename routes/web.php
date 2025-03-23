@@ -25,6 +25,9 @@ Route::get('/view-rooms', function () {
     return view('frontdesk.view_rooms'); // Points to frontdesk/view_rooms.blade.php
 })->name('frontdesk.view_rooms');
 
+Route::get('/room-details', function () {
+    return view('frontdesk.specific_room'); // Points to frontdesk/view_rooms.blade.php
+})->name('frontdesk.room-details');
 
 // Management Dashboard Route with Authentication
 Route::middleware(['auth', 'verified'])->group(function () {

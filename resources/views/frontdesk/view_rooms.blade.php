@@ -53,46 +53,48 @@
                     <li><a class="dropdown-item" href="#">Cleaning</a></li>
                 </ul>
             </div>
-            <button type="button" class="btn btn-light">Light</button>
+            <button type="button" class="btn btn-light">Enter Date</button>
         </div>
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th scope="col">TRANSACT ID</th>
-                    <th scope="col">ROOM #</th>
-                    <th scope="col">ROOM TYPE</th>
-                    <th scope="col">GUEST NAME</th>
-                    <th scope="col">CHECK-IN</th>
-                    <th scope="col">CHECK-OUT</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th scope="row">1001</th>
-                    <td>101</td>
-                    <td>Bembang Standard</td>
-                    <td>John Doe</td>
-                    <td>2025-03-21 14:00</td>
-                    <td>2025-03-23 12:00</td>
-                </tr>
-                <tr>
-                    <th scope="row">1002</th>
-                    <td>203</td>
-                    <td>Bembang Twin</td>
-                    <td>Jane Smith</td>
-                    <td>2025-03-20 15:30</td>
-                    <td>2025-03-24 11:00</td>
-                </tr>
-                <tr>
-                    <th scope="row">1003</th>
-                    <td>305</td>
-                    <td>Bembang Suite</td>
-                    <td>Michael Johnson</td>
-                    <td>2025-03-22 16:00</td>
-                    <td>2025-03-26 10:30</td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="table-container">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">ROOM #</th>
+                        <th scope="col">ROOM TYPE</th>
+                        <th scope="col">STATUS</th>
+                        <th scope="col">GUEST NAME</th>
+                        <th scope="col">CHECK-IN</th>
+                        <th scope="col">CHECK-OUT</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr onclick="window.location.href='/room-details'">
+                        <th scope="row">1001</th>
+                        <td>Bembang Standard</td>
+                        <td><div class="status-div">Reserved</div></td>
+                        <td>John Doe</td>
+                        <td>2025-03-21<br><p style="font-size: 13px;">12:00</p></td>
+                        <td>2025-03-23 <br><p style="font-size: 13px;">12:00</p></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">1002</th>
+                        <td>Bembang Twin</td>
+                        <td><div class="status-div">Maintenance</div></td>
+                        <td>Jane Smith</td>
+                        <td>2025-03-21<br><p style="font-size: 13px;">12:00</p></td>
+                        <td>2025-03-23 <br><p style="font-size: 13px;">12:00</p></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">1003</th>
+                        <td>Bembang Suite</td>
+                        <td><div class="status-div">Available</div></td>
+                        <td>Michael Johnson</td>
+                        <td>2025-03-21<br><p style="font-size: 13px;">12:00</p></td>
+                        <td>2025-03-23 <br><p style="font-size: 13px;">12:00</p></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 @endsection
 
