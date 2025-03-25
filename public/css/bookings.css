@@ -6,29 +6,29 @@ h4{
     font-weight: bold !important;
 }
 
-#rooms-nav{
+#bookings-nav{
     background-color: #A1E3F9;
     color: #578FCA;
     pointer-events: none !important;
 }
-#rooms-nav .icon{
+#bookings-nav .icon{
     fill: #578FCA !important;
     pointer-events: none !important;
 }
 
-#bookings-nav, 
+#rooms-nav, 
 #reserve-nav, 
 #msg-nav, 
 #guest-nav
 #dashboard-nav{
     background-color: #a1e3f900;
 }
-#rooms-nav p{
+#bookings-nav p{
     pointer-events: none !important;
     font-weight: 600;
 }
 #dashboard-nav p, 
-#bookings-nav p, 
+#rooms-nav p, 
 #reserve-nav p, 
 #msg-nav p, 
 #guest-nav p{
@@ -47,7 +47,7 @@ h4{
     left:9rem;
 }
 #main-label img{
-    height: 1.6rem;
+    height: 1.7rem;
     width: auto;
     position: absolute;
     top: 2.5rem;
@@ -69,7 +69,7 @@ h4{
 #content-card .input-group {
     display: flex;
     align-items: center;
-    gap: 30px; /* Space between the search bar and dropdown */
+    gap: 20px; /* Space between the search bar and dropdown */
     margin-left: 20px;
 }
 
@@ -123,7 +123,7 @@ h4{
     border-radius: 5px;
 }
 #dropdown-label-roomtype{
-    margin-left: 220px !important;
+    margin-left: 215px !important;
 }
 #dropdown-label-status{
     margin-left: 145px !important;
@@ -140,7 +140,7 @@ h4{
     height: 30px;
     font-family: 'Poppins' !important;
     font-size: 14px;
-    width: 218px; 
+    width: 150px; 
     border: 0.5px solid #90989f;
     border-radius: 5px !important;
     text-align: left;
@@ -151,7 +151,7 @@ h4{
 }
 
 #date-time-label{
-    margin-left: 190px !important;
+    margin-left: 130px !important;
 }
 .table thead {
     background-color: #A1E3F9 !important;
@@ -244,4 +244,27 @@ h4{
     border-radius: 10px;
     padding-top: 15px;
     margin-top: 5px;
+}
+#book-button{
+    background-color: #578FCA;
+    border: none;
+    color: #f7f7f7;
+    padding: 0;
+    padding-left: 22px;
+    font-weight: 600;
+    width: 120px;
+}
+#book-button:hover{
+    background-color: #3c628a;
+}
+#scan-qr-button{
+    background-color: #f7f7f7;
+    color: #578FCA ;
+    border: 1px solid #578FCA !important;
+    height: 30px;
+    width: 180px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 0;
 }

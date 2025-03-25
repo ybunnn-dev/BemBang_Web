@@ -1,0 +1,367 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Righteous&display=swap');
+
+#exit-button {
+    display: flex;
+    align-items: center;  /* Aligns content vertically (optional) */
+    justify-content: center;  /* Centers content horizontally (optional) */
+    gap: 8px;  /* Adds space between the image and text (optional) */
+    margin-left: 100px;
+    margin-top: 20px;
+    outline: none;
+    border: none;
+    font-family: 'Poppins';
+    font-weight: 600;
+    background-color: transparent;
+    font-size: 14px;
+}
+#rooms-nav{
+    background-color: #A1E3F9;
+    color: #578FCA;
+    pointer-events: none !important;
+}
+#rooms-nav .icon{
+    fill: #578FCA !important;
+    pointer-events: none !important;
+}
+
+#bookings-nav, 
+#reserve-nav, 
+#msg-nav, 
+#guest-nav
+#dashboard-nav{
+    background-color: #a1e3f900;
+}
+#rooms-nav p{
+    pointer-events: none !important;
+    font-weight: 600;
+}
+#dashboard-nav p, 
+#bookings-nav p, 
+#reserve-nav p, 
+#msg-nav p, 
+#guest-nav p{
+    font-weight: 500;
+}
+
+#exit-button img {
+    margin-right: 5px; /* Adjust space between image and text */
+}
+
+#room-profile-pic{
+    width: 258px;
+    height: 258px;
+    margin-left: 100px;
+    margin-top: 10px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
+}
+
+.details-card{
+    width: 880px;
+    height: 380px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
+    position: absolute;
+    top: 50px;
+    left: 380px;
+    border-radius: 10px;
+    color: #f7f7f7;
+}
+.features-card{
+    width: 258px;
+    height: 310px;
+    color: #f7f7f7;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
+    border-radius: 10px;
+    position: relative;
+    top: 10px;
+    left: 100px;
+}
+.checkin-price{
+    width: 310px;
+    height: 190px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
+    position: absolute;
+    top: 440px;
+    left: 380px;
+    border-radius: 10px;
+    color: #f7f7f7;
+}
+.reserve-price{
+    width: 310px;
+    height: 190px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
+    position: absolute;
+    top: 440px;
+    left: 710px;
+    border-radius: 10px;
+    color: #f7f7f7;
+}
+.action-buttons ul {
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    width: 230px;
+    position: absolute;
+    top: 440px;
+    left: 1030px;
+    list-style-type: none;
+}
+
+.action-buttons ul li {
+    margin-bottom: 10px; /* Adds a gap between buttons */
+}
+
+.action-buttons ul li button {
+    width: 100%; /* Makes the buttons full width of their container */
+    height: 57px; /* You can adjust this height as needed */
+    font-size: 16px; /* Adjust button text size */
+    background-color: #578FCA !important;
+    font-family: 'Poppins' !important;
+    font-weight: 600 !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12) !important;
+    border: none !important;
+}
+.details-card p{
+    font-family: 'Poppins';
+    color: #697A8D;
+    font-weight: 500;
+}
+#room-type-label{
+    position: absolute;
+    top: 90px;
+    left: 30px;
+    font-size: 11px;
+}
+#room-type-value{
+    position: absolute;
+    top: 110px;
+    left: 30px;
+    font-size: 14px;
+}
+.room-details-head{
+    display: flex;
+    align-items: center; /* Vertically aligns items */
+    gap: 15px; /* Sets a 10px gap between the elements */
+    margin-left: 30px;
+    justify-content: flex-start;
+    margin-top: 25px;
+}
+#room-status {
+    color: #26E42C;
+    width: 100px;
+    height: 20px;
+    background-color: transparent;
+    text-align: center;
+    border-radius: 15px;
+    font-family: 'Poppins';
+    font-size: 14px;
+    border: 0.5px solid #26E42C !important;
+    margin-bottom: -5px;
+}
+
+.details-card h4 {
+    color: #566A7F;
+    font-family: 'Poppins';
+    font-weight: 600;
+    margin: 0;
+    margin-bottom: -5px;
+}
+
+.details-card img {
+    width: 25px;
+    height: 25px;
+}
+#guest-num-label{
+    position: absolute;
+    top: 90px;
+    left: 430px;
+    font-size: 11px;
+}
+#guest-num-value{
+    position: absolute;
+    top: 110px;
+    left: 430px;
+    font-size: 14px;
+}
+#line1{
+    color: #566A7F;
+    width: 800px;
+    position: absolute;
+    left: 30px;
+    top: 135px;
+}
+#guest-name-label{
+    position: absolute;
+    top: 175px;
+    left: 30px;
+    font-size: 11px;
+}
+#guest-name-value{
+    position: absolute;
+    top: 195px;
+    left: 30px;
+    font-size: 14px;
+}
+#guest-num2-label{
+    position: absolute;
+    top: 175px;
+    left: 430px;
+    font-size: 11px;
+}
+#guest-num2-value{
+    position: absolute;
+    top: 195px;
+    left: 430px;
+    font-size: 14px;
+}
+#checkin-date-label{
+    position: absolute;
+    top: 230px;
+    left: 30px;
+    font-size: 11px;
+}
+#checkin-date-value{
+    position: absolute;
+    top: 250px;
+    left: 30px;
+    font-size: 14px;
+}
+#checkout-date-label{
+    position: absolute;
+    top: 285px;
+    left: 30px;
+    font-size: 11px;
+}
+#checkout-date-value{
+    position: absolute;
+    top: 305px;
+    left: 30px;
+    font-size: 14px;
+}
+#checkin-time-label{
+    position: absolute;
+    top: 230px;
+    left: 430px;
+    font-size: 11px;
+}
+#checkin-time-value{
+    position: absolute;
+    top: 250px;
+    left: 430px;
+    font-size: 14px;
+}
+#checkout-time-label{
+    position: absolute;
+    top: 285px;
+    left: 430px;
+    font-size: 11px;
+}
+#checkout-time-value{
+    position: absolute;
+    top: 305px;
+    left: 430px;
+    font-size: 14px;
+}
+.features-card h5{
+    font-family: 'Poppins';
+    font-weight: 600 !important;
+    font-size: 18px;
+    color: #566A7F;
+    position: absolute;
+    top: 15px;
+    left: 50px;
+}
+.features-card img{
+    position: absolute;
+    left: 15px;
+    top: 14px;
+}
+#feature-line{
+    width: 230px;
+    color: #566A7F;
+    position: absolute;
+    top: 35px;
+    left: 15px;
+}
+.checkin-price img, .reserve-price img{
+    position: absolute;
+    left: 20px;
+    top: 20px;
+}
+.checkin-price h5, .reserve-price h5{
+    position: absolute;
+    left: 60px;
+    top: 20px;
+    font-family: 'Poppins';
+    color: #566A7F;
+    font-weight: 600;
+}
+.price-line{
+    position: absolute;
+    width: 270px;
+    color: #566A7F;
+    top: 40px;
+    left: 20px;
+}
+.checkin-price, .reserve-price{
+    font-family: 'Poppins';
+    color: #697A8D;
+}
+#checkin-12, #reserve-12{
+    position: absolute;
+    top: 90px;
+    margin-left: 130px;
+}
+#checkin-24, #reserve-24{
+    position: absolute;
+    top: 130px;
+    margin-left: 130px;
+}
+.rate-level{
+    margin-top: 90px;
+    margin-left: 30px;
+    font-weight: 600;
+}
+.features-content {
+    height: 230px;
+    width: 250px;
+    position: relative;
+    top: 60px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    
+    /* Hide scrollbar */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE & Edge */
+}
+.feature-list{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    font-family: 'Poppins';
+    color: #697A8D;
+    font-size: 12px;
+    gap: 10px;
+}
+.feature-list li{
+    list-style: none; 
+}
+
+.li-content {
+    display: flex;
+    align-items: center; /* Ensures vertical alignment */
+    height: 20px;
+    gap: 20px;
+    width: 180px;
+    list-style-type: none;
+    margin-top: 15px;    
+}
+
+.li-content p {
+    margin-bottom: -1px;
+    margin-left: 10px;
+}
+.li-content img {
+    position: static; /* Removes absolute positioning */
+}

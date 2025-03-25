@@ -14,26 +14,30 @@
       <p>Dashboard</p>
     </div>
   </a>
-  <a class="nav-link active" aria-current="page" href="{{ route('frontdesk.view_rooms') }}"><div id="rooms-nav">
-    <svg fill="#697A8D" class="icon" width="1rem" height="1rem" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M5 10C3.347656 10 2 11.347656 2 13L2 26.8125C3.296875 25.6875 4.9375 24.777344 7 24.0625L7 20C7 17.339844 11.542969 17 15.5 17C19.457031 17 24 17.339844 24 20L24 22C24.335938 21.996094 24.65625 22 25 22C25.34375 22 25.664063 21.996094 26 22L26 20C26 17.339844 30.542969 17 34.5 17C38.457031 17 43 17.339844 43 20L43 24.03125C45.058594 24.742188 46.691406 25.671875 48 26.8125L48 13C48 11.347656 46.652344 10 45 10 Z M 25 24C5.90625 24 -0.015625 27.53125 0 37L50 37C50.015625 27.46875 44.09375 24 25 24 Z M 0 39L0 50L7 50L7 46C7 44.5625 7.5625 44 9 44L41 44C42.4375 44 43 44.5625 43 46L43 50L50 50L50 39Z"/></svg>
-    <p>View Rooms</p></div></a>
-  <a class="nav-link active" aria-current="page" href="#">
-    <div id="bookings-nav">
-      <svg fill="#697A8D" width="1rem" height="1rem" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M2,7V21a1,1,0,0,0,1,1H13V6H3A1,1,0,0,0,2,7ZM5,9h5v2H5Zm0,4h5v2H5Zm0,4h5v2H5ZM22,3V21a1,1,0,0,1-1,1H15V4H10V3a1,1,0,0,1,1-1H21A1,1,0,0,1,22,3Z"/>
-      </svg>
-      <p>Bookings</p>
-    </div>
-  </a>
-  <a class="nav-link active" aria-current="page" href="#">
+
+    <a class="nav-link active" aria-current="page" href="{{ route('frontdesk.view_rooms') }}"><div id="rooms-nav">
+      <svg fill="#697A8D" class="icon" width="1rem" height="1rem" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M5 10C3.347656 10 2 11.347656 2 13L2 26.8125C3.296875 25.6875 4.9375 24.777344 7 24.0625L7 20C7 17.339844 11.542969 17 15.5 17C19.457031 17 24 17.339844 24 20L24 22C24.335938 21.996094 24.65625 22 25 22C25.34375 22 25.664063 21.996094 26 22L26 20C26 17.339844 30.542969 17 34.5 17C38.457031 17 43 17.339844 43 20L43 24.03125C45.058594 24.742188 46.691406 25.671875 48 26.8125L48 13C48 11.347656 46.652344 10 45 10 Z M 25 24C5.90625 24 -0.015625 27.53125 0 37L50 37C50.015625 27.46875 44.09375 24 25 24 Z M 0 39L0 50L7 50L7 46C7 44.5625 7.5625 44 9 44L41 44C42.4375 44 43 44.5625 43 46L43 50L50 50L50 39Z"/></svg>
+      <p>View Rooms</p></div></a>
+
+    <a class="nav-link active" aria-current="page" href="{{ route('frontdesk.bookings') }}">
+      <div id="bookings-nav">
+        <svg fill="#697A8D" width="1rem" height="1rem" class="icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M2,7V21a1,1,0,0,0,1,1H13V6H3A1,1,0,0,0,2,7ZM5,9h5v2H5Zm0,4h5v2H5Zm0,4h5v2H5ZM22,3V21a1,1,0,0,1-1,1H15V4H10V3a1,1,0,0,1,1-1H21A1,1,0,0,1,22,3Z"/>
+        </svg>
+        <p>Bookings</p>
+      </div>
+    </a>
+
+  <a class="nav-link active" aria-current="page" href="{{ route('frontdesk.reservations') }}">
     <div id="reserve-nav">
-    <svg width="1rem" height="1rem" viewBox="0 0 24 24" fill="#697A8D" xmlns="http://www.w3.org/2000/svg">
-        <path d="M21.9707 18V19C21.9707 20.65 21.9707 22 18.9707 22H4.9707C1.9707 22 1.9707 20.65 1.9707 19V18C1.9707 17.45 2.4207 17 2.9707 17H20.9707C21.5207 17 21.9707 17.45 21.9707 18Z" fill="currentColor"/>
-        <path d="M14.4095 5.17977C14.4595 4.97977 14.4895 4.78977 14.4995 4.57977C14.5295 3.41977 13.8195 2.39977 12.6995 2.09977C11.0195 1.63977 9.49953 2.89977 9.49953 4.49977C9.49953 4.73977 9.52953 4.95977 9.58953 5.17977C5.97953 5.94977 3.26953 9.15977 3.26953 12.9998V14.4998C3.26953 15.0498 3.71953 15.4998 4.26953 15.4998H19.7195C20.2695 15.4998 20.7195 15.0498 20.7195 14.4998V12.9998C20.7195 9.15977 18.0195 5.95977 14.4095 5.17977ZM14.9995 11.7498H8.99953C8.58953 11.7498 8.24953 11.4098 8.24953 10.9998C8.24953 10.5898 8.58953 10.2498 8.99953 10.2498H14.9995C15.4095 10.2498 15.7495 10.5898 15.7495 10.9998C15.7495 11.4098 15.4095 11.7498 14.9995 11.7498Z" fill="#currentColor"/>
+      <svg width="1rem" height="1rem" viewBox="0 0 24 24" fill="#697A8D" xmlns="http://www.w3.org/2000/svg" class="icon">
+        <path d="M21.9707 18V19C21.9707 20.65 21.9707 22 18.9707 22H4.9707C1.9707 22 1.9707 20.65 1.9707 19V18C1.9707 17.45 2.4207 17 2.9707 17H20.9707C21.5207 17 21.9707 17.45 21.9707 18Z" fill="inherit"/>
+        <path d="M14.4095 5.17977C14.4595 4.97977 14.4895 4.78977 14.4995 4.57977C14.5295 3.41977 13.8195 2.39977 12.6995 2.09977C11.0195 1.63977 9.49953 2.89977 9.49953 4.49977C9.49953 4.73977 9.52953 4.95977 9.58953 5.17977C5.97953 5.94977 3.26953 9.15977 3.26953 12.9998V14.4998C3.26953 15.0498 3.71953 15.4998 4.26953 15.4998H19.7195C20.2695 15.4998 20.7195 15.0498 20.7195 14.4998V12.9998C20.7195 9.15977 18.0195 5.95977 14.4095 5.17977ZM14.9995 11.7498H8.99953C8.58953 11.7498 8.24953 11.4098 8.24953 10.9998C8.24953 10.5898 8.58953 10.2498 8.99953 10.2498H14.9995C15.4095 10.2498 15.7495 10.5898 15.7495 10.9998C15.7495 11.4098 15.4095 11.7498 14.9995 11.7498Z" fill="inherit"/>
       </svg>
       <p>Reservations</p>
     </div>
   </a>
-  <a class="nav-link active" aria-current="page" href="#">
+
+  <a class="nav-link active" aria-current="page" href="{{ route('frontdesk.msg') }}">
     <div id="msg-nav">
         <svg width="1rem" height="1rem" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
           <title>message_three_points [#1560]</title>
@@ -50,7 +54,8 @@
       <p>Messages</p>
     </div>
   </a>
-  <a class="nav-link active" aria-current="page" href="#">
+
+  <a class="nav-link active" aria-current="page" href="{{ route('frontdesk.guest') }}">
     <div id="guest-nav">
       <svg width="1rem" height="1rem" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <g id="style=fill">
@@ -63,4 +68,5 @@
       <p>Guest Profile</p>
     </div>
   </a>
+  
 </nav>

@@ -1,8 +1,8 @@
 @extends('layouts.frontdesk')
-@section('title', 'Rooms')
+@section('title', 'Guests')
 
 @section('styles')
-    <link rel="stylesheet" href="{{ asset('css/view-rooms.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/reservations.css') }}">
 @endsection
 
 @section('scripts')
@@ -11,8 +11,8 @@
 
 @section('content')  
     <div id="main-label">
-        <img src="{{ asset('images/bed-icon.svg') }}">
-        <h3>Rooms</h3>
+        <img src="{{ asset('images/reserve2.svg') }}">
+        <h3>Guests</h3>
     </div>
     <div id="content-card">
         <!-- Labels Row -->
@@ -153,5 +153,4 @@
         </div>
     </div>
 @endsection
-
 

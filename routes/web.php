@@ -18,16 +18,34 @@ Route::prefix('frontdesk')->middleware(['auth', 'verified'])->group(function () 
 
     Route::get('/dashboard', [FrontdeskDashboardController::class, 'index'])
         ->name('frontdesk.dashboard');
+
+    // Add additional routes inside this group
+    Route::get('/view-rooms', function () {
+        return view('frontdesk.view_rooms');
+    })->name('frontdesk.view_rooms');
+
+    Route::get('/room-details', function () {
+        return view('frontdesk.specific_room');
+    })->name('frontdesk.room-details');
+
+    Route::get('/bookings', function () {
+        return view('frontdesk.bookings');
+    })->name('frontdesk.bookings');
+
+    Route::get('/reservations', function () {
+        return view('frontdesk.reservations');
+    })->name('frontdesk.reservations');
+
+    Route::get('/frontdesk/msg', function () {
+        return view('frontdesk.msg');
+    })->name('frontdesk.msg');
+    
+    // Route for frontdesk/guest.blade.php
+    Route::get('/frontdesk/guest', function () {
+        return view('frontdesk.guest');
+    })->name('frontdesk.guest');
+    
 });
-
-
-Route::get('/view-rooms', function () {
-    return view('frontdesk.view_rooms'); // Points to frontdesk/view_rooms.blade.php
-})->name('frontdesk.view_rooms');
-
-Route::get('/room-details', function () {
-    return view('frontdesk.specific_room'); // Points to frontdesk/view_rooms.blade.php
-})->name('frontdesk.room-details');
 
 // Management Dashboard Route with Authentication
 Route::middleware(['auth', 'verified'])->group(function () {
