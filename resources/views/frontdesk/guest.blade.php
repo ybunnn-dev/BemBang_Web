@@ -2,7 +2,7 @@
 @section('title', 'Guests')
 
 @section('styles')
-    <link rel="stylesheet" href="{{ asset('css/reservations.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/guest.css') }}">
 @endsection
 
 @section('scripts')
@@ -11,16 +11,16 @@
 
 @section('content')  
     <div id="main-label">
-        <img src="{{ asset('images/reserve2.svg') }}">
+        <img src="{{ asset('images/profile.svg') }}">
         <h3>Guests</h3>
     </div>
     <div id="content-card">
         <!-- Labels Row -->
         <div class="input-labels">
-            <label for="search-table" id="search-label">Search for rooms?</label>
+            <label for="search-table" id="search-label">Search for guests?</label>
             <label for="room-type-dropdown" id="dropdown-label-roomtype">Room Types</label>
             <label for="status-dropdown" id="dropdown-label-status">Status</label>
-            <label for="status-dropdown" id="date-time-label">Date and Time</label>
+            <label for="status-dropdown" id="date-time-label">Date</label>
         </div>
 
         <!-- Input Fields Row -->
@@ -54,100 +54,132 @@
                 </ul>
             </div>
             <button type="button" class="btn btn-light">Enter Date</button>
+            <button type="button" class="btn btn-primary" id="scan-qr-button">
+                <img src="{{ asset('images/qr2.svg') }}" width="15px" height="16px">
+                Scan QR Code
+            </button>
         </div>
         <div class="table-container">
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th scope="col">ROOM #</th>
-                        <th scope="col">ROOM TYPE</th>
-                        <th scope="col">STATUS</th>
-                        <th scope="col">GUEST NAME</th>
-                        <th scope="col">CHECK-IN</th>
-                        <th scope="col">CHECK-OUT</th>
+                        <th scope="col" class="guest-id-column">GUEST ID</th>
+                        <th scope="col" class="guest-name-column">GUEST NAME</th>
+                        <th scope="col">MEMBERSHIP STATUS</th>
+                        <th scope="col">RECENT TRANSACTION</th>
+                        <th scope="col">TRANSACTION DATE</th>
                     </tr>
                 </thead>
                 <tbody>
+                    <tr onclick="window.location.href='/frontdesk/current-guest'">
+                        <th scope="row" class="guest-id-column2">1001</th>
+                        <td class="guest-name-column2">Giannis Akoynagtatampo</td>
+                        <td>
+                            <div class="membership-type">
+                                <img src="{{ asset('images/elite-icon.svg') }}" width="20px" height="20px">
+                                <p>ELITE</p>
+                            </div>
+                        </td>   
+                        <td><div class="status-div">Reservation</div></td>
+                        <td>2025-03-23 <br><p style="font-size: 13px;">12:00</p></td>
+                    </tr>
                     <tr onclick="window.location.href='/frontdesk/room-details'">
-                        <th scope="row">1001</th>
-                        <td>Bembang Standard</td>
-                        <td><div class="status-div">Available</div></td>
-                        <td>John Doe</td>
-                        <td>2025-03-21<br><p style="font-size: 13px;">12:00</p></td>
+                        <th scope="row" class="guest-id-column2">1001</th>
+                        <td class="guest-name-column2">Giannis Akoynagtatampo</td>
+                        <td>
+                            <div class="membership-type">
+                                <img src="{{ asset('images/elite-icon.svg') }}" width="20px" height="20px">
+                                <p>ELITE</p>
+                            </div>
+                        </td>   
+                        <td><div class="status-div">Reservation</div></td>
                         <td>2025-03-23 <br><p style="font-size: 13px;">12:00</p></td>
                     </tr>
-                    <tr>
-                        <th scope="row">1002</th>
-                        <td>Bembang Twin</td>
-                        <td><div class="status-div">Reserved</div></td>
-                        <td>Jane Smith</td>
-                        <td>2025-03-21<br><p style="font-size: 13px;">12:00</p></td>
+                    <tr onclick="window.location.href='/frontdesk/room-details'">
+                        <th scope="row" class="guest-id-column2">1001</th>
+                        <td class="guest-name-column2">Giannis Akoynagtatampo</td>
+                        <td>
+                            <div class="membership-type">
+                                <img src="{{ asset('images/elite-icon.svg') }}" width="20px" height="20px">
+                                <p>ELITE</p>
+                            </div>
+                        </td>   
+                        <td><div class="status-div">Reservation</div></td>
                         <td>2025-03-23 <br><p style="font-size: 13px;">12:00</p></td>
                     </tr>
-                    <tr>
-                        <th scope="row">1002</th>
-                        <td>Bembang Twin</td>
-                        <td><div class="status-div">Maintenance</div></td>
-                        <td>Jane Smith</td>
-                        <td>2025-03-21<br><p style="font-size: 13px;">12:00</p></td>
+                    <tr onclick="window.location.href='/frontdesk/room-details'">
+                        <th scope="row" class="guest-id-column2">1001</th>
+                        <td class="guest-name-column2">Giannis Akoynagtatampo</td>
+                        <td>
+                            <div class="membership-type">
+                                <img src="{{ asset('images/elite-icon.svg') }}" width="20px" height="20px">
+                                <p>ELITE</p>
+                            </div>
+                        </td>   
+                        <td><div class="status-div">Reservation</div></td>
                         <td>2025-03-23 <br><p style="font-size: 13px;">12:00</p></td>
                     </tr>
-                    <tr>
-                        <th scope="row">1002</th>
-                        <td>Bembang Twin</td>
-                        <td><div class="status-div">Booking</div></td>
-                        <td>Jane Smith</td>
-                        <td>2025-03-21<br><p style="font-size: 13px;">12:00</p></td>
+                    <tr onclick="window.location.href='/frontdesk/room-details'">
+                        <th scope="row" class="guest-id-column2">1001</th>
+                        <td class="guest-name-column2">Giannis Akoynagtatampo</td>
+                        <td>
+                            <div class="membership-type">
+                                <img src="{{ asset('images/elite-icon.svg') }}" width="20px" height="20px">
+                                <p>ELITE</p>
+                            </div>
+                        </td>   
+                        <td><div class="status-div">Reservation</div></td>
                         <td>2025-03-23 <br><p style="font-size: 13px;">12:00</p></td>
                     </tr>
-                    <tr>
-                        <th scope="row">1002</th>
-                        <td>Bembang Twin</td>
-                        <td><div class="status-div">Cleaning</div></td>
-                        <td>Jane Smith</td>
-                        <td>2025-03-21<br><p style="font-size: 13px;">12:00</p></td>
+                    <tr onclick="window.location.href='/frontdesk/room-details'">
+                        <th scope="row" class="guest-id-column2">1001</th>
+                        <td class="guest-name-column2">Giannis Akoynagtatampo</td>
+                        <td>
+                            <div class="membership-type">
+                                <img src="{{ asset('images/elite-icon.svg') }}" width="20px" height="20px">
+                                <p>ELITE</p>
+                            </div>
+                        </td>   
+                        <td><div class="status-div">Reservation</div></td>
                         <td>2025-03-23 <br><p style="font-size: 13px;">12:00</p></td>
                     </tr>
-                    <tr>
-                        <th scope="row">1002</th>
-                        <td>Bembang Twin</td>
-                        <td><div class="status-div">Maintenance</div></td>
-                        <td>Jane Smith</td>
-                        <td>2025-03-21<br><p style="font-size: 13px;">12:00</p></td>
+                    <tr onclick="window.location.href='/frontdesk/room-details'">
+                        <th scope="row" class="guest-id-column2">1001</th>
+                        <td class="guest-name-column2">Giannis Akoynagtatampo</td>
+                        <td>
+                            <div class="membership-type">
+                                <img src="{{ asset('images/elite-icon.svg') }}" width="20px" height="20px">
+                                <p>ELITE</p>
+                            </div>
+                        </td>   
+                        <td><div class="status-div">Reservation</div></td>
                         <td>2025-03-23 <br><p style="font-size: 13px;">12:00</p></td>
                     </tr>
-                    <tr>
-                        <th scope="row">1002</th>
-                        <td>Bembang Twin</td>
-                        <td><div class="status-div">Maintenance</div></td>
-                        <td>Jane Smith</td>
-                        <td>2025-03-21<br><p style="font-size: 13px;">12:00</p></td>
+                    <tr onclick="window.location.href='/frontdesk/room-details'">
+                        <th scope="row" class="guest-id-column2">1001</th>
+                        <td class="guest-name-column2">Giannis Akoynagtatampo</td>
+                        <td>
+                            <div class="membership-type">
+                                <img src="{{ asset('images/elite-icon.svg') }}" width="20px" height="20px">
+                                <p>ELITE</p>
+                            </div>
+                        </td>   
+                        <td><div class="status-div">Reservation</div></td>
                         <td>2025-03-23 <br><p style="font-size: 13px;">12:00</p></td>
                     </tr>
-                    <tr>
-                        <th scope="row">1002</th>
-                        <td>Bembang Twin</td>
-                        <td><div class="status-div">Maintenance</div></td>
-                        <td>Jane Smith</td>
-                        <td>2025-03-21<br><p style="font-size: 13px;">12:00</p></td>
+                    <tr onclick="window.location.href='/frontdesk/room-details'">
+                        <th scope="row" class="guest-id-column2">1001</th>
+                        <td class="guest-name-column2">Giannis Akoynagtatampo</td>
+                        <td>
+                            <div class="membership-type">
+                                <img src="{{ asset('images/elite-icon.svg') }}" width="20px" height="20px">
+                                <p>ELITE</p>
+                            </div>
+                        </td>   
+                        <td><div class="status-div">Reservation</div></td>
                         <td>2025-03-23 <br><p style="font-size: 13px;">12:00</p></td>
                     </tr>
-                    <tr>
-                        <th scope="row">1002</th>
-                        <td>Bembang Twin</td>
-                        <td><div class="status-div">Maintenance</div></td>
-                        <td>Jane Smith</td>
-                        <td>2025-03-21<br><p style="font-size: 13px;">12:00</p></td>
-                        <td>2025-03-23 <br><p style="font-size: 13px;">12:00</p></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">1002</th>
-                        <td>Bembang Twin</td>
-                        <td><div class="status-div">Maintenance</div></td>
-                        <td>Jane Smith</td>
-                        <td>2025-03-21<br><p style="font-size: 13px;">12:00</p></td>
-                        <td>2025-03-23 <br><p style="font-size: 13px;">12:00</p></td>
-                    </tr>
+
                 </tbody>
             </table>
         </div>

@@ -1,0 +1,204 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Righteous&display=swap');
+
+h4{
+    color: #566A7F !important;
+    font-family: 'Poppins';
+    font-weight: bold !important;
+}
+#exit-button {
+    display: flex;
+    align-items: center;  /* Aligns content vertically (optional) */
+    justify-content: center;  /* Centers content horizontally (optional) */
+    gap: 8px;  /* Adds space between the image and text (optional) */
+    margin-left: 100px;
+    margin-top: 20px;
+    outline: none;
+    border: none;
+    font-family: 'Poppins';
+    font-weight: 600;
+    background-color: transparent;
+    font-size: 14px;
+}
+#guest-nav{
+    background-color: #A1E3F9;
+    color: #578FCA;
+    pointer-events: none !important;
+}
+#guest-nav .icon{
+    fill: #578FCA !important;
+    pointer-events: none !important;
+}
+
+#bookings-nav, 
+#reserve-nav, 
+#msg-nav, 
+#rooms-nav,
+#dashboard-nav{
+    background-color: #a1e3f900;
+}
+#guest-nav p{
+    pointer-events: none !important;
+    font-weight: 600;
+}
+#dashboard-nav p, 
+#bookings-nav p, 
+#reserve-nav p, 
+#msg-nav p, 
+#rooms-nav p{
+    font-weight: 500;
+}
+
+.guest-info-card{
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12); /* Thin shadow on all sides */
+    height: 300px;
+    width: 1150px;
+    background-color: #f7f7f7;
+    position: relative;
+    left: 100px;
+    top: 15px;
+    border-radius: 10px;
+}
+.current-transact-card{
+    height: 270px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12); /* Thin shadow on all sides */
+    width: 430px;
+    background-color: #f7f7f7;
+    position: relative;
+    left: 100px;
+    top: 25px;
+    border-radius: 10px;
+}
+.guest-num{
+    height: 270px;
+    width: 430px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12); /* Thin shadow on all sides */
+    background-color: #f7f7f7;
+    position: absolute;
+    left: 545px;
+    top: 368px;
+    border-radius: 10px;
+}
+.buttons-flex {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centers buttons horizontally */
+    gap: 10px; /* Adds spacing between buttons */
+    top: 368px;
+    left: 985px;
+}
+.buttons-flex .btn.btn-light{
+    height: 84px;
+    width: 260px;
+}
+.profile-pic-holder{
+    position: absolute;
+    height: 100%;
+    border-right: 0.5px solid #bdcfe2;
+    width: 425px;
+}
+.profile-pic-holder h5{
+    color: #566A7F;
+    font-family: 'Poppins';
+    font-weight: 600;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 20px;
+    white-space: nowrap; 
+    top: 220px;
+}
+#profile-pic{
+    background-color: pink;
+    height: 170px;
+    top: 30px;
+    width: 170px;
+    border-radius: 50%;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 1px solid #bdcfe2;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
+
+}
+#profile-pic img {
+    width: 100%; /* Adjust as needed */
+    height: auto;
+    object-fit: cover;
+    border-radius: 50%;
+}
+.membership-type{
+    display: flex;
+    gap: 10px;
+    position: absolute;
+    top: 245px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.membership-type p{
+    font-family: 'Poppins';
+    font-weight: 700;
+    color: #003087;
+}
+.current-transact-card h5{
+    position: absolute;
+    font-family: 'Poppins';
+    font-weight: 600;
+    color: #566A7F;
+    left: 20px;
+    top: 20px;
+}
+.guest-num h5{
+    font-family: 'Poppins';
+    font-weight: 600;
+    color: #566A7F;
+    margin-left: 20px;
+    margin-top: 20px;
+}
+.guest-info-title{
+    position: absolute;
+    top: 20px;
+    left: 450px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.guest-info-title h5{
+    font-family: 'Poppins';
+    font-weight: 600;
+    margin-bottom: 0px;
+    color: #566A7F;
+}
+#msg-button, #history-button, #transact-button {
+    display: flex;
+    align-items: center; /* Centers items vertically */
+    justify-content: left; /* Centers items horizontally */
+    gap: 20px;
+    font-family: 'Poppins';
+    font-weight: 600;
+    font-size: 20px;
+    color: #566A7F;
+    padding-left: 50px;
+}
+.info-labels{
+    position: absolute;
+    left: 460px;
+    top: 80px;
+}
+.info-labels p{
+    color: #697A8D;
+    font-family: 'Poppins';
+    font-size: 12px;
+    font-weight: 600;
+}
+.info-values{
+    position: absolute;
+    left: 620px;
+    top: 80px;
+}
+.info-values p{
+    color: #697A8D;
+    font-family: 'Poppins';
+    font-size: 12px;
+    font-weight: 500;
+}

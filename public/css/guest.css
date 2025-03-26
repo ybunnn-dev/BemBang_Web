@@ -1,0 +1,279 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Righteous&display=swap');
+
+h4{
+    color: #566A7F !important;
+    font-family: 'Poppins';
+    font-weight: bold !important;
+}
+
+#guest-nav{
+    background-color: #A1E3F9;
+    color: #578FCA;
+    pointer-events: none !important;
+}
+#guest-nav .icon{
+    fill: #578FCA !important;
+    pointer-events: none !important;
+}
+
+#bookings-nav, 
+#reserve-nav, 
+#msg-nav, 
+#rooms-nav,
+#dashboard-nav{
+    background-color: #a1e3f900;
+}
+#guest-nav p{
+    pointer-events: none !important;
+    font-weight: 600;
+}
+#dashboard-nav p, 
+#bookings-nav p, 
+#reserve-nav p, 
+#msg-nav p, 
+#rooms-nav p{
+    font-weight: 500;
+}
+
+#main-label{
+    margin-left: 100px;
+    margin-top: 40px;
+    font-family: 'Poppins';
+}
+#main-label h3{
+    font-weight: 600 !important;
+    color: #323643;
+    position: absolute;
+    left:9rem;
+}
+#main-label img{
+    height: 1.6rem;
+    width: auto;
+    position: absolute;
+    top: 2.5rem;
+}
+#content-card {
+    width: 1150px;
+    margin-left: 100px;
+    margin-top: 85px;
+    min-height: 550px; /* Allows it to grow */
+    height: auto; /* Ensures flexibility */
+    background-color: #f7f7f7;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Space between elements */
+}
+
+#content-card .input-group {
+    display: flex;
+    align-items: center;
+    gap: 20px; /* Space between the search bar and dropdown */
+    margin-left: 20px;
+}
+
+#content-card label {
+    font-weight: 600;
+    font-family: 'Poppins';
+    color: #566A7F; 
+    margin-left: 20px;
+    margin-top: 20px;
+}
+#content-card .btn.btn-primary.dropdown-toggle {
+    width: 180px !important;
+    height: 30px;
+    font-family: 'Poppins';
+    font-size: 14px;
+}
+
+#content-card .form-control:focus {
+    outline: none !important;
+    border: 0.5px solid #578FCA !important;
+    box-shadow: none !important;
+}
+
+#content-card .form-control::placeholder {
+    font-family: 'Poppins';
+    font-size: 14px;
+    color: #90989f;
+}
+
+#content-card .btn.btn-primary.dropdown-toggle {
+    border: 0.5px solid #90989f !important;
+    color: #566A7F;
+    background-color: #f7f7f7;
+    font-size: 14px;
+    text-align: left;
+    width: 218px; /* Ensure consistent width */
+    padding: 5px 15px;
+    display: flex;
+    justify-content: space-between; /* Pushes text left and arrow right */
+    align-items: center;
+}
+
+#content-card .btn.btn-primary.dropdown-toggle::after {
+    margin-left: auto; /* Ensures the arrow stays on the right */
+}
+
+#search-table {
+    width: 280px !important; /* Force width */
+    max-width: 25%; /* Prevents it from shrinking unexpectedly */
+    height: 30px;
+    border-radius: 5px;
+}
+#dropdown-label-roomtype{
+    margin-left: 155px !important;
+}
+#dropdown-label-status{
+    margin-left: 95px !important;
+}
+.input-group .dropdown-menu{
+    height: 160px !important;
+    width: 180px !important;
+    font-family: 'Poppins';
+    font-size: 14px;
+}
+#status-menu{
+    height: 130px !important;
+}
+.input-group .btn.btn-light {
+    height: 30px;
+    font-family: 'Poppins' !important;
+    font-size: 14px;
+    width: 168px; 
+    border: 0.5px solid #90989f;
+    border-radius: 5px !important;
+    text-align: left;
+    color: #697A8D;
+    
+    display: flex;
+    align-items: center; /* Centers text vertically */
+}
+
+#date-time-label{
+    margin-left: 140px !important;
+}
+.table thead {
+    background-color: #A1E3F9 !important;
+}
+.table thead th {
+    background-color: inherit !important;
+    color: #464F60 !important;
+    font-family: 'Poppins' !important;
+    font-weight: 600 !important;
+    font-size: 12px;
+}
+.table{
+    font-size: 14px !important;
+    margin-top: 15px;
+    font-family: 'Poppins';
+}
+.table.table-hover th,
+.table.table-hover td {
+    padding-left: 20px; /* Adjust the value as needed */
+}
+.table.table-hover td, .table.table-hover th{
+    color: #697A8D;
+}
+.table.table-hover td {
+    height: 40px !important;
+    padding-bottom: 0px;
+}
+.status-div{
+    background-color: gray; 
+    text-align: center; 
+    font-family: 'Poppins'; 
+    color: #f7f7f7;
+    font-size: 12px;
+    border-radius: 15px;
+    width: 100px;
+}
+.table-container {
+    flex-grow: 1; /* Allows it to take available space */
+    overflow-y: auto; /* Enables vertical scrolling */
+    max-height: 500px; /* Adjust height as needed */
+}
+.table-container table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table-container thead {
+    position: sticky;
+    top: 0;
+    background: white; /* Ensures header remains visible */
+    z-index: 1;
+}
+
+.table-container tbody {
+    display: block;
+    max-height: 400px; /* Controls tbody height */
+    overflow-y: auto; /* Makes tbody scrollable */
+}
+
+.table-container thead, 
+.table-container tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed; /* Ensures alignment */
+}
+
+.table.table-hover tbody td:not(:nth-child(5)):not(:nth-child(6)),
+.table.table-hover tbody th:nth-child(1) {
+    padding-top: 20px; /* Adjust as needed */
+}
+.table-container{
+    margin-left: 20px;
+    width: 96.5%;
+}
+.table-container tbody::-webkit-scrollbar {
+    width: 8px; /* Adjust width as needed */
+}
+
+.table-container tbody::-webkit-scrollbar-button {
+    display: none; /* Hides the up/down arrows */
+}
+.table-container tbody::-webkit-scrollbar-track {
+    background: #f0f0f0; /* Track color */
+    border-radius: 10px;
+    padding-top: 15px;
+    margin-top: 5px;
+}
+
+.table-container tbody::-webkit-scrollbar-thumb {
+    background: #a5a6a6; /* Scrollbar color */
+    border-radius: 10px;
+    padding-top: 15px;
+    margin-top: 5px;
+}
+#scan-qr-button{
+    background-color: #f7f7f7;
+    color: #578FCA ;
+    border: 1px solid #578FCA !important;
+    height: 30px;
+    width: 180px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 0;
+}
+.membership-type{
+    display: flex;
+    gap: 10px;
+}
+.membership-type p{
+    font-weight: 600;
+}
+.guest-id-column{
+    width: 150px; /* Adjust as needed */
+    min-width: 100px;
+}
+.guest-id-column2{
+    width: 150px; /* Adjust as needed */
+    min-width: 100px;
+}
+.guest-name-column2, .guest-name-column{
+    width: 250px; /* Adjust as needed */
+    min-width: 100px;
+}
