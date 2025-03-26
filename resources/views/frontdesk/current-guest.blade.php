@@ -46,10 +46,35 @@
     </div>
     <div class="current-transact-card">
         <h5>Current Transaction</h5>
-        <img src="{{ asset('images/msg.svg') }}" width="25px" height="25px">
+        <img src="{{ asset('images/standard.jpg') }}" width="125px" height="145px">
+        <div class="room-details-label">
+            <p>ROOM #:</p>
+            <p>ROOM TYPE:</p>
+            <p>STATUS:</p>
+        </div>
+        <div class="room-details-values">
+            <p>123</p>
+            <p>Bembang Standard</p>
+            <div class="status-div">
+                <p>Reservation</p>
+            </div>
+        </div>
     </div>
     <div class="guest-num">
         <h5>Guest Activities</h5>
+        <div class="icon-holder">
+            <img src="{{ asset('images/guest-icons/checkin.svg') }}" width="40px" height="40px" id="checkin-icon">
+            <img src="{{ asset('images/guest-icons/booking.svg') }}" width="35px" height="35px" id="checkin-icon">
+            <img src="{{ asset('images/guest-icons/reserve.svg') }}" width="35px" height="35px" id="checkin-icon">
+        </div>
+        <p id="checkin-value">999</p>
+        <p id="act-checkin-label">Check Ins</p>
+
+        <p id="book-value">999</p>
+        <p id="act-book-label">Bookings</p>
+        
+        <p id="reserve-value">999</p>
+        <p id="act-reserve-label">Reservations</p>
     </div>
     <div class="buttons-flex">
         <button type="button" class="btn btn-light" id="msg-button">
@@ -65,4 +90,9 @@
             Transaction
         </button>
     </div>
+    <script>
+        function goBackToGuestList(){
+            
+        }
+    </script>
 @endsection

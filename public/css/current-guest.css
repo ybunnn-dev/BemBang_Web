@@ -70,7 +70,7 @@ h4{
 }
 .guest-num{
     height: 270px;
-    width: 430px;
+    width: 400px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12); /* Thin shadow on all sides */
     background-color: #f7f7f7;
     position: absolute;
@@ -85,11 +85,12 @@ h4{
     align-items: center; /* Centers buttons horizontally */
     gap: 10px; /* Adds spacing between buttons */
     top: 368px;
-    left: 985px;
+    left: 960px;
 }
 .buttons-flex .btn.btn-light{
     height: 84px;
-    width: 260px;
+    width: 290px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
 }
 .profile-pic-holder{
     position: absolute;
@@ -178,7 +179,10 @@ h4{
     font-weight: 600;
     font-size: 20px;
     color: #566A7F;
-    padding-left: 50px;
+    padding-left: 70px;
+}
+#transact-button{
+    padding-left: 60px !important;
 }
 .info-labels{
     position: absolute;
@@ -188,7 +192,7 @@ h4{
 .info-labels p{
     color: #697A8D;
     font-family: 'Poppins';
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 600;
 }
 .info-values{
@@ -199,6 +203,83 @@ h4{
 .info-values p{
     color: #697A8D;
     font-family: 'Poppins';
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 500;
+}
+.current-transact-card img{
+    margin-top: 80px;
+    margin-left: 30px;
+    border-radius: 10px;
+}
+.room-details-label{
+    font-family: 'Poppins';
+    font-weight: 600;
+    color: #566A7F;
+    font-size: 12px;
+    position: absolute;
+    top: 110px;
+    left: 180px;
+}
+.room-details-values{
+    font-family: 'Poppins';
+    font-weight: 500;
+    color: #566A7F;
+    font-size: 12px;
+    position: absolute;
+    top: 110px;
+    left: 275px;
+}
+.status-div{
+    background-color: #bdcfe2;
+    width: 110px;
+    border-radius: 10px;
+    height: 20px;
+    text-align: center;
+}
+.icon-holder{
+    margin-left: 110px;
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+#checkin-value, #act-checkin-label, 
+#book-value, #act-book-label, 
+#reserve-value, #act-reserve-label {
+    position: absolute;
+    font-family: 'Poppins';
+    color: #697A8D;
+}
+#checkin-value{
+    top: 80px;
+    left: 200px;
+    font-weight: 600;
+    font-size: 18px;
+}
+#act-checkin-label{
+    top: 100px;
+    left: 200px;
+    font-size: 12px;
+}
+#book-value{
+    top: 140px;
+    left: 200px;
+    font-weight: 600;
+    font-size: 18px;
+}
+#act-book-label{
+    top: 160px;
+    left: 200px;
+    font-size: 12px;
+}
+#reserve-value{
+    top: 200px;
+    left: 200px;
+    font-weight: 600;
+    font-size: 18px;
+}
+#act-reserve-label{
+    top: 220px;
+    left: 200px;
+    font-size: 12px;
 }
