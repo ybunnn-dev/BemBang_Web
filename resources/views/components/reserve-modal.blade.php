@@ -44,7 +44,7 @@
                   <hr>
                 </div>
                 <p id="qr-ask-label">Guest have an existing account?</p>
-                <button type="button" class="btn btn-light" id="qr-button" onclick="user_qr()">
+                <button type="button" class="btn btn-light" id="qr-button-reserve" onclick="user_qr_reserve()">
                   <img src="{{ asset('images/qr2.svg') }}" width="30px" height="30px">
                   SCAN QR CODE
                 </button>
@@ -53,7 +53,7 @@
 
               <div class="input-content-2">
                   <div class="scanner-holder">
-                    <div id="qr-reader" style="width: 100%; height: 100%;"></div>
+                    <div id="qr-reader5" style="width: 100%; height: 100%;"></div>
                   </div>
                   <p>Please position the QR code in front of the camera.</p>
                   <hr class="bottom-line">
@@ -229,7 +229,7 @@
               </div>
               <hr>
               
-              <button type="button" class="btn btn-primary" id="select-voucher-qr" onclick="openVoucherScanner()">
+              <button type="button" class="btn btn-primary" id="select-voucher-qr-reserve" onclick="openVoucherScannerReserve()">
                 <img src="{{ asset('images/qr2.svg') }}" width="30px" height="30px">
                 SELECT VOUCHER
               </button>
@@ -255,7 +255,7 @@
 
             <div class="input-content-8">
                   <div class="scanner-holder">
-                    <div id="qr-reader2" style="width: 100%; height: 100%;"></div>
+                    <div id="qr-reader6" style="width: 100%; height: 100%;"></div>
                   </div>
                   <p>Please position the QR code in front of the camera.</p>
                   <hr class="bottom-line">
@@ -305,10 +305,10 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" id="prev-button" onclick="modal_switch_prev()">Previous</button>
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="cancel-button">Cancel</button>
-        <button type="button" class="btn btn-primary" id="next-button" onclick="modal_switch_next()">Next</button>
-        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="confirm-button">Confirm</button>
+        <button type="button" class="btn btn-secondary" id="prev-button-reserve" onclick="modal_switch_prev_reserve()">Previous</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="cancel-button-reserve">Cancel</button>
+        <button type="button" class="btn btn-primary" id="next-button-reserve" onclick="modal_switch_next_reserve()">Next</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="confirm-button-reserve">Confirm</button>
       </div>
     </div>
   </div>

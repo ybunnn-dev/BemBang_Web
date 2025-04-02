@@ -1,0 +1,732 @@
+/*These section are for modals*/
+#book-modal .modal-header {
+    font-family: 'Poppins';
+    padding-top: 30px;
+    flex-direction: column;
+    border-bottom: none;
+}
+
+#book-modal .modal-header h5 {
+    font-weight: 600;
+    color: #566A7F;
+}
+
+#book-modal .modal-header p {
+    font-size: 14px;
+    color: #697A8D;
+}
+
+#book-modal .modal-body {
+    padding-top: 0px;
+    margin-top: 0px;
+    height: 400px;
+}
+
+#book-modal .btn-close {
+    display: none;
+}
+
+#book-modal .modal-footer {
+    padding-right: 35px;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    border-top: none;
+}
+
+#book-modal .modal-content {
+    width: 600px;
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translate(-50%);
+}
+
+#book-modal .input-content-2, 
+#book-modal .input-content-3, 
+#book-modal .input-content-4,
+#book-modal .input-content-5, 
+#book-modal .input-content-6,
+#book-modal .input-content-7, 
+#book-modal .input-content-8,
+#book-modal .input-content-9, 
+#book-modal .input-content-10, 
+#book-modal .input-content-11, 
+#book-modal .input-content-12 {
+    display: none;
+}
+
+#book-modal .input-content-1, 
+#book-modal .input-content-2, 
+#book-modal .input-content-3, 
+#book-modal .input-content-4, 
+#book-modal .input-content-5, 
+#book-modal .input-content-6, 
+#book-modal .input-content-7, 
+#book-modal .input-content-8,
+#book-modal .input-content-9, 
+#book-modal .input-content-10,
+#book-modal .input-content-11, 
+#book-modal .input-content-12 {
+    padding-left: 30px;
+    transition: opacity 0.5s ease-in-out;
+    padding-right: 30px;
+    width: 100%;
+    height: 400px;
+}
+
+#book-modal .input-content-5 {
+    margin-top: -15px;
+    padding-right: 10px;
+    height: 350px;
+}
+
+#book-modal .input-content-6 {
+    overflow-y: auto;
+}
+
+#book-modal .input-content hr, 
+#book-modal .input-content-7 hr {
+    color: #566A7F;
+    width: 500px;
+}
+
+#book-modal .input-content-2 p, 
+#book-modal .input-content-8 p {
+    margin-left: 36%;
+    transform: translateX(-36%);
+    font-family: 'Poppins';
+    font-size: 14px;
+    white-space: nowrap;
+    color: #566A7F;
+    margin-top: 20px;
+}
+
+#book-modal .input-content-2 hr {
+    position: absolute;
+    top: 370px;
+}
+
+#book-modal .scanner-holder {
+    border: 1px solid #566A7F;
+    width: 300px;
+    height: 300px;
+    color: pink;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    border-radius: 10px;
+}
+
+#book-modal label {
+    color: #566A7F;
+    font-family: 'Poppins';
+    font-size: 14px;
+    font-weight: 600;
+}
+
+#book-modal .form-control {
+    font-family: 'Poppins';
+    font-size: 14px;
+}
+
+#book-modal .form-control:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+#book-modal .name-flex, 
+#book-modal .contact-flex, 
+#book-modal .namelabel-flex, 
+#book-modal .contactLabel-flex, 
+#book-modal .address-gen-label-flex, 
+#book-modal .address-gen-flex {
+    display: flex;
+}
+
+#book-modal .name-flex, 
+#book-modal .contact-flex, 
+#book-modal .address-gen-flex {
+    align-items: center;
+    gap: 20px;
+}
+#book-modal .address-gen-label-flex {
+    gap: 200px;
+}
+
+#book-modal #gen-label {
+    margin-top: 20px;
+    padding-bottom: 0px;
+    margin-bottom: -10px;
+}
+
+#book-modal .namelabel-flex {
+    gap: 190px;
+}
+
+#book-modal .contactLabel-flex {
+    margin-top: 20px;
+    gap: 230px;
+}
+
+#book-modal #gender-select {
+    font-family: 'Poppins';
+    font-size: 14px;
+    color: #697A8D;
+}
+
+#book-modal #gender-select:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+#book-modal #qr-reader, 
+#book-modal #qr-reader2 {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+#book-modal #address-label {
+    margin-top: 20px;
+}
+
+#book-modal .separate-flex {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+#book-modal .separate-flex p {
+    font-weight: 600;
+    font-size: 14px;
+    color: #566A7F;
+    font-family: 'Poppins';
+    margin-bottom: 0px;
+}
+
+#book-modal .separate-flex hr {
+    color: #566A7F;
+    width: 230px !important;
+    margin-top: 10px;
+}
+
+#book-modal #qr-ask-label {
+    font-family: 'Poppins';
+    font-size: 13px;
+    color: #697A8D;
+    margin-left: 55%;
+    margin-top: 10px;
+    transform: translateX(-55%);
+}
+
+#book-modal #qr-button-book {
+    display: flex;
+    gap: 10px;
+    height: 60px !important;
+    border: 1px solid #578FCA;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    width: 200px !important;
+    background-color: #f7f7f7;
+    font-family: 'Poppins';
+    font-weight: 600;
+    color: #578FCA;
+    align-items: center;
+    padding-left: 20px;
+}
+#book-modal .modal-footer .btn {
+    width: 140px;
+    font-size: 14px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+}
+
+#book-modal .modal-footer .btn.btn-primary {
+    background-color: #578FCA;
+    color: #f7f7f7;
+    border: none;
+}
+
+#book-modal .modal-footer .btn.btn-secondary {
+    background-color: #f7f7f7;
+    border: 1px solid #578FCA;
+    color: #578FCA;
+}
+
+#book-modal #prev-button-book, 
+#book-modal #confirm-button-book {
+    display: none;
+}
+
+#book-modal .bottom-line {
+    color: #566A7F;
+    width: 500px;
+    margin-top: 20px;
+}
+
+#book-modal .ic3-container {
+    display: flex;
+    gap: 60px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    height: 100%;
+    margin-top: 30px !important;
+}
+
+#book-modal .existing-user-labels {
+    margin-left: 20px;
+    color: #566A7F;
+    font-weight: 600;
+}
+
+#book-modal .existing-user-labels, 
+#book-modal .existing-user-values {
+    color: #697A8D;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#book-modal #address {
+    max-width: 200px;
+}
+
+#book-modal #ic3hr1 {
+    margin-top: -10px;
+}
+
+#book-modal #ic3hr2 {
+    margin-top: -30px;
+}
+
+#book-modal .ic4-flex {
+    display: flex;
+    flex-direction: column;
+}
+
+#book-modal .checkin-dates-label-flex, 
+#book-modal .checkout-dates-label-flex, 
+#book-modal .roomtypes-label-flex, 
+#book-modal .extra-details-label-flex {
+    display: flex;
+    color: #566A7F;
+    gap: 150px;
+}
+
+#book-modal .checkin-dates-label-flex {
+    gap: 160px;
+}
+
+#book-modal .checkout-dates-label-flex {
+    margin-top: 20px;
+}
+
+#book-modal .roomtypes-label-flex {
+    gap: 180px;
+    margin-top: 20px;
+}
+
+#book-modal .extra-details-label-flex {
+    gap: 140px;
+    margin-top: 20px;
+}
+
+#book-modal .room-types-flex .form-select {
+    width: 460px;
+    font-family: 'Poppins', sans-serif;
+}
+
+#book-modal .checkin-dates-flex, 
+#book-modal .checkout-dates-flex, 
+#book-modal .room-types-flex, 
+#book-modal .extra-flex {
+    display: flex;
+    gap: 20px;
+}
+
+#book-modal .input-content-4 hr {
+    width: 500px;
+    margin-top: 70px;
+}
+
+#book-modal .output-flex {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    overflow-x: hidden;
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    gap: -5px;
+    color: #697A8D;
+}
+
+#book-modal .output-label-name, 
+#book-modal .output-values-name, 
+#book-modal .output-label-numgen, 
+#book-modal .output-values-numgen,
+#book-modal .output-label-checkin, 
+#book-modal .output-values-checkin,
+#book-modal .output-label-checkout, 
+#book-modal .output-values-checkout,
+#book-modal .output-label-guestrate, 
+#book-modal .output-values-guestrate,
+#book-modal .output-label-room, 
+#book-modal .output-values-room {
+    gap: 100px;
+    display: flex;
+}
+
+#book-modal .output-values-name, 
+#book-modal .output-values-numgen, 
+#book-modal .output-values-checkin,
+#book-modal .output-values-checkout, 
+#book-modal .output-values-guestrate, 
+#book-modal .output-values-room {
+    font-size: 18px;
+    font-weight: 600;
+    color: #566A7F;
+    margin-top: -10px;
+}
+
+#book-modal #output-email, 
+#book-modal #output-address {
+    font-size: 18px;
+    font-weight: 600;
+    color: #566A7F;
+    margin-top: -10px;
+}
+
+#book-modal .input-content-5 hr {
+    width: 500px;
+}
+
+#book-modal .output-label-name {
+    gap: 200px;
+}
+
+#book-modal .output-values-name {
+    gap: 120px;
+}
+
+#book-modal .output-label-numgen {
+    gap: 245px;
+}
+
+#book-modal .output-values-numgen {
+    gap: 250px;
+}
+
+#book-modal #output-fname {
+    max-width: 150px;
+    width: 100%;
+}
+
+#book-modal .output-label-checkin {
+    gap: 185px;
+}
+
+#book-modal #output-checkin-date, 
+#book-modal #output-checkout-date {
+    max-width: 150px;
+    width: 100%;
+}
+
+#book-modal .output-label-checkout {
+    gap: 170px;
+}
+
+#book-modal .output-values-checkin, 
+#book-modal .output-values-checkout {
+    gap: 120px;
+}
+
+#book-modal .output-label-room {
+    gap: 205px;
+}
+
+#book-modal #output-room-type {
+    max-width: 200px;
+    width: 100%;
+}
+
+#book-modal .output-values-room {
+    gap: 70px;
+}
+
+#book-modal .output-label-guestrate {
+    gap: 160px;
+}
+
+#book-modal #output-guest-num {
+    max-width: 100px;
+    width: 100%;
+}
+
+#book-modal .output-values-guestrate {
+    gap: 170px;
+}
+
+#book-modal .payment-methods {
+    display: flex;
+    flex-direction: column;
+    font-family: 'Poppins', sans-serif;
+    gap: 10px;
+}
+
+#book-modal .payment-methods .btn.btn-light {
+    border: 1px solid #566A7F;
+    color: #566A7F;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    background-color: #f7f7f7;
+    width: 100%;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    gap: 260px;
+    padding-left: 30px;
+}
+
+#book-modal .input-content-7 p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+}
+
+#book-modal .payment-methods p {
+    color: #566A7F;
+    font-weight: 600;
+    margin-bottom: -5px;
+    font-size: 14px;
+}
+
+#book-modal .payment-label-flex {
+    color: #566A7F;
+    display: flex;
+    gap: 150px;
+}
+
+#book-modal .payment-flex {
+    margin-top: -20px;
+    display: flex;
+    gap: 75px;
+}
+#book-modal .payment-flex p {
+    color: #697A8D;
+    font-weight: 600;
+    font-size: 20px;
+    max-width: 200px;
+    width: 100%;
+}
+
+#book-modal #select-voucher-qr-book {
+    width: 280px;
+    height: 50px;
+    background-color: #f7f7f7;
+    color: #578FCA;
+    border: 1px solid #578FCA;
+    font-weight: 600;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-left: 40px;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    margin-top: 30px;
+}
+
+#book-modal .voucher-details-flex {
+    margin-top: 20px;
+    display: flex;
+    gap: 50px;
+    margin-left: 50%;
+    transform: translateX(-50%);
+}
+
+#book-modal .voucher-details-flex p {
+    color: #566A7F;
+    width: 200px;
+}
+
+#book-modal #voucher-value {
+    color: #697A8D;
+    width: 350px;
+    font-weight: 600;
+}
+
+#book-modal #remove-voucher {
+    margin-left: 60%;
+    transform: translateX(-60%);
+    color: #697A8D;
+}
+
+#book-modal .total-amount-flex {
+    display: flex;
+    gap: 250px;
+}
+
+#book-modal #total-amount-value {
+    color: #566A7F;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+#book-modal .total-amount-value-flex {
+    display: flex;
+    flex-direction: column;
+    text-align: right; 
+}
+
+#book-modal #orig-amount-value, 
+#book-modal #discount-amount-value, 
+#book-modal #res-amount-value {
+    margin-top: -20px;
+    color: #697A8D;
+}
+
+#book-modal #tot-amount-label {
+    color: #566A7F;
+    font-weight: 600;
+}
+
+#book-modal .input-content-9 img, 
+#book-modal .input-content-10 img, 
+#book-modal .input-content-11 img {
+    margin-left: 50%;
+    transform: translateX(-50%);
+}
+
+#book-modal .input-content-9 h5, 
+#book-modal .input-content-10 h5, 
+#book-modal .input-content-11 h5 {
+    margin-left: 35%;
+    transform: translateX(-35%);
+    font-weight: 600;
+    font-family: 'Poppins';
+    margin-top: 20px;
+    color: #566A7F;
+}
+
+#book-modal .input-content-10 h5 {
+    margin-left: 58%;
+    transform: translateX(-58%);
+}
+
+#book-modal #acc-email-paypal, 
+#book-modal #acc-name-paypal, 
+#book-modal #acc-num-gcash, 
+#book-modal #acc-name-gcash, 
+#book-modal #cash-amount {
+    margin-left: 20px;
+    width: 460px;
+}
+
+#book-modal .input-content-9 label, 
+#book-modal .input-content-10 label, 
+#book-modal .input-content-11 label {
+    margin-top: 30px;
+    margin-left: 20px;
+}
+
+#book-modal .bottom-hr {
+    margin-top: -5px;
+}
+
+#book-modal .amount-labels, 
+#book-modal .amount-values {
+    display: flex;
+    font-family: 'Poppins';
+}
+
+#book-modal .amount-labels {
+    gap: 140px;
+    color: #697A8D;
+    font-size: 14px;
+    margin-top: 40px;
+    margin-left: 40px;
+    font-weight: 600;
+}
+
+#book-modal .amount-values {
+    font-size: 20px;
+    font-weight: bold;
+    color: #566A7F;
+    margin-left: 40px;
+    margin-top: -10px;
+    max-width: 250px;
+    width: 100%;
+    gap: 150px;
+    white-space: nowrap;
+}
+
+#book-modal .input-content-12 img {
+    margin-left: 50%;
+    transform: translateX(-50%);
+}
+
+#book-modal .input-content-12 h5 {
+    margin-left: 50%;
+    transform: translateX(-50%);
+    font-size: 26px;
+    font-family: 'Poppins';
+    color: #566A7F;
+    font-weight: 600;
+}
+
+#book-modal .input-content-12 p {
+    font-family: 'Poppins';
+    color: #697A8D;
+    font-size: 14px;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    width: 350px;
+    text-align: center;
+}
+
+#book-modal .fade-in {
+    opacity: 0;
+    animation: fadeIn 0.5s forwards;
+}
+
+#book-modal .fade-out {
+    opacity: 1;
+    animation: fadeOut 0.5s forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+#book-modal #qr-reader3, 
+#book-modal #qr-reader4 {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+#book-modal #qr-reader3 video, 
+#book-modal #qr-reader4 video {
+    width: 100%;
+    height: 300px;
+    display: block;
+}
+
+#book-modal #qr-reader3 canvas, 
+#book-modal #qr-reader4 canvas {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+}
+
+#book-modal #qr-shaded-region {
+    border-radius: 10px;
+}
+
+/*These section are for modals*/

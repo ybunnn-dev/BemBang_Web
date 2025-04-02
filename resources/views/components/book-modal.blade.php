@@ -44,7 +44,7 @@
                   <hr>
                 </div>
                 <p id="qr-ask-label">Guest have an existing account?</p>
-                <button type="button" class="btn btn-light" id="qr-button" onclick="user_qr()">
+                <button type="button" class="btn btn-light" id="qr-button-book" onclick="user_qr_book()">
                   <img src="{{ asset('images/qr2.svg') }}" width="30px" height="30px">
                   SCAN QR CODE
                 </button>
@@ -53,7 +53,7 @@
 
               <div class="input-content-2">
                   <div class="scanner-holder">
-                    <div id="qr-reader" style="width: 100%; height: 100%;"></div>
+                    <div id="qr-reader3" style="width: 100%; height: 100%;"></div>
                   </div>
                   <p>Please position the QR code in front of the camera.</p>
                   <hr class="bottom-line">
@@ -229,7 +229,7 @@
               </div>
               <hr>
               
-              <button type="button" class="btn btn-primary" id="select-voucher-qr" onclick="openVoucherScanner()">
+              <button type="button" class="btn btn-primary" id="select-voucher-qr-book" onclick="openVoucherScannerBook()">
                 <img src="{{ asset('images/qr2.svg') }}" width="30px" height="30px">
                 SELECT VOUCHER
               </button>
@@ -255,7 +255,7 @@
 
             <div class="input-content-8">
                   <div class="scanner-holder">
-                    <div id="qr-reader2" style="width: 100%; height: 100%;"></div>
+                    <div id="qr-reader4" style="width: 100%; height: 100%;"></div>
                   </div>
                   <p>Please position the QR code in front of the camera.</p>
                   <hr class="bottom-line">
@@ -305,10 +305,10 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" id="prev-button" onclick="modal_switch_prev()">Previous</button>
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="cancel-button">Cancel</button>
-        <button type="button" class="btn btn-primary" id="next-button" onclick="modal_switch_next()">Next</button>
-        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="confirm-button">Confirm</button>
+        <button type="button" class="btn btn-secondary" id="prev-button-book" onclick="modal_switch_prev_book()">Previous</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="cancel-button-book">Cancel</button>
+        <button type="button" class="btn btn-primary" id="next-button-book" onclick="modal_switch_next_book()">Next</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="confirm-button-book">Confirm</button>
       </div>
     </div>
   </div>

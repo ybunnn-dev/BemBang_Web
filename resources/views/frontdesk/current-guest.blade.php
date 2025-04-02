@@ -10,7 +10,7 @@
 @endsection
 
 @section('content')
-    <button id="exit-button" onclick="goBackToViewRooms()">
+    <button id="exit-button" onclick="goBackToGuestList()">
         <img src="{{ asset('images/arrow-back.svg') }}" width="14px" height="14px">
         Return
     </button>
@@ -81,7 +81,7 @@
             <img src="{{ asset('images/msg.svg') }}" width="25px" height="25px">
             Message
         </button>
-        <button type="button" class="btn btn-light" id="history-button">
+        <button type="button" class="btn btn-light" id="history-button" onclick="goToHistory()">
             <img src="{{ asset('images/history.svg') }}" width="25px" height="25px">
             History
         </button>
@@ -91,8 +91,11 @@
         </button>
     </div>
     <script>
-        function goBackToGuestList(){
-            
+       function goBackToGuestList() {
+            window.location.href = "{{ route('frontdesk.guest') }}";
+        }
+        function goToHistory(){
+             window.location.href = "{{ route('frontdesk.guest-history') }}";
         }
     </script>
 @endsection

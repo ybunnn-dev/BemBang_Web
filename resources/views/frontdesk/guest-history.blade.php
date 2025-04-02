@@ -1,11 +1,8 @@
 @extends('layouts.frontdesk')
-@section('title', 'Rooms')
+@section('title', 'Guest History')
 
 @section('styles')
-    <link rel="stylesheet" href="{{ asset('css/view-rooms.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/book-modal.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/reserve-modal.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/checkin-modal.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/guest-history.css') }}">
 @endsection
 
 @section('scripts')
@@ -13,20 +10,16 @@
 @endsection
 
 @section('content')  
-    <div id="main-label">
-        <img src="{{ asset('images/bed-icon.svg') }}">
-        <h3>Rooms</h3>
-    </div>
-    <div class="transact-actions">
-        <button type="button" class="btn btn-light" id="checkin-button" data-bs-toggle="modal" data-bs-target="#checkInModal1">Check In</button>
-        @include('components.check-in-modal1', ['modalId' => 'checkInModal1', 'title' => 'Check In'])
-        <button type="button" class="btn btn-light" id="book-button" data-bs-toggle="modal" data-bs-target="#book-modal">Book Now</button>
-        @include('components.book-modal', ['modalId' => 'book-modal', 'title' => 'Book Room'])
-        <button type="button" class="btn btn-light" id="reserve-button" data-bs-toggle="modal" data-bs-target="#reserve-modal">Reserve Now</button>
-        @include('components.reserve-modal', ['modalId' => 'reserve-modal', 'title' => 'Reserve Room'])
-    </div>
+    <button id="exit-button" onclick="window.location.href='/frontdesk/current-guest'"k="goBackToGuestList()">
+        <img src="{{ asset('images/arrow-back.svg') }}" width="14px" height="14px">
+        Return
+    </button>
     <div id="content-card">
         <!-- Labels Row -->
+         <div class="header-content">
+            <img src="{{ asset('images/history.svg') }}" width="30px" height="30px">
+            <h3>Giannis' History</h3>
+         </div>
         <div class="input-labels">
             <label for="search-table" id="search-label">Search for rooms?</label>
             <label for="room-type-dropdown" id="dropdown-label-roomtype">Room Types</label>
@@ -70,10 +63,10 @@
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th scope="col">ROOM #</th>
+                        <th scope="col" id="main-header">TRANSACT ID</th>
                         <th scope="col">ROOM TYPE</th>
                         <th scope="col">STATUS</th>
-                        <th scope="col">GUEST NAME</th>
+                        <th scope="col">TRANSACT DATE</th>
                         <th scope="col">CHECK-IN</th>
                         <th scope="col">CHECK-OUT</th>
                     </tr>
@@ -83,7 +76,7 @@
                         <th scope="row">1001</th>
                         <td>Bembang Standard</td>
                         <td><div class="status-div">Available</div></td>
-                        <td>John Doe</td>
+                        <td>2025-03-21<br><p style="font-size: 13px;">12:00</p></td>
                         <td>2025-03-21<br><p style="font-size: 13px;">12:00</p></td>
                         <td>2025-03-23 <br><p style="font-size: 13px;">12:00</p></td>
                     </tr>
@@ -163,13 +156,6 @@
             </table>
         </div>
     </div>
-@endsection
-
-@section('extra-scripts')
-    <script src="https://unpkg.com/html5-qrcode"></script>
-    <script src="{{ asset('js/checkin-modal.js') }}"></script>
-    <script src="{{ asset('js/book-modal.js') }}"></script>
-    <script src="{{ asset('js/reserve-modal.js') }}"></script>
 @endsection
 
 

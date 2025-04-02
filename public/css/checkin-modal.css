@@ -1,0 +1,731 @@
+/*These section are for modals*/
+.contents{
+    display: flex;
+}
+#checkInModal1 .modal-header {
+    font-family: 'Poppins';
+    padding-top: 30px;
+    flex-direction: column;
+    border-bottom: none;
+}
+
+#checkInModal1 .modal-header h5 {
+    font-weight: 600;
+    color: #566A7F;
+}
+
+#checkInModal1 .modal-header p {
+    font-size: 14px;
+    color: #697A8D;
+}
+
+#checkInModal1 .modal-body {
+    padding-top: 0px;
+    margin-top: 0px;
+    height: 400px;
+}
+
+#checkInModal1 .btn-close {
+    display: none;
+}
+
+#checkInModal1 .modal-footer {
+    padding-right: 35px;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    border-top: none;
+}
+
+#checkInModal1 .modal-content {
+    width: 600px;
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translate(-50%);
+}
+
+#checkInModal1 .input-content-2, 
+#checkInModal1 .input-content-3, 
+#checkInModal1 .input-content-4,
+#checkInModal1 .input-content-5, 
+#checkInModal1 .input-content-6,
+#checkInModal1 .input-content-7, 
+#checkInModal1 .input-content-8,
+#checkInModal1 .input-content-9, 
+#checkInModal1 .input-content-10, 
+#checkInModal1 .input-content-11, 
+#checkInModal1 .input-content-12 {
+    display: none;
+}
+
+#checkInModal1 .input-content-1, 
+#checkInModal1 .input-content-2, 
+#checkInModal1 .input-content-3, 
+#checkInModal1 .input-content-4, 
+#checkInModal1 .input-content-5, 
+#checkInModal1 .input-content-6, 
+#checkInModal1 .input-content-7, 
+#checkInModal1 .input-content-8,
+#checkInModal1 .input-content-9, 
+#checkInModal1 .input-content-10,
+#checkInModal1 .input-content-11, 
+#checkInModal1 .input-content-12 {
+    padding-left: 30px;
+    transition: opacity 0.5s ease-in-out;
+    padding-right: 30px;
+    width: 100%;
+    height: 400px;
+}
+
+#checkInModal1 .input-content-5 {
+    margin-top: -15px;
+    padding-right: 10px;
+    height: 350px;
+}
+
+#checkInModal1 .input-content-6 {
+    overflow-y: auto;
+}
+
+#checkInModal1 .input-content hr, 
+#checkInModal1 .input-content-7 hr {
+    color: #566A7F;
+    width: 500px;
+}
+
+#checkInModal1 .input-content-2 p, 
+#checkInModal1 .input-content-8 p {
+    margin-left: 36%;
+    transform: translateX(-36%);
+    font-family: 'Poppins';
+    font-size: 14px;
+    white-space: nowrap;
+    color: #566A7F;
+    margin-top: 20px;
+}
+
+#checkInModal1 .input-content-2 hr {
+    position: absolute;
+    top: 370px;
+}
+
+#checkInModal1 .scanner-holder {
+    border: 1px solid #566A7F;
+    width: 300px;
+    height: 300px;
+    color: pink;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    border-radius: 10px;
+}
+
+#checkInModal1 label {
+    color: #566A7F;
+    font-family: 'Poppins';
+    font-size: 14px;
+    font-weight: 600;
+}
+
+#checkInModal1 .form-control {
+    font-family: 'Poppins';
+    font-size: 14px;
+}
+
+#checkInModal1 .form-control:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+#checkInModal1 .name-flex, 
+#checkInModal1 .contact-flex, 
+#checkInModal1 .namelabel-flex, 
+#checkInModal1 .contactLabel-flex, 
+#checkInModal1 .address-gen-label-flex, 
+#checkInModal1 .address-gen-flex {
+    display: flex;
+}
+
+#checkInModal1 .name-flex, 
+#checkInModal1 .contact-flex, 
+#checkInModal1 .address-gen-flex {
+    align-items: center;
+    gap: 20px;
+}
+#checkInModal1 .address-gen-label-flex {
+    gap: 200px;
+}
+
+#checkInModal1 #gen-label {
+    margin-top: 20px;
+    padding-bottom: 0px;
+    margin-bottom: -10px;
+}
+
+#checkInModal1 .namelabel-flex {
+    gap: 190px;
+}
+
+#checkInModal1 .contactLabel-flex {
+    margin-top: 20px;
+    gap: 230px;
+}
+
+#checkInModal1 #gender-select {
+    font-family: 'Poppins';
+    font-size: 14px;
+    color: #697A8D;
+}
+
+#checkInModal1 #gender-select:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+#checkInModal1 #qr-reader, 
+#checkInModal1 #qr-reader2 {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+#checkInModal1 #address-label {
+    margin-top: 20px;
+}
+
+#checkInModal1 .separate-flex {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+#checkInModal1 .separate-flex p {
+    font-weight: 600;
+    font-size: 14px;
+    color: #566A7F;
+    font-family: 'Poppins';
+    margin-bottom: 0px;
+}
+
+#checkInModal1 .separate-flex hr {
+    color: #566A7F;
+    width: 230px !important;
+    margin-top: 10px;
+}
+
+#checkInModal1 #qr-ask-label {
+    font-family: 'Poppins';
+    font-size: 13px;
+    color: #697A8D;
+    margin-left: 55%;
+    margin-top: 10px;
+    transform: translateX(-55%);
+}
+
+#checkInModal1 #qr-button {
+    display: flex;
+    gap: 10px;
+    height: 60px;
+    border: 1px solid #578FCA !important;
+    background-color: #f7f7f7 !important;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    font-family: 'Poppins';
+    font-weight: 600;
+    color: #578FCA;
+    align-items: center;
+    padding-left: 20px;
+}
+#checkInModal1 .modal-footer .btn {
+    width: 140px;
+    font-size: 14px;
+    font-family: 'Poppins';
+    font-weight: 600;
+}
+
+#checkInModal1 .modal-footer .btn.btn-primary {
+    background-color: #578FCA;
+    color: #f7f7f7;
+    border: none;
+}
+
+#checkInModal1 .modal-footer .btn.btn-secondary {
+    background-color: #f7f7f7;
+    border: 1px solid #578FCA;
+    color: #578FCA;
+}
+
+#checkInModal1 #prev-button, 
+#checkInModal1 #confirm-button {
+    display: none;
+}
+
+#checkInModal1 .bottom-line {
+    color: #566A7F;
+    width: 500px;
+    margin-top: 20px;
+}
+
+#checkInModal1 .ic3-container {
+    display: flex;
+    gap: 60px;
+    font-family: 'Poppins';
+    font-size: 14px;
+    height: 100%;
+    margin-top: 30px !important;
+}
+
+#checkInModal1 .existing-user-labels {
+    margin-left: 20px;
+    color: #566A7F;
+    font-weight: 600;
+}
+
+#checkInModal1 .existing-user-labels, 
+#checkInModal1 .existing-user-values {
+    color: #697A8D;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#checkInModal1 #address {
+    max-width: 200px;
+}
+
+#checkInModal1 #ic3hr1 {
+    margin-top: -10px;
+}
+
+#checkInModal1 #ic3hr2 {
+    margin-top: -30px;
+}
+
+#checkInModal1 .ic4-flex {
+    display: flex;
+    flex-direction: column;
+}
+
+#checkInModal1 .checkin-dates-label-flex, 
+#checkInModal1 .checkout-dates-label-flex, 
+#checkInModal1 .roomtypes-label-flex, 
+#checkInModal1 .extra-details-label-flex {
+    display: flex;
+    color: #566A7F;
+    gap: 150px;
+}
+#checkInModal1 .checkin-dates-label-flex {
+    gap: 160px;
+}
+
+#checkInModal1 .checkout-dates-label-flex {
+    margin-top: 20px;
+}
+
+#checkInModal1 .roomtypes-label-flex {
+    gap: 180px;
+    margin-top: 20px;
+}
+
+#checkInModal1 .extra-details-label-flex {
+    gap: 140px;
+    margin-top: 20px;
+}
+
+#checkInModal1 .room-types-flex .form-select {
+    width: 460px;
+    font-family: 'Poppins';
+}
+
+#checkInModal1 .checkin-dates-flex, 
+#checkInModal1 .checkout-dates-flex, 
+#checkInModal1 .room-types-flex, 
+#checkInModal1 .extra-flex {
+    display: flex;
+    gap: 20px;
+}
+
+#checkInModal1 .input-content-4 hr {
+    width: 500px;
+    margin-top: 70px;
+}
+
+#checkInModal1 .output-flex {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    overflow-x: hidden;
+    font-family: 'Poppins';
+    font-size: 12px;
+    gap: -5px;
+    color: #697A8D;
+}
+
+#checkInModal1 .output-label-name, 
+#checkInModal1 .output-values-name, 
+#checkInModal1 .output-label-numgen, 
+#checkInModal1 .output-values-numgen,
+#checkInModal1 .output-label-checkin, 
+#checkInModal1 .output-values-checkin,
+#checkInModal1 .output-label-checkout, 
+#checkInModal1 .output-values-checkout,
+#checkInModal1 .output-label-guestrate, 
+#checkInModal1 .output-values-guestrate,
+#checkInModal1 .output-label-room, 
+#checkInModal1 .output-values-room {
+    gap: 100px;
+    display: flex;
+}
+
+#checkInModal1 .output-values-name, 
+#checkInModal1 .output-values-numgen, 
+#checkInModal1 .output-values-checkin,
+#checkInModal1 .output-values-checkout, 
+#checkInModal1 .output-values-guestrate, 
+#checkInModal1 .output-values-room {
+    font-size: 18px;
+    font-weight: 600;
+    color: #566A7F;
+    margin-top: -10px;
+}
+
+#checkInModal1 #output-email, 
+#checkInModal1 #output-address {
+    font-size: 18px;
+    font-weight: 600;
+    color: #566A7F;
+    margin-top: -10px;
+}
+
+#checkInModal1 .input-content-5 hr {
+    width: 500px;
+}
+
+#checkInModal1 .output-label-name {
+    gap: 200px;
+}
+#checkInModal1 .output-values-name {
+    gap: 120px;
+}
+
+#checkInModal1 .output-label-numgen {
+    gap: 245px;
+}
+
+#checkInModal1 .output-values-numgen {
+    gap: 250px;
+}
+
+#checkInModal1 #output-fname {
+    max-width: 150px;
+    width: 100%;
+}
+
+#checkInModal1 .output-label-checkin {
+    gap: 185px;
+}
+
+#checkInModal1 #output-checkin-date, 
+#checkInModal1 #output-checkout-date {
+    max-width: 150px;
+    width: 100%;
+}
+
+#checkInModal1 .output-label-checkout {
+    gap: 170px;
+}
+
+#checkInModal1 .output-values-checkin, 
+#checkInModal1 .output-values-checkout {
+    gap: 120px;
+}
+
+#checkInModal1 .output-label-room {
+    gap: 205px;
+}
+
+#checkInModal1 #output-room-type {
+    max-width: 200px;
+    width: 100%;
+}
+
+#checkInModal1 .output-values-room {
+    gap: 70px;
+}
+
+#checkInModal1 .output-label-guestrate {
+    gap: 160px;
+}
+
+#checkInModal1 #output-guest-num {
+    max-width: 100px;
+    width: 100%;
+}
+
+#checkInModal1 .output-values-guestrate {
+    gap: 170px;
+}
+
+#checkInModal1 .payment-methods {
+    display: flex;
+    flex-direction: column;
+    font-family: 'Poppins';
+    gap: 10px;
+}
+#checkInModal1 .payment-methods .btn.btn-light {
+    border: 1px solid #566A7F;
+    color: #566A7F;
+    font-family: 'Poppins';
+    font-weight: 600;
+    font-size: 14px;
+    height: 100px;
+    width: 100% !important;
+    background-color: #f7f7f7;
+    display: flex;
+    align-items: center;
+    gap: 260px;
+    padding-left: 30px;
+}
+
+#checkInModal1 .input-content-7 p {
+    font-family: 'Poppins';
+    font-size: 14px;
+}
+
+#checkInModal1 .payment-methods p {
+    color: #566A7F;
+    font-weight: 600;
+    margin-bottom: -5px;
+    font-size: 14px;
+}
+
+#checkInModal1 .payment-label-flex {
+    color: #566A7F;
+    display: flex;
+    gap: 150px;
+}
+
+#checkInModal1 .payment-flex {
+    margin-top: -20px;
+    display: flex;
+    gap: 75px;
+}
+
+#checkInModal1 .payment-flex p {
+    color: #697A8D;
+    font-weight: 600;
+    font-size: 20px;
+    max-width: 200px;
+    width: 100%;
+}
+
+#checkInModal1 #select-voucher-qr {
+    width: 280px !important;
+    height: 50px;
+    font-size: 16px;
+    background-color: #f7f7f7;
+    color: #578FCA;
+    border: 1px solid #578FCA;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-left: 40px;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    margin-top: 30px;
+}
+
+#checkInModal1 .voucher-details-flex {
+    margin-top: 20px;
+    display: flex;
+    gap: 50px;
+    margin-left: 50%;
+    transform: translateX(-50%);
+}
+
+#checkInModal1 .voucher-details-flex p {
+    color: #566A7F;
+    width: 200px;
+}
+
+#checkInModal1 #voucher-value {
+    color: #697A8D;
+    width: 350px;
+    font-weight: 600;
+}
+
+#checkInModal1 #remove-voucher {
+    margin-left: 60%;
+    transform: translateX(-60%);
+    color: #697A8D;
+}
+
+#checkInModal1 .total-amount-flex {
+    display: flex;
+    gap: 250px;
+}
+
+#checkInModal1 #total-amount-value {
+    color: #566A7F;
+    font-size: 20px;
+    font-weight: 600;
+}
+#checkInModal1 .total-amount-value-flex {
+    display: flex;
+    flex-direction: column;
+    text-align: right; 
+}
+
+#checkInModal1 #orig-amount-value, 
+#checkInModal1 #discount-amount-value, 
+#checkInModal1 #res-amount-value {
+    margin-top: -20px;
+    color: #697A8D;
+}
+
+#checkInModal1 #tot-amount-label {
+    color: #566A7F;
+    font-weight: 600;
+}
+
+#checkInModal1 .input-content-9 img, 
+#checkInModal1 .input-content-10 img, 
+#checkInModal1 .input-content-11 img {
+    margin-left: 50%;
+    transform: translateX(-50%);
+}
+
+#checkInModal1 .input-content-9 h5, 
+#checkInModal1 .input-content-10 h5, 
+#checkInModal1 .input-content-11 h5 {
+    margin-left: 35%;
+    transform: translateX(-35%);
+    font-weight: 600;
+    font-family: 'Poppins';
+    margin-top: 20px;
+    color: #566A7F;
+}
+
+#checkInModal1 .input-content-10 h5{
+    margin-left: 58%;
+    transform: translateX(-58%);
+}
+#checkInModal1 #acc-email-paypal, 
+#checkInModal1 #acc-name-paypal, 
+#checkInModal1 #acc-num-gcash, 
+#checkInModal1 #acc-name-gcash, 
+#checkInModal1 #cash-amount {
+    margin-left: 20px;
+    width: 460px;
+}
+
+#checkInModal1 .input-content-9 label, 
+#checkInModal1 .input-content-10 label, 
+#checkInModal1 .input-content-11 label {
+    margin-top: 30px;
+    margin-left: 20px;
+}
+
+#checkInModal1 .bottom-hr {
+    margin-top: -5px;
+}
+
+#checkInModal1 .amount-labels, 
+#checkInModal1 .amount-values {
+    display: flex;
+    font-family: 'Poppins';
+}
+
+#checkInModal1 .amount-labels {
+    gap: 140px;
+    color: #697A8D;
+    font-size: 14px;
+    margin-top: 40px;
+    margin-left: 40px;
+    font-weight: 600;
+}
+
+#checkInModal1 .amount-values {
+    font-size: 20px;
+    font-weight: bold;
+    color: #566A7F;
+    margin-left: 40px;
+    margin-top: -10px;
+    max-width: 250px;
+    width: 100%;
+    gap: 150px;
+    white-space: nowrap;
+}
+
+#checkInModal1 .input-content-12 img {
+    margin-left: 50%;
+    transform: translateX(-50%);
+}
+
+#checkInModal1 .input-content-12 h5 {
+    margin-left: 50%;
+    transform: translateX(-50%);
+    font-size: 26px;
+    font-family: 'Poppins';
+    color: #566A7F;
+    font-weight: 600;
+}
+
+#checkInModal1 .input-content-12 p {
+    font-family: 'Poppins';
+    color: #697A8D;
+    font-size: 14px;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    width: 350px;
+    text-align: center;
+}
+
+#checkInModal1 .fade-in {
+    opacity: 0;
+    animation: fadeIn 0.5s forwards;
+}
+
+#checkInModal1 .fade-out {
+    opacity: 1;
+    animation: fadeOut 0.5s forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+#checkInModal1 #qr-reader, 
+#checkInModal1 #qr-reader2 {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+#checkInModal1 #qr-reader video, 
+#checkInModal1 #qr-reader2 video {
+    width: 100%;
+    height: 300px;
+    display: block;
+}
+
+#checkInModal1 #qr-reader canvas, 
+#checkInModal1 #qr-reader2 canvas {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+}
+
+#checkInModal1 #qr-shaded-region {
+    border-radius: 10px;
+}
+
+/*These section are for modals*/

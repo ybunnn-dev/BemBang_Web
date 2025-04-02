@@ -63,12 +63,14 @@ body{
     left: 400px;
 }
 #formControlInput{
+    font-family: 'Poppins';
     margin-top: 30px;
     margin-left: 50%;
     transform: translateX(-50%);
     padding-bottom: 5px;
 }
 #formControlInput1{
+    font-family: 'Poppins';
     margin-top: 30px;
     margin-left: 50%;
     transform: translateX(-50%);

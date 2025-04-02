@@ -44,9 +44,18 @@ Route::prefix('frontdesk')->middleware(['auth', 'verified'])->group(function () 
     Route::get('/frontdesk/guest', function () {
         return view('frontdesk.guest');
     })->name('frontdesk.guest');
+    
     Route::get('/current-guest', function () {
         return view('frontdesk.current-guest');
     })->name('frontdesk.current-guest');
+    
+    Route::get('/guest-history', function () {
+        return view('frontdesk.guest-history');
+    })->name('frontdesk.guest-history');
+    
+    Route::get('/myprofile', function () {
+        return view('frontdesk.myprofile');
+    })->name('frontdesk.myprofile');
     
 });
 

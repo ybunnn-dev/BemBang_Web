@@ -1,0 +1,300 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Righteous&display=swap');
+
+.main-container{
+    position: relative;
+    left: 45%;
+    transform: translateX(-55%);
+    width: 1000px;
+    top: 20px;
+    height: 550px;
+    border-radius: 10px;
+}
+#exit-button {
+    display: flex;
+    align-items: center;  /* Aligns content vertically (optional) */
+    justify-content: center;  /* Centers content horizontally (optional) */
+    gap: 8px;  /* Adds space between the image and text (optional) */
+    margin-left: 40px;
+    margin-top: 30px;
+    outline: none;
+    border: none;
+    font-family: 'Poppins';
+    font-weight: 600;
+    background-color: transparent;
+    font-size: 14px;
+}
+.profile-holder{
+    height: 300px;
+    width: 300px;
+    background-color: #f7f7f7;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
+    border-radius: 10px;
+}
+.profile-type{
+    height: 240px;
+    width: 300px;
+    background-color: #f7f7f7;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
+    border-radius: 10px;
+    margin-top: 10px;
+}
+.profile-details{
+    position: absolute;
+    top: 0px;
+    height: 100%;
+    width: 700px;
+    background-color: #f7f7f7;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
+    border-radius: 10px;
+    left: 310px;
+    font-family: 'Poppins';
+}
+.profile-img{
+    position: relative;
+    height: 150px;
+    width: 150px;
+    background-color: pink;
+    border-radius: 50%;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 40px;
+}
+#edit-button{
+    font-family: 'Poppins';
+    border: 1px solid #697A8D;
+    width: 200px;
+    height: 50px;
+    margin-top: 60px;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    color: #697A8D;
+    font-weight: 600;
+}
+.details-header{
+    display: flex;
+    gap: 15px;
+    margin-left: 40px;
+    margin-top: 30px;
+}
+.details-header h5{
+    color: #566A7F;
+    font-weight: 600;
+}
+.details-flex{
+    display: flex;
+    gap: 50px;
+}
+.details-label{
+    display: flex;
+    flex-direction: column;
+    font-family: 'Poppins';
+    gap: 5px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #566A7F;
+    margin-top: 40px;
+    margin-left: 40px;
+}
+.details-values{
+    display: flex;
+    flex-direction: column;
+    font-family: 'Poppins';
+    gap: 5px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #697A8D;
+    margin-top: 40px;
+    margin-left: 40px;
+}
+#address{
+    max-width: 300px;
+    padding-left: 0px;
+}
+.type-header{
+    position: relative;
+    color: #697A8D;
+    font-family: 'Poppins';
+    display: flex;
+    gap: 10px;
+    top: 30px;
+    left: 30px;
+}
+.type-header h5{
+    font-size: 16px;
+    font-weight: 600;
+}
+.type-labels{
+    position: relative;
+    top: 50px;
+    left: 30px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #566A7F;
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+    font-family: 'Poppins';
+}
+.type-values{
+    position: relative;
+    top: 50px;
+    left: 30px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #697A8D;
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+    font-family: 'Poppins';
+}
+.type-contents{
+    margin-top: 10px;
+    display: flex;
+    gap: 30px;
+}
+.action-buttons{
+    position: absolute;
+    display: flex;
+    left: 270px;
+    top: 85%;
+    gap: 20px;
+}
+#save-button{
+    background-color: #3674B5;
+    width: 180px;
+    height: 50px;
+    font-weight: 600;
+}
+#change-pass{
+    border: 1px solid #3674B5;
+    color: #3674B5;
+    font-weight: 600;
+}
+
+.profile-img img {
+    width: 100%;  /* Make image fully fill the container */
+    height: 100%; /* Ensures it fully covers the height */
+    object-fit: cover; /* Crops image to fit inside without distortion */
+    border-radius: 50%; /* Ensures the image remains circular */
+}
+.button-change{
+    display: flex;
+    gap: 15px;
+}
+.button-change2{
+    display: flex;
+    gap: 0px;
+}
+#changeEmailModal, #changeNumModal, #changeAddressModal, 
+#changePassModal, #confirmPassModal, #saveChangesConfirmModal{
+    margin-top: 10% !important;
+    transform: transalteY(-10%);
+    font-family: 'Poppins';
+}
+#changeEmailModal .modal-header, #changeNumModal .modal-header,
+ #changeAddressModal .modal-header,  #changePassModal .modal-header,
+ #confirmPassModal .modal-header, #saveChangesConfirmModal .modal-header{
+    border-bottom: none;
+}
+#changeEmailModal .modal-body, #changeNumModal .modal-body, 
+#changeAddressModal .modal-body, #confirmPassModal .modal-body,
+#saveChangesConfirmModal .modal-body{
+    height: 100px;
+}
+#changePassModal .modal-body{
+    height: 200px;
+}
+#changeEmailModal h5, #changeNumModal h5, 
+#changeAddressModal h5, #changePassModal h5, 
+#saveChangesConfirmModal h5{
+    margin-left: 50%;
+    transform: translateX(-50%);
+    font-weight: 600;
+    color: #566A7F;
+    margin-top: 20px;
+}
+#changeEmailModal .btn-close, #changeNumModal .btn-close, 
+#changeAddressModal .btn-close, #changePassModal .btn-close,
+#confirmPassModal .btn-close, #saveChangesConfirmModal .btn-close{
+    display: none;
+}
+#changeEmailModal .modal-footer, #changeNumModal .modal-footer, 
+#changeAddressModal .modal-footer, #changePassModal .modal-footer,
+#confirmPassModal .modal-footer, #saveChangesConfirmModal .modal-footer{
+    border-top: none;
+}
+#changeEmailButton, #changeNumButton, #changeAddressButton{
+    cursor: pointer;
+}
+
+#formControlInput1, #formControlInput2,  
+#formControlInput3, #formControlInput4, 
+#formControlInput5, #formControlInput6{
+    width: 405px !important;
+    margin-left: 30px;
+}
+#formControlInput1:focus, #formControlInput2:focus,
+ #formControlInput3:focus, #formControlInput4:focus, 
+ #formControlInput5:focus, #formControlInput6:focus{
+    outline: none !important;
+    box-shadow: none !important;
+}
+#formControlInput1Label, #formControlInput2Label,
+#formControlInput3Label, #formControlInput4Label, 
+#formControlInput5Label, #formControlInput6Label{
+    color: #566A7F;
+    font-size: 14px;
+    font-weight: 600;
+    margin-left: 30px;
+}
+#formControlInput5Label{
+    margin-top: 20px;
+}
+#changeEmailModal .btn.btn-primary, #changeNumModal .btn.btn-primary, 
+#changeAddressModal .btn.btn-primary, #changePassModal .btn.btn-primary, 
+#confirmPassModal .btn.btn-primary, #saveChangesConfirmModal .btn.btn-primary{
+    margin-right: 30px;
+    background-color: #3674B5;
+    font-weight: 600;
+    width: 100px;
+    margin-bottom: 10px;
+}
+#changePassModal .btn.btn-primary{
+    width: 180px;
+}
+#saveChangesConfirmModal .btn.btn-primary{
+    width: 150px;
+}
+#saveChangesConfirmModal p{
+    color: #697A8D;
+}
+#saveChangesConfirmModal .modal-body{
+    text-align: center;
+    height: 70px;
+}
+#changeEmailModal .btn.btn-light, #changeNumModal .btn.btn-light, 
+#changeAddressModal .btn.btn-light, #changePassModal .btn.btn-light, 
+#confirmPassModal .btn.btn-light, #saveChangesConfirmModal .btn.btn-light{
+    color: #3674B5;
+    border: 1px solid #3674B5;
+    font-weight: 600;
+    width: 100px;
+    margin-bottom: 10px;
+}
+#confirmPassModal .modal-header{
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    margin-top: 20px;
+}
+#confirmPassModal .modal-header p{
+    font-size: 12px;
+    color: #697A8D;
+}
+#confirmPassModal .modal-header h5{
+    color: #566A7F;
+    font-weight: 600;
+}
+#confirmPassModal .modal-body{
+    margin-bottom: 20px;
+}

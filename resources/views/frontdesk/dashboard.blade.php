@@ -2,6 +2,9 @@
 @section('title', 'Dashboard')
 @section('styles')
     <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/checkin-modal.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/book-modal.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/reserve-modal.css') }}">
 @endsection
 @section('scripts')
     <script src="{{ asset('js/frontdesk-dashboard.js') }}"></script>
@@ -13,7 +16,7 @@
         <h3>Dashboard</h3>
     </div>
     <div id="msg_content">
-        <h4>Welcome, {{ Auth::user()->name }}!</h4>
+        <h4>Welcome, {{ Auth::user()->first_name }}!</h4>
         <p>We're excited to have you on the team! Your skills are invaluable, and we’re confident you’ll make a great impact. Here’s to a successful future together!</p>
         <img src="{{ asset('images/welcomevai.png') }}">
     </div>
@@ -185,18 +188,31 @@
         <img src="{{ asset('images/check-in.svg') }}" width="40px" height="40px">
         <p>Check In</p>
     </div>
-    @include('components.check-in-modal1', ['modalId' => 'checkInModal1', 'title' => 'Bakal Ako'])
-    <div id="book-now">
+    @include('components.check-in-modal1', ['modalId' => 'checkInModal1', 'title' => 'Check In'])
+    <div id="book-now" data-bs-toggle="modal" data-bs-target="#book-modal">
         <img src="{{ asset('images/book-logo.svg') }}" width="40px" height="40px">
         <p>Book Now</p>
     </div>
-    <div id="reserve-now">
+    @include('components.book-modal', ['modalId' => 'book-modal', 'title' => 'Book Room'])
+    <div id="reserve-now" data-bs-toggle="modal" data-bs-target="#reserve-modal">
         <img src="{{ asset('images/reserve.svg') }}" width="40px" height="40px">
         <p>Reserve Now</p>
     </div>
+    @include('components.reserve-modal', ['modalId' => 'reserve-modal', 'title' => 'Reserve Room'])
     <div id="scan-qr">
         <img src="{{ asset('images/qr.svg') }}" width="40px" height="40px">
         <p id="qrlabel">Scan <br> QR Code</p>
         <p id="qrlowermsg">Instant Transaction</p>
     </div>
+    @php
+        $modalId = $modalId ?? 'defaultModalId';
+    @endphp
+    
+@endsection
+
+@section('extra-scripts')
+    <script src="https://unpkg.com/html5-qrcode"></script>
+    <script src="{{ asset('js/checkin-modal.js') }}"></script>
+    <script src="{{ asset('js/book-modal.js') }}"></script>
+    <script src="{{ asset('js/reserve-modal.js') }}"></script>
 @endsection
