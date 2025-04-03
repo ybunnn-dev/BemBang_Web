@@ -7,4 +7,5 @@ body{
 }
 .sidebar{
     background-color: #f7f7f7;
+    z-index: -1;
 }

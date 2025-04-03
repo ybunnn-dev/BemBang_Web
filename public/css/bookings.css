@@ -73,7 +73,7 @@ h4{
     margin-left: 20px;
 }
 
-#content-card label {
+#content-card .input-labels {
     font-weight: 600;
     font-family: 'Poppins';
     color: #566A7F; 
@@ -267,4 +267,8 @@ h4{
     font-size: 14px;
     font-weight: 600;
     padding: 0;
+}
+#checkInModal1, #book-modal, #reserve-modal{
+    margin-top: 10%;
+    transform: translateY(-10%);
 }

@@ -3,6 +3,7 @@
 
 @section('styles')
     <link rel="stylesheet" href="{{ asset('css/bookings.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/book-modal.css') }}">
 @endsection
 
 @section('scripts')
@@ -42,7 +43,8 @@
 
             <!-- Status Dropdown -->
             <button type="button" class="btn btn-light">Enter Date</button>
-            <button type="button" class="btn btn-light" id="book-button">Book Now</button>
+            <button type="button" class="btn btn-light" id="book-button" data-bs-toggle="modal" data-bs-target="#book-modal">Book Now</button>
+            @include('components.book-modal', ['modalId' => 'book-modal', 'title' => 'Book Room'])
             <button type="button" class="btn btn-primary" id="scan-qr-button">
                 <img src="{{ asset('images/qr2.svg') }}" width="15px" height="16px">
                 Scan QR Code
@@ -99,4 +101,10 @@
     </div>
 @endsection
 
+@section('extra-scripts')
+    <script src="https://unpkg.com/html5-qrcode"></script>
+    <script src="{{ asset('js/checkin-modal.js') }}"></script>
+    <script src="{{ asset('js/book-modal.js') }}"></script>
+    <script src="{{ asset('js/reserve-modal.js') }}"></script>
+@endsection
 

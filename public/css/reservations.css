@@ -74,12 +74,16 @@ h4{
     margin-left: 20px;
 }
 
-#content-card label {
+#content-card .input-labels {
     font-weight: 600;
     font-family: 'Poppins';
     color: #566A7F; 
     margin-left: 20px;
     margin-top: 20px;
+}
+#checkInModal1, #book-modal, #reserve-modal{
+    margin-top: 10%;
+    transform: translateY(-10%);
 }
 #content-card .btn.btn-primary.dropdown-toggle {
     width: 220px;

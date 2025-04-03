@@ -1,39 +1,44 @@
 /*These section are for modals*/
-#reserve-modal .modal-header {
+.contents{
+    display: flex;
+}
+#qr-modal .modal-header {
     font-family: 'Poppins';
     padding-top: 30px;
     flex-direction: column;
     border-bottom: none;
 }
-
-#reserve-modal .modal-header h5 {
+#qr-modal .bottom-line{
+    margin-top: 30px !important;
+}
+#qr-modal .modal-header h5 {
     font-weight: 600;
     color: #566A7F;
 }
 
-#reserve-modal .modal-header p {
+#qr-modal .modal-header p {
     font-size: 14px;
     color: #697A8D;
 }
 
-#reserve-modal .modal-body {
+#qr-modal .modal-body {
     padding-top: 0px;
     margin-top: 0px;
     height: 400px;
 }
 
-#reserve-modal .btn-close {
+#qr-modal .btn-close {
     display: none;
 }
 
-#reserve-modal .modal-footer {
+#qr-modal .modal-footer {
     padding-right: 35px;
     padding-bottom: 20px;
     padding-top: 20px;
     border-top: none;
 }
 
-#reserve-modal .modal-content {
+#qr-modal .modal-content {
     width: 600px;
     position: absolute;
     top: -20px;
@@ -41,32 +46,7 @@
     transform: translate(-50%);
 }
 
-#reserve-modal .input-content-2, 
-#reserve-modal .input-content-3, 
-#reserve-modal .input-content-4,
-#reserve-modal .input-content-5, 
-#reserve-modal .input-content-6,
-#reserve-modal .input-content-7, 
-#reserve-modal .input-content-8,
-#reserve-modal .input-content-9, 
-#reserve-modal .input-content-10, 
-#reserve-modal .input-content-11, 
-#reserve-modal .input-content-12 {
-    display: none;
-}
-
-#reserve-modal .input-content-1, 
-#reserve-modal .input-content-2, 
-#reserve-modal .input-content-3, 
-#reserve-modal .input-content-4, 
-#reserve-modal .input-content-5, 
-#reserve-modal .input-content-6, 
-#reserve-modal .input-content-7, 
-#reserve-modal .input-content-8,
-#reserve-modal .input-content-9, 
-#reserve-modal .input-content-10,
-#reserve-modal .input-content-11, 
-#reserve-modal .input-content-12 {
+.qr-content {
     padding-left: 30px;
     transition: opacity 0.5s ease-in-out;
     padding-right: 30px;
@@ -74,24 +54,23 @@
     height: 400px;
 }
 
-#reserve-modal .input-content-5 {
+#qr-modal .input-content-5 {
     margin-top: -15px;
     padding-right: 10px;
     height: 350px;
 }
 
-#reserve-modal .input-content-6 {
+#qr-modal .input-content-6 {
     overflow-y: auto;
 }
 
-#reserve-modal .input-content hr, 
-#reserve-modal .input-content-7 hr {
+#qr-modal .input-content hr, 
+#qr-modal .input-content-7 hr {
     color: #566A7F;
     width: 500px;
 }
 
-#reserve-modal .input-content-2 p, 
-#reserve-modal .input-content-8 p {
+#qr-modal .qr-content p {
     margin-left: 36%;
     transform: translateX(-36%);
     font-family: 'Poppins';
@@ -101,12 +80,12 @@
     margin-top: 20px;
 }
 
-#reserve-modal .input-content-2 hr {
+#qr-modal .input-content-2 hr {
     position: absolute;
     top: 370px;
 }
 
-#reserve-modal .scanner-holder {
+#qr-modal .scanner-holder {
     border: 1px solid #566A7F;
     width: 300px;
     height: 300px;
@@ -114,88 +93,88 @@
     margin-left: 50%;
     transform: translateX(-50%);
     border-radius: 10px;
+    margin-top: 20px;
 }
 
-#reserve-modal label {
+#qr-modal label {
     color: #566A7F;
     font-family: 'Poppins';
     font-size: 14px;
     font-weight: 600;
 }
 
-#reserve-modal .form-control {
+#qr-modal .form-control {
     font-family: 'Poppins';
     font-size: 14px;
 }
 
-#reserve-modal .form-control:focus {
+#qr-modal .form-control:focus {
     outline: none;
     box-shadow: none;
 }
 
-#reserve-modal .name-flex, 
-#reserve-modal .contact-flex, 
-#reserve-modal .namelabel-flex, 
-#reserve-modal .contactLabel-flex, 
-#reserve-modal .address-gen-label-flex, 
-#reserve-modal .address-gen-flex {
+#qr-modal .name-flex, 
+#qr-modal .contact-flex, 
+#qr-modal .namelabel-flex, 
+#qr-modal .contactLabel-flex, 
+#qr-modal .address-gen-label-flex, 
+#qr-modal .address-gen-flex {
     display: flex;
 }
 
-#reserve-modal .name-flex, 
-#reserve-modal .contact-flex, 
-#reserve-modal .address-gen-flex {
+#qr-modal .name-flex, 
+#qr-modal .contact-flex, 
+#qr-modal .address-gen-flex {
     align-items: center;
     gap: 20px;
 }
-#reserve-modal .address-gen-label-flex {
+#qr-modal .address-gen-label-flex {
     gap: 200px;
 }
 
-#reserve-modal #gen-label {
+#qr-modal #gen-label {
     margin-top: 20px;
     padding-bottom: 0px;
     margin-bottom: -10px;
 }
 
-#reserve-modal .namelabel-flex {
+#qr-modal .namelabel-flex {
     gap: 190px;
 }
 
-#reserve-modal .contactLabel-flex {
+#qr-modal .contactLabel-flex {
     margin-top: 20px;
     gap: 230px;
 }
 
-#reserve-modal #gender-select {
+#qr-modal #gender-select {
     font-family: 'Poppins';
     font-size: 14px;
     color: #697A8D;
 }
 
-#reserve-modal #gender-select:focus {
+#qr-modal #gender-select:focus {
     outline: none;
     box-shadow: none;
 }
 
-#reserve-modal #qr-reader, 
-#reserve-modal #qr-reader2 {
+#qr-reader-main {
     width: 100%;
     height: 100%;
     position: relative;
 }
 
-#reserve-modal #address-label {
+#qr-modal #address-label {
     margin-top: 20px;
 }
 
-#reserve-modal .separate-flex {
+#qr-modal .separate-flex {
     display: flex;
     gap: 15px;
     margin-top: 20px;
 }
 
-#reserve-modal .separate-flex p {
+#qr-modal .separate-flex p {
     font-weight: 600;
     font-size: 14px;
     color: #566A7F;
@@ -203,13 +182,13 @@
     margin-bottom: 0px;
 }
 
-#reserve-modal .separate-flex hr {
+#qr-modal .separate-flex hr {
     color: #566A7F;
     width: 230px !important;
     margin-top: 10px;
 }
 
-#reserve-modal #qr-ask-label {
+#qr-modal #qr-ask-label {
     font-family: 'Poppins';
     font-size: 13px;
     color: #697A8D;
@@ -218,12 +197,12 @@
     transform: translateX(-55%);
 }
 
-#reserve-modal #qr-button-reserve {
+#qr-modal #qr-button {
     display: flex;
     gap: 10px;
     height: 60px;
-    border: 1px solid #578FCA;
-    background-color: #f7f7f7;
+    border: 1px solid #578FCA !important;
+    background-color: #f7f7f7 !important;
     margin-left: 50%;
     transform: translateX(-50%);
     width: 200px;
@@ -233,285 +212,278 @@
     align-items: center;
     padding-left: 20px;
 }
-#reserve-modal .modal-footer .btn {
+#qr-modal .modal-footer .btn {
     width: 140px;
     font-size: 14px;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Poppins';
     font-weight: 600;
 }
 
-#reserve-modal .modal-footer .btn.btn-primary {
+#qr-modal .modal-footer .btn.btn-primary {
     background-color: #578FCA;
     color: #f7f7f7;
     border: none;
 }
 
-#reserve-modal .modal-footer .btn.btn-secondary {
+#qr-modal .modal-footer .btn.btn-secondary {
     background-color: #f7f7f7;
     border: 1px solid #578FCA;
     color: #578FCA;
 }
 
-#reserve-modal #prev-button-reserve, 
-#reserve-modal #confirm-button-reserve {
-    display: none;
-}
-
-#reserve-modal .bottom-line {
+#qr-modal .bottom-line {
     color: #566A7F;
     width: 500px;
-    margin-top: 20px;
+    margin-top: -10px;
 }
 
-#reserve-modal .ic3-container {
+#qr-modal .ic3-container {
     display: flex;
     gap: 60px;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Poppins';
     font-size: 14px;
     height: 100%;
     margin-top: 30px !important;
 }
 
-#reserve-modal .existing-user-labels {
+#qr-modal .existing-user-labels {
     margin-left: 20px;
     color: #566A7F;
     font-weight: 600;
 }
 
-#reserve-modal .existing-user-labels, 
-#reserve-modal .existing-user-values {
+#qr-modal .existing-user-labels, 
+#qr-modal .existing-user-values {
     color: #697A8D;
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
-#reserve-modal #address {
+#qr-modal #address {
     max-width: 200px;
 }
 
-#reserve-modal #ic3hr1 {
+#qr-modal #ic3hr1 {
     margin-top: -10px;
 }
 
-#reserve-modal #ic3hr2 {
+#qr-modal #ic3hr2 {
     margin-top: -30px;
 }
 
-#reserve-modal .ic4-flex {
+#qr-modal .ic4-flex {
     display: flex;
     flex-direction: column;
 }
 
-#reserve-modal .checkin-dates-label-flex, 
-#reserve-modal .checkout-dates-label-flex, 
-#reserve-modal .roomtypes-label-flex, 
-#reserve-modal .extra-details-label-flex {
+#qr-modal .checkin-dates-label-flex, 
+#qr-modal .checkout-dates-label-flex, 
+#qr-modal .roomtypes-label-flex, 
+#qr-modal .extra-details-label-flex {
     display: flex;
     color: #566A7F;
     gap: 150px;
 }
-
-#reserve-modal .checkin-dates-label-flex {
+#qr-modal .checkin-dates-label-flex {
     gap: 160px;
 }
 
-#reserve-modal .checkout-dates-label-flex {
+#qr-modal .checkout-dates-label-flex {
     margin-top: 20px;
 }
 
-#reserve-modal .roomtypes-label-flex {
+#qr-modal .roomtypes-label-flex {
     gap: 180px;
     margin-top: 20px;
 }
 
-#reserve-modal .extra-details-label-flex {
+#qr-modal .extra-details-label-flex {
     gap: 140px;
     margin-top: 20px;
 }
 
-#reserve-modal .room-types-flex .form-select {
+#qr-modal .room-types-flex .form-select {
     width: 460px;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Poppins';
 }
 
-#reserve-modal .checkin-dates-flex, 
-#reserve-modal .checkout-dates-flex, 
-#reserve-modal .room-types-flex, 
-#reserve-modal .extra-flex {
+#qr-modal .checkin-dates-flex, 
+#qr-modal .checkout-dates-flex, 
+#qr-modal .room-types-flex, 
+#qr-modal .extra-flex {
     display: flex;
     gap: 20px;
 }
 
-#reserve-modal .input-content-4 hr {
+#qr-modal .input-content-4 hr {
     width: 500px;
     margin-top: 70px;
 }
 
-#reserve-modal .output-flex {
+#qr-modal .output-flex {
     height: 100%;
     display: flex;
     flex-direction: column;
     overflow-y: auto;
     overflow-x: hidden;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Poppins';
     font-size: 12px;
     gap: -5px;
     color: #697A8D;
 }
 
-#reserve-modal .output-label-name, 
-#reserve-modal .output-values-name, 
-#reserve-modal .output-label-numgen, 
-#reserve-modal .output-values-numgen,
-#reserve-modal .output-label-checkin, 
-#reserve-modal .output-values-checkin,
-#reserve-modal .output-label-checkout, 
-#reserve-modal .output-values-checkout,
-#reserve-modal .output-label-guestrate, 
-#reserve-modal .output-values-guestrate,
-#reserve-modal .output-label-room, 
-#reserve-modal .output-values-room {
+#qr-modal .output-label-name, 
+#qr-modal .output-values-name, 
+#qr-modal .output-label-numgen, 
+#qr-modal .output-values-numgen,
+#qr-modal .output-label-checkin, 
+#qr-modal .output-values-checkin,
+#qr-modal .output-label-checkout, 
+#qr-modal .output-values-checkout,
+#qr-modal .output-label-guestrate, 
+#qr-modal .output-values-guestrate,
+#qr-modal .output-label-room, 
+#qr-modal .output-values-room {
     gap: 100px;
     display: flex;
 }
 
-#reserve-modal .output-values-name, 
-#reserve-modal .output-values-numgen, 
-#reserve-modal .output-values-checkin,
-#reserve-modal .output-values-checkout, 
-#reserve-modal .output-values-guestrate, 
-#reserve-modal .output-values-room {
+#qr-modal .output-values-name, 
+#qr-modal .output-values-numgen, 
+#qr-modal .output-values-checkin,
+#qr-modal .output-values-checkout, 
+#qr-modal .output-values-guestrate, 
+#qr-modal .output-values-room {
     font-size: 18px;
     font-weight: 600;
     color: #566A7F;
     margin-top: -10px;
 }
 
-#reserve-modal #output-email, 
-#reserve-modal #output-address {
+#qr-modal #output-email, 
+#qr-modal #output-address {
     font-size: 18px;
     font-weight: 600;
     color: #566A7F;
     margin-top: -10px;
 }
 
-#reserve-modal .input-content-5 hr {
+#qr-modal .input-content-5 hr {
     width: 500px;
 }
 
-#reserve-modal .output-label-name {
+#qr-modal .output-label-name {
     gap: 200px;
 }
-
-#reserve-modal .output-values-name {
+#qr-modal .output-values-name {
     gap: 120px;
 }
 
-#reserve-modal .output-label-numgen {
+#qr-modal .output-label-numgen {
     gap: 245px;
 }
 
-#reserve-modal .output-values-numgen {
+#qr-modal .output-values-numgen {
     gap: 250px;
 }
 
-#reserve-modal #output-fname {
+#qr-modal #output-fname {
     max-width: 150px;
     width: 100%;
 }
 
-#reserve-modal .output-label-checkin {
+#qr-modal .output-label-checkin {
     gap: 185px;
 }
 
-#reserve-modal #output-checkin-date, 
-#reserve-modal #output-checkout-date {
+#qr-modal #output-checkin-date, 
+#qr-modal #output-checkout-date {
     max-width: 150px;
     width: 100%;
 }
 
-#reserve-modal .output-label-checkout {
+#qr-modal .output-label-checkout {
     gap: 170px;
 }
 
-#reserve-modal .output-values-checkin, 
-#reserve-modal .output-values-checkout {
+#qr-modal .output-values-checkin, 
+#qr-modal .output-values-checkout {
     gap: 120px;
 }
 
-#reserve-modal .output-label-room {
+#qr-modal .output-label-room {
     gap: 205px;
 }
 
-#reserve-modal #output-room-type {
+#qr-modal #output-room-type {
     max-width: 200px;
     width: 100%;
 }
 
-#reserve-modal .output-values-room {
+#qr-modal .output-values-room {
     gap: 70px;
 }
 
-#reserve-modal .output-label-guestrate {
+#qr-modal .output-label-guestrate {
     gap: 160px;
 }
 
-#reserve-modal #output-guest-num {
+#qr-modal #output-guest-num {
     max-width: 100px;
     width: 100%;
 }
 
-#reserve-modal .output-values-guestrate {
+#qr-modal .output-values-guestrate {
     gap: 170px;
 }
 
-#reserve-modal .payment-methods {
+#qr-modal .payment-methods {
     display: flex;
     flex-direction: column;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Poppins';
     gap: 10px;
 }
-
-#reserve-modal .payment-methods .btn.btn-light {
+#qr-modal .payment-methods .btn.btn-light {
     border: 1px solid #566A7F;
     color: #566A7F;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Poppins';
     font-weight: 600;
     font-size: 14px;
-    width: 100%;
-    background-color: #f7f7f7;
     height: 100px;
+    width: 100% !important;
+    background-color: #f7f7f7;
     display: flex;
     align-items: center;
     gap: 260px;
     padding-left: 30px;
 }
 
-#reserve-modal .input-content-7 p {
-    font-family: 'Poppins', sans-serif;
+#qr-modal .input-content-7 p {
+    font-family: 'Poppins';
     font-size: 14px;
 }
 
-#reserve-modal .payment-methods p {
+#qr-modal .payment-methods p {
     color: #566A7F;
     font-weight: 600;
     margin-bottom: -5px;
     font-size: 14px;
 }
 
-#reserve-modal .payment-label-flex {
+#qr-modal .payment-label-flex {
     color: #566A7F;
     display: flex;
     gap: 150px;
 }
 
-#reserve-modal .payment-flex {
+#qr-modal .payment-flex {
     margin-top: -20px;
     display: flex;
     gap: 75px;
 }
-#reserve-modal .payment-flex p {
+
+#qr-modal .payment-flex p {
     color: #697A8D;
     font-weight: 600;
     font-size: 20px;
@@ -519,15 +491,15 @@
     width: 100%;
 }
 
-#reserve-modal #select-voucher-qr-reserve {
-    width: 280px;
+#qr-modal #select-voucher-qr {
+    width: 280px !important;
     height: 50px;
+    font-size: 16px;
     background-color: #f7f7f7;
     color: #578FCA;
     border: 1px solid #578FCA;
     font-weight: 600;
     display: flex;
-    font-size: 16px;
     align-items: center;
     gap: 10px;
     padding-left: 40px;
@@ -536,7 +508,7 @@
     margin-top: 30px;
 }
 
-#reserve-modal .voucher-details-flex {
+#qr-modal .voucher-details-flex {
     margin-top: 20px;
     display: flex;
     gap: 50px;
@@ -544,62 +516,61 @@
     transform: translateX(-50%);
 }
 
-#reserve-modal .voucher-details-flex p {
+#qr-modal .voucher-details-flex p {
     color: #566A7F;
     width: 200px;
 }
 
-#reserve-modal #voucher-value {
+#qr-modal #voucher-value {
     color: #697A8D;
     width: 350px;
     font-weight: 600;
 }
 
-#reserve-modal #remove-voucher {
+#qr-modal #remove-voucher {
     margin-left: 60%;
     transform: translateX(-60%);
     color: #697A8D;
 }
 
-#reserve-modal .total-amount-flex {
+#qr-modal .total-amount-flex {
     display: flex;
     gap: 250px;
 }
 
-#reserve-modal #total-amount-value {
+#qr-modal #total-amount-value {
     color: #566A7F;
     font-size: 20px;
     font-weight: 600;
 }
-
-#reserve-modal .total-amount-value-flex {
+#qr-modal .total-amount-value-flex {
     display: flex;
     flex-direction: column;
     text-align: right; 
 }
 
-#reserve-modal #orig-amount-value, 
-#reserve-modal #discount-amount-value, 
-#reserve-modal #res-amount-value {
+#qr-modal #orig-amount-value, 
+#qr-modal #discount-amount-value, 
+#qr-modal #res-amount-value {
     margin-top: -20px;
     color: #697A8D;
 }
 
-#reserve-modal #tot-amount-label {
+#qr-modal #tot-amount-label {
     color: #566A7F;
     font-weight: 600;
 }
 
-#reserve-modal .input-content-9 img, 
-#reserve-modal .input-content-10 img, 
-#reserve-modal .input-content-11 img {
+#qr-modal .input-content-9 img, 
+#qr-modal .input-content-10 img, 
+#qr-modal .input-content-11 img {
     margin-left: 50%;
     transform: translateX(-50%);
 }
 
-#reserve-modal .input-content-9 h5, 
-#reserve-modal .input-content-10 h5, 
-#reserve-modal .input-content-11 h5 {
+#qr-modal .input-content-9 h5, 
+#qr-modal .input-content-10 h5, 
+#qr-modal .input-content-11 h5 {
     margin-left: 35%;
     transform: translateX(-35%);
     font-weight: 600;
@@ -608,38 +579,37 @@
     color: #566A7F;
 }
 
-#reserve-modal .input-content-10 h5 {
+#qr-modal .input-content-10 h5{
     margin-left: 58%;
     transform: translateX(-58%);
 }
-
-#reserve-modal #acc-email-paypal, 
-#reserve-modal #acc-name-paypal, 
-#reserve-modal #acc-num-gcash, 
-#reserve-modal #acc-name-gcash, 
-#reserve-modal #cash-amount {
+#qr-modal #acc-email-paypal, 
+#qr-modal #acc-name-paypal, 
+#qr-modal #acc-num-gcash, 
+#qr-modal #acc-name-gcash, 
+#qr-modal #cash-amount {
     margin-left: 20px;
     width: 460px;
 }
 
-#reserve-modal .input-content-9 label, 
-#reserve-modal .input-content-10 label, 
-#reserve-modal .input-content-11 label {
+#qr-modal .input-content-9 label, 
+#qr-modal .input-content-10 label, 
+#qr-modal .input-content-11 label {
     margin-top: 30px;
     margin-left: 20px;
 }
 
-#reserve-modal .bottom-hr {
+#qr-modal .bottom-hr {
     margin-top: -5px;
 }
 
-#reserve-modal .amount-labels, 
-#reserve-modal .amount-values {
+#qr-modal .amount-labels, 
+#qr-modal .amount-values {
     display: flex;
     font-family: 'Poppins';
 }
 
-#reserve-modal .amount-labels {
+#qr-modal .amount-labels {
     gap: 140px;
     color: #697A8D;
     font-size: 14px;
@@ -648,7 +618,7 @@
     font-weight: 600;
 }
 
-#reserve-modal .amount-values {
+#qr-modal .amount-values {
     font-size: 20px;
     font-weight: bold;
     color: #566A7F;
@@ -660,12 +630,12 @@
     white-space: nowrap;
 }
 
-#reserve-modal .input-content-12 img {
+#qr-modal .input-content-12 img {
     margin-left: 50%;
     transform: translateX(-50%);
 }
 
-#reserve-modal .input-content-12 h5 {
+#qr-modal .input-content-12 h5 {
     margin-left: 50%;
     transform: translateX(-50%);
     font-size: 26px;
@@ -674,7 +644,7 @@
     font-weight: 600;
 }
 
-#reserve-modal .input-content-12 p {
+#qr-modal .input-content-12 p {
     font-family: 'Poppins';
     color: #697A8D;
     font-size: 14px;
@@ -684,12 +654,12 @@
     text-align: center;
 }
 
-#reserve-modal .fade-in {
+#qr-modal .fade-in {
     opacity: 0;
     animation: fadeIn 0.5s forwards;
 }
 
-#reserve-modal .fade-out {
+#qr-modal .fade-out {
     opacity: 1;
     animation: fadeOut 0.5s forwards;
 }
@@ -704,28 +674,25 @@
     to { opacity: 0; }
 }
 
-#reserve-modal #qr-reader5, 
-#reserve-modal #qr-reader6 {
+#qr-reader-main{
     width: 100%;
     height: 100%;
     position: relative;
 }
 
-#reserve-modal #qr-reader5 video, 
-#reserve-modal #qr-reader6 video {
+#qr-reader-main video{
     width: 100%;
     height: 300px;
     display: block;
 }
 
-#reserve-modal #qr-reader5 canvas, 
-#reserve-modal #qr-reader6 canvas {
+#qr-reader-main canvas{
     width: 100%;
     height: 100%;
     border-radius: 10px;
 }
 
-#reserve-modal #qr-shaded-region {
+#qr-modal #qr-shaded-region {
     border-radius: 10px;
 }
 

@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="{{ asset('css/checkin-modal.css') }}">
     <link rel="stylesheet" href="{{ asset('css/book-modal.css') }}">
     <link rel="stylesheet" href="{{ asset('css/reserve-modal.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/qr-scanner.css') }}">
 @endsection
 @section('scripts')
     <script src="{{ asset('js/frontdesk-dashboard.js') }}"></script>
@@ -199,11 +200,12 @@
         <p>Reserve Now</p>
     </div>
     @include('components.reserve-modal', ['modalId' => 'reserve-modal', 'title' => 'Reserve Room'])
-    <div id="scan-qr">
+    <div id="scan-qr" data-bs-toggle="modal" data-bs-target="#qr-modal">
         <img src="{{ asset('images/qr.svg') }}" width="40px" height="40px">
         <p id="qrlabel">Scan <br> QR Code</p>
         <p id="qrlowermsg">Instant Transaction</p>
     </div>
+    @include('components.qr-scanner-modal', ['modalId' => 'qr-modal', 'title' => 'Scan QR Code'])
     @php
         $modalId = $modalId ?? 'defaultModalId';
     @endphp
@@ -215,4 +217,5 @@
     <script src="{{ asset('js/checkin-modal.js') }}"></script>
     <script src="{{ asset('js/book-modal.js') }}"></script>
     <script src="{{ asset('js/reserve-modal.js') }}"></script>
+    <script src="{{ asset('js/qr-code.js') }}"></script>
 @endsection
