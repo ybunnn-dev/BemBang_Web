@@ -1,73 +1,44 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Righteous&display=swap');
 
-h4{
-    color: #566A7F !important;
+#main-label{
+    margin-left: 115px;
+    margin-top: 30px;
     font-family: 'Poppins';
-    font-weight: bold !important;
 }
-#dashnav{
-    margin-top: 120px;
+#main-label h3{
+    font-weight: 600 !important;
+    color: #323643;
+    position: absolute;
+    left:10rem;
 }
-#guest-nav{
-    background-color: #A1E3F9;
-    color: #578FCA;
-    pointer-events: none !important;
-}
-#guest-nav .icon{
-    fill: #578FCA !important;
-    pointer-events: none !important;
+#main-label img{
+    height: 1.6rem;
+    width: auto;
+    position: absolute;
+    top: 1.95rem;
 }
 
-#bookings-nav, 
-#reserve-nav, 
-#msg-nav, 
-#rooms-nav,
-#dashboard-nav{
-    background-color: #a1e3f900;
+#rooms-nav{
+    background-color: #A1E3F9;
+    color: #578FCA;
 }
-#guest-nav p{
+#rooms-nav .icon, #room-arrow, #room-av{
+    fill: #578FCA;
+    color:#578FCA !important;
+}
+#room-av{
+    font-weight: 600;
+}
+#rooms-nav p{
     pointer-events: none !important;
     font-weight: 600;
 }
-#dashboard-nav p, 
-#bookings-nav p, 
-#reserve-nav p, 
-#msg-nav p, 
-#rooms-nav p{
-    font-weight: 500;
-}
-#exit-button {
-    display: flex;
-    align-items: center;  /* Aligns content vertically (optional) */
-    justify-content: center;  /* Centers content horizontally (optional) */
-    gap: 8px;  /* Adds space between the image and text (optional) */
-    margin-left: 100px;
-    margin-top: 20px;
-    outline: none;
-    border: none;
-    font-family: 'Poppins';
-    font-weight: 600;
-    background-color: transparent;
-    font-size: 14px;
-}
-.header-content{
-    display: flex;
-    font-family: 'Poppins';
-    font-weight: 600;
-    gap: 20px;
-    align-items: center;
-    margin-top: 30px;
-    margin-left: 30px;
-}
-.header-content h3{
-    margin-bottom: 0px;
-    color: #566A7F;
-}
+
 #content-card {
     width: 1150px;
     margin-left: 100px;
-    margin-top: 20px;
-    min-height: 570px; /* Allows it to grow */
+    margin-top: 75px;
+    min-height: 550px; /* Allows it to grow */
     height: auto; /* Ensures flexibility */
     background-color: #f7f7f7;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
@@ -200,8 +171,8 @@ h4{
 }
 .table-container {
     flex-grow: 1; /* Allows it to take available space */
-    overflow-y: hidden; /* Enables vertical scrolling */
-    max-height: 370px; /* Adjust height as needed */
+    overflow-y: auto; /* Enables vertical scrolling */
+    max-height: 500px; /* Adjust height as needed */
 }
 .table-container table {
     width: 100%;
@@ -217,7 +188,7 @@ h4{
 
 .table-container tbody {
     display: block;
-    max-height: 310px; /* Controls tbody height */
+    max-height: 400px; /* Controls tbody height */
     overflow-y: auto; /* Makes tbody scrollable */
 }
 
@@ -256,6 +227,30 @@ h4{
     padding-top: 15px;
     margin-top: 5px;
 }
-th[scope="row"], #main-header{
-    width: 140px;
+.transact-actions{
+    display: flex;
+    position: absolute;
+    gap: 15px;
+    left: 840px;
+    top: 40px;
+}
+.transact-actions button{
+    background-color: #578FCA;
+    border: none;
+    color: #f7f7f7;
+    padding: 0;
+    font-size: 14px;
+    height: 30px;
+    font-weight: 600;
+    width: 120px;
+    text-align: center;
+    font-family: 'Poppins';
+}
+.transact-actions button:hover{
+    background-color: #3c628a;
+    color: #f7f7f7;
+}
+#checkInModal1, #book-modal, #reserve-modal{
+    margin-top: 10%;
+    transform: translateY(-10%);
 }

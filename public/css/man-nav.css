@@ -1,0 +1,143 @@
+#rooms-nav{
+    background-color: transparent;
+    color: #697A8D;
+    width: 15rem;
+    margin-left: 18px;
+    margin-top: 5px;
+    padding-left: 15px;
+    font-family: 'Poppins';
+}
+#room-arrow , #deal-arrow, #user-arrow{
+    transform: rotate(270deg); /* rotates the ">" */
+    margin-left: 90px;
+    transition: transform 0.4s ease;
+}
+#deal-arrow{
+    margin-left: 100px;
+}
+#user-arrow{
+    margin-left: 100px;
+}
+.room_button_holder .nav-link.active{
+    margin-top: 5px;
+}
+
+#room-av, #room-type, #promos-nav, 
+#voucher-nav, #discount-nav,
+#points-nav, #man-guest-nav,
+#employee-nav{
+    background-color: transparent;
+    color: #697A8D;
+    pointer-events: none !important;
+    width: 13.5rem;
+    padding-top: 0px;
+    margin-top: -5px;
+    display: flex;
+    margin-left: 1.5rem;
+    height: 2rem !important;
+    align-items: center;
+    border-radius: 10px;
+}
+#room-av, #room-type, #man-guest-nav, #employee-nav{
+    padding-top: 0px;
+    padding-left: 20px;
+    margin-top: 0px;
+}
+#promos-nav{
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+}
+
+#man-guest-nav, #employee-nav{
+    display: flex;
+    align-items: center;
+    margin-top: 0px;
+}
+#voucher-nav, #discount-nav, #points-nav{
+    display: flex;
+    align-items: center;
+    margin-top: 0px;
+    padding-left: 20px;
+}
+#voucher-nav, #discount-nav,
+#points-nav{
+    margin-top: 5px;
+}
+#room-av p, #room-type p{
+    position: absolute;
+    top: 15px;
+    left: 65px;
+}
+.buttons-part2{
+    position: absolute;
+    width: 100%;
+    top: 160px;
+    background-color: #f7f7f7;
+    width: 17rem;
+    margin: 0px;
+    padding-top: 0px;
+}
+.buttons-part2 {
+    transition: top 0.4s ease-in-out;
+}
+
+.buttons-part2 .nav-link.active:first-of-type{
+    margin-top: 0%;
+    padding-top: 0px;
+}
+.buttons-part3{
+    padding-left: 0px;
+    position: absolute;
+    top: 55px;
+    width: 100%;
+    height: 100%;
+    background-color: #f7f7f7;
+    transition: top 0.4s ease-in-out;
+}
+#deals-nav,
+#msg-nav,
+#user-nav,
+#perf-nav,
+#history-nav,
+#faq-nav{
+    font-weight: 500;
+    font-family: 'Poppins';
+    background-color: transparent;
+    height: 2.9rem !important;
+    color: #697A8D;
+    width: 100%;
+    margin-top: 0px;
+    border-radius: 10px;
+    margin-left: 5px;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    gap: 8%;
+}
+#deals-nav{
+    font-family: 'Poppins';
+    font-weight: 500;
+    width: 15rem;
+    margin-left: 20px;
+}
+#user-nav{
+    width: 15rem;
+    margin-left: 20px;
+    margin-top: 5px;
+}
+#perf-nav{
+    margin-top: 0px;
+}
+.buttons-part4{
+    padding-top: 0px;
+    background-color: #f7f7f7;
+    position: absolute;
+    top: 105px;
+    width: 100%;
+    transition: top 0.4s ease-in-out;
+}
+#perf-nav .icon{
+    fill: #697A8D;
+}

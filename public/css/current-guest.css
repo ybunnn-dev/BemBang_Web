@@ -5,6 +5,9 @@ h4{
     font-family: 'Poppins';
     font-weight: bold !important;
 }
+#dashnav{
+    margin-top: 120px;
+}
 #exit-button {
     display: flex;
     align-items: center;  /* Aligns content vertically (optional) */

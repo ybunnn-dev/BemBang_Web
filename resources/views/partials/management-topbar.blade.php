@@ -6,10 +6,12 @@
     
  
     <button class="btn btn-primary d-flex align-items-center" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-        <div id="Profile1"></div>
+        <div id="Profile1">
+          <img src="{{ asset('images/beki.jpg') }}">
+        </div>
         <svg width="1rem" height="1rem" viewBox="0 0 1024 1024" class="icon"  version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M903.232 256l56.768 50.432L512 768 64 306.432 120.768 256 512 659.072z" fill="#F7F7F7" /></svg>
         <p id="rec">Manager</p>
-        <p id="rec2">{{ Auth::user()->name }}</p>
+        <p id="rec2">{{ Auth::user()->first_name }}</p>
     </button>
 
       <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
