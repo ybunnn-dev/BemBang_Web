@@ -20,12 +20,12 @@
     <svg width="1rem" height="1rem" viewBox="0 0 1024 1024" id="room-arrow" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M903.232 256l56.768 50.432L512 768 64 306.432 120.768 256 512 659.072z" fill="currentColor" /></svg>
   </div>
   <div class="room_button_holder">
-      <a class="nav-link active" aria-current="page">
+      <a class="nav-link active" aria-current="page" href="{{ route('management.manage-rooms') }}">
           <div id="room-av">
               Manage Rooms
           </div>
       </a>
-      <a class="nav-link active" aria-current="page" href="{{ route('management.specific-room') }}">
+      <a class="nav-link active" aria-current="page" href="{{ route('management.room-types') }}">
           <div id="room-type">
             Room Types
           </div>

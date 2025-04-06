@@ -10,3 +10,8 @@ function goBacktoRoomList(){
     window.location.href=targetLink;
 }
 
+function gotoSpecificType(){
+    let targetLink = "/management/specific-type";
+
+    window.location.href=targetLink;
+}

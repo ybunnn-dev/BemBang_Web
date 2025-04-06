@@ -1,0 +1,465 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Righteous&display=swap');
+
+#exit-button {
+    display: flex;
+    align-items: center;  /* Aligns content vertically (optional) */
+    justify-content: center;  /* Centers content horizontally (optional) */
+    gap: 8px;  /* Adds space between the image and text (optional) */
+    margin-left: 100px;
+    margin-top: 20px;
+    outline: none;
+    border: none;
+    font-family: 'Poppins';
+    font-weight: 600;
+    background-color: transparent;
+    font-size: 14px;
+}
+#rooms-nav{
+    background-color: #A1E3F9;
+    color: #578FCA;
+}
+#rooms-nav .icon, #room-arrow, #room-type{
+    fill: #578FCA;
+    color:#578FCA !important;
+}
+#room-type{
+    font-weight: 600;
+}
+#bookings-nav, 
+#reserve-nav, 
+#msg-nav, 
+#guest-nav
+#dashboard-nav{
+    background-color: #a1e3f900;
+}
+#rooms-nav p{
+    pointer-events: none !important;
+    font-weight: 600;
+}
+#dashboard-nav p, 
+#bookings-nav p, 
+#reserve-nav p, 
+#msg-nav p, 
+#guest-nav p{
+    font-weight: 500;
+}
+
+#exit-button img {
+    margin-right: 5px; /* Adjust space between image and text */
+}
+
+#room-profile-pic{
+    width: 258px;
+    height: 268px;
+    margin-left: 100px;
+    margin-top: 10px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
+    object-fit: cover;
+}
+
+.details-card{
+    width: 880px;
+    height: 320px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
+    position: absolute;
+    top: 50px;
+    left: 380px;
+    border-radius: 10px;
+    color: #f7f7f7;
+}
+.rates-card{
+    width: 258px;
+    height: 230px;
+    color: #f7f7f7;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
+    border-radius: 10px;
+    position: relative;
+    top: 80px;
+    left: 100px;
+}
+.checkin-price{
+    width: 310px;
+    height: 190px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
+    position: absolute;
+    top: 440px;
+    left: 380px;
+    border-radius: 10px;
+    color: #f7f7f7;
+}
+.reserve-price{
+    width: 310px;
+    height: 190px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
+    position: absolute;
+    top: 440px;
+    left: 710px;
+    border-radius: 10px;
+    color: #f7f7f7;
+}
+.action-buttons ul {
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    width: 230px;
+    position: absolute;
+    top: 440px;
+    left: 1030px;
+    list-style-type: none;
+}
+
+.action-buttons ul li {
+    margin-bottom: 10px; /* Adds a gap between buttons */
+}
+
+.action-buttons ul li button {
+    width: 100%; /* Makes the buttons full width of their container */
+    height: 57px; /* You can adjust this height as needed */
+    font-size: 16px; /* Adjust button text size */
+    background-color: #578FCA !important;
+    font-family: 'Poppins' !important;
+    font-weight: 600 !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12) !important;
+    border: none !important;
+}
+.details-card p{
+    font-family: 'Poppins';
+    color: #697A8D;
+    font-weight: 500;
+}
+.features{
+    width: 810px;
+    height: 50px;
+    margin-left: 30px;
+}
+.description{
+    border: none;
+    width: 810px;
+    height: 100px;
+    margin-left: 30px;
+}
+#room-type-label{
+    position: absolute;
+    top: 90px;
+    left: 30px;
+    font-size: 11px;
+}
+#room-type-value{
+    position: absolute;
+    top: 110px;
+    left: 30px;
+    font-size: 14px;
+}
+.room-details-head{
+    display: flex;
+    align-items: center; /* Vertically aligns items */
+    gap: 15px; /* Sets a 10px gap between the elements */
+    margin-left: 30px;
+    justify-content: flex-start;
+    margin-top: 25px;
+}
+.room-details-head button{
+    border-radius: 10px;
+    border: 1px solid #566A7F;
+    font-family: 'Poppins';
+    color: #f7f7f7;
+    color: #566A7F;
+    font-size: 14px;
+    height: 30px;
+    width: 150px;
+    margin-left: 360px;
+}
+.details-card h4 {
+    color: #566A7F;
+    font-family: 'Poppins';
+    font-weight: 600;
+    margin: 0;
+    margin-bottom: -5px;
+}
+
+.details-card img {
+    width: 25px;
+    height: 25px;
+}
+.rates-card h5{
+    font-family: 'Poppins';
+    font-weight: 600 !important;
+    font-size: 18px;
+    color: #566A7F;
+    position: absolute;
+    top: 15px;
+    left: 50px;
+}
+.rates-card img{
+    position: absolute;
+    left: 15px;
+    top: 14px;
+}
+#feature-line{
+    width: 230px;
+    color: #566A7F;
+    position: absolute;
+    top: 35px;
+    left: 15px;
+}
+.rate-level{
+    margin-top: 90px;
+    margin-left: 30px;
+    font-weight: 600;
+}
+.rate-content {
+    height: 120px;
+    width: 250px;
+    position: relative;
+    top: 60px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    
+    /* Hide scrollbar */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE & Edge */
+}
+.rates-card button{
+    font-family: 'Poppins';
+    color: #566A7F;
+    border: 1px solid #566A7F;
+    font-size: 12px;
+    border-radius: 5px;
+    width: 100px;
+    height: 25px;
+    margin-top: 70px;
+    margin-left: 50%;
+    transform: translateX(-50%);
+}
+.rate-list{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    font-family: 'Poppins';
+    color: #697A8D;
+    font-size: 12px;
+    gap: 10px;
+}
+.rate-list li{
+    list-style: none; 
+}
+
+.li-content {
+    display: flex;
+    align-items: center; /* Ensures vertical alignment */
+    height: 20px;
+    gap: 20px;
+    width: 180px;
+    list-style-type: none;
+    margin-top: 15px;    
+}
+
+.li-content p {
+    margin-bottom: -1px;
+    margin-left: 10px;
+}
+.li-content img {
+    position: static; /* Removes absolute positioning */
+}
+
+.reviews-card{
+    top: 380px;
+    position: absolute;
+    background-color: #f7f7f7;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
+    height: 250px;
+    width: 880px;
+    border-radius: 10px;
+    left: 380px;
+    font-family: 'Poppins';
+}
+#edit-photos{
+    width: 258px;
+    height: 60px;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
+    font-family: 'Poppins';
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: 600;
+    color: #697A8D;
+    position: absolute;
+    left: 100px;
+    top: 330px;
+}
+.details-card hr{
+    color: #566A7F;
+    width: 810px;
+    margin-top: 20px;
+    margin-left: 30px;
+}
+.features h6, .description h6 {
+    color: #566A7F;
+    font-weight: 600;
+    margin-bottom: 0px;
+    font-family: 'Poppins';
+}
+.features-head, .description-head{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.features-head img, .description-head img{
+    height: 20px;
+    width: 20px;
+}
+.features-list{
+    margin-top: 20px;
+    display: flex;
+    gap: 25px;
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+.feature-item{
+    margin-left: 40px;
+    display: flex;
+    gap: 15px;
+    margin-bottom: -20px;
+}
+.feature-item img{
+    height: 16px;
+    width: 16px;
+}
+.feature-item p{
+    font-size: 13px;
+}
+#description-content {
+    margin-top: 20px;
+    font-size: 13px;
+    overflow: hidden; /* Hides overflowed content */
+    text-overflow: ellipsis; /* Adds ellipsis (...) if the content overflows */
+    white-space: nowrap; /* Prevents the content from wrapping */
+    line-height: 2;
+}
+#see-more-details, #see-more-details2{
+    display: flex;
+    gap: 10px;
+    margin-left: 730px;
+    margin-top: -5px;
+}
+#see-more-details2{
+    color: #697A8D;
+    font-weight: 500;
+    margin-top: 10px;
+}
+.review-head{
+    display: flex;
+    font-family: 'Poppins';
+    gap: 15px;
+    margin-top: 20px;
+    margin-left: 30px;
+}
+.review-head h5{
+    font-weight: 600;
+    color: #566A7F;
+}
+.review-count{
+    align-items: center;
+    display: flex;
+    gap: 15px;
+    margin-left: 30px;
+    margin-top: 15px;
+}
+.review-count h1{
+    font-weight: 600;
+    color: #697A8D;
+}
+.stars{
+    display: flex;
+    gap: 0px;
+}
+.review-sample{
+    margin-left: 30px;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.review-stars-num{
+    display: flex;
+    flex-direction: column;
+    align-items: center;;
+}
+.review-stars-num p{
+    color: #697A8D;
+    font-size: 13px;
+}
+.review-sample-head{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+#user-img{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.review-sample p{
+    font-size: 13px;
+    margin-bottom: 0px;
+}
+#user-name{
+    font-weight: 600;
+    color: #566A7F;
+}
+.user-head{
+    display: flex;
+    flex-direction: column;
+}
+.user-stars{
+    display: flex;
+}
+.user-items{
+    display: flex;
+    gap: 10px;
+}
+.review-sample-body{
+    margin-left: 60px;
+    width: 700px;
+}
+.review-sample-body p, .user-items p{
+    color: #697A8D;
+}
+.rate-item {
+    display: flex;
+    align-items: center; /* Align vertically if needed */
+    gap: 5px; /* Space between h5 and p */
+    margin-left: 30px;
+}
+
+.rate-item h5 {
+    position: relative; /* Now left will work */
+    left: 0; /* You can adjust this if you want, but it's not needed */
+    margin: 0; /* Optional: Reset default margin */
+}
+
+.rate-item p {
+    color: #697A8D;
+    font-family: 'Poppins', sans-serif;
+    margin: 0; /* Optional: Reset default margin */
+    margin-bottom: -30px;
+    font-size: 14px;
+}
+.rate-content hr{
+    color: #566A7F;
+    width: 78%;
+    margin-left: 30px;
+}
+.rate-content{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+#part2-rate{
+    margin-top: -20px;
+}

@@ -28,7 +28,6 @@
 #employee-nav{
     background-color: transparent;
     color: #697A8D;
-    pointer-events: none !important;
     width: 13.5rem;
     padding-top: 0px;
     margin-top: -5px;

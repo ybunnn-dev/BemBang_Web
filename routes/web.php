@@ -75,6 +75,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return view('management.specific_room'); // Uses layouts/management.blade.php
     })->name('management.specific-room');
 
+    Route::get('/management/room-types', function () {
+        return view('management.room-types'); // Uses layouts/management.blade.php
+    })->name('management.room-types');
+
+    // New route for specific-type
+    Route::get('/management/specific-type', function () {
+        return view('management.specific-type'); // Uses layouts/management.blade.php
+    })->name('management.specific-type');
 });
 
 Route::get('/employee/home', function () {
