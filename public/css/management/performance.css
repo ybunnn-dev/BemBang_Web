@@ -1,0 +1,211 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Righteous&display=swap');
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000; /* Ensures the navbar stays on top of other content */
+    background-color: #fff; /* Optional: adds a background color */
+    box-shadow: 0 4px 2px -2px gray; /* Optional: adds a shadow to distinguish the navbar */
+}
+body{
+    padding-top: 60px;
+}
+h4{
+    color: #566A7F !important;
+    font-family: 'Poppins';
+    font-weight: bold !important;
+}
+#dashnav{
+    margin-top: 120px;
+}
+#perf-nav{
+    background-color: #A1E3F9;
+    color: #578FCA;
+    pointer-events: none !important;
+}
+#perf-nav .icon{
+    fill: #578FCA !important;
+    pointer-events: none !important;
+}
+
+#bookings-nav, 
+#reserve-nav, 
+#msg-nav, 
+#rooms-nav,
+#dashboard-nav{
+    background-color: #a1e3f900;
+}
+#guest-nav p{
+    pointer-events: none !important;
+    font-weight: 600;
+}
+#dashboard-nav p, 
+#bookings-nav p, 
+#reserve-nav p, 
+#msg-nav p, 
+#rooms-nav p{
+    font-weight: 500;
+}
+#main-label{
+    margin-left: 120px;
+    margin-top: 40px;
+    font-family: 'Poppins';
+}
+#main-label h3{
+    font-weight: 600 !important;
+    color: #323643;
+    position: absolute;
+    left:10rem;
+}
+#main-label img{
+    height: 1.6rem;
+    width: auto;
+    position: absolute;
+    top: 2.6rem;
+}
+.main-contents{
+    margin-left: 120px;
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.actions{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.select-grp{
+    display: flex;
+    flex-direction: column;
+    font-family: 'Poppins';
+    color: #566A7F;
+}
+.select-grp .form-select{
+    height: 35px;
+    font-size: 15px;
+}
+.form-select{
+    color: #697A8D;
+}
+.actions .btn{
+    font-size: 14px;
+    margin-top: 25px;
+    height: 35px;
+    background-color: #578FCA;
+    border: none;
+    font-weight: 600;
+}
+#pdf-btn{
+    margin-left: 680px;
+}
+.reports{
+    display: flex;
+    gap: 15px;
+}
+.rev-card, .checkin-card, .book-card, .reserve-card {
+    height: 100px;
+    width: 270px;
+    background-color: #f7f7f7;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+    font-family: 'Poppins';
+    padding-top: 20px;
+    padding-left: 30px;
+}
+.rev-card img, .checkin-card img, .book-card img, .reserve-card img {
+    width: 25px;
+    height: 25px;
+}
+
+.rev-card p, .checkin-card p, .book-card p, .reserve-card p {
+    font-size: 12px;
+    color: #003087;
+    margin-top: 0px;
+    padding-top: 0px;
+}
+
+.rev-card h5, .checkin-card h5, .book-card h5, .reserve-card h5 {
+    color: #003087;
+    font-weight: 600;
+    margin-top: 5px;
+    margin-bottom: -5px;
+}
+
+.metrics{
+    background-color: #f7f7f7;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
+    border-radius: 10px;
+    height: 380px;
+    width: 1125px;
+}
+.top-rooms{
+    display: flex;
+    gap: 25px;
+    padding-bottom: 20px;
+}
+.top1, .top2{
+    height: 350px;
+    width: 555px;
+    background-color: #f7f7f7;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+}
+.top1 h5, .top2 h5{
+    color: #003087;
+    font-family: 'Poppins';
+    font-weight: 600;
+    margin-left: 30px;
+    margin-top: 20px;
+}
+.metrics-head{
+    margin-left: 30px;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.metrics-head h5{
+    color: #003087;
+    font-family: 'Poppins';
+    font-weight: 600;
+}
+.metrics-head p{
+    font-family: 'Poppins';
+    color: #697A8D;
+    font-size: 14px;
+}
+#checkin-bar{
+    width: 70px;
+    height: 5px;
+    background-color: pink;
+    margin-top: -15px;
+}
+#book-bar{
+    width: 70px;
+    height: 5px;
+    background-color: indigo;
+    margin-top: -15px;
+}
+#reserve-bar{
+    width: 70px;
+    height: 5px;
+    background-color: lightblue;
+    margin-top: -15px;
+}
+#checkin-label2{
+    margin-left: 350px;
+}
+#myChart{
+    padding-left: 30px;
+    padding-right: 30px;
+}
+#occupiedRoomsChart, #topRatedRoomsChart{
+    padding-left: 30px;
+    padding-right: 30px;
+}

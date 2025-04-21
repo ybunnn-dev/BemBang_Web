@@ -2,16 +2,26 @@
 @section('title', 'Room Types')
 @section('styles')
     <link rel="stylesheet" href="{{ asset('css/management/specific-type.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/management/type-details-modal.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/management/edit-type-modal.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/management/features-modal.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/management/edit-rates-modal.css') }}">
 @endsection
 
 @section('content')
-    <button id="exit-button" onclick="goBacktoRoomList()"><img src="{{ asset('images/arrow-back.svg') }}" width="14px" height="14px">Return</button>
-    <img src="{{ asset('images/rooms/standard.jpg') }}" id="room-profile-pic">
+    <script>
+        window.origFeatures = @json($features->toArray());
+        window.currentFeatures = @json($features->toArray());
+        window.all_Features  = @json($all_features->toArray());
+        window.allRoom = @json($roomType);
+    </script>
+    <button id="exit-button" onclick="goBacktoRoomTypes()"><img src="{{ asset('images/arrow-back.svg') }}" width="14px" height="14px">Return</button>
+    <img src="{{ asset($roomType->images[0]) }}" id="room-profile-pic">
     <div class="details-card">
         <div class="room-details-head">
             <img src="{{ asset('images/bed-icon-2.svg') }}">
-            <h4>Bembang Standard</h4>
-            <button>Edit Details</button>
+            <h4>{{ $roomType->type_name }}</h4>
+            <button data-bs-toggle="modal" data-bs-target="#edit-type">Edit Details</button>
         </div>
         <hr>
         <div class="features">
@@ -20,22 +30,25 @@
                 <h6>Room Features</h6>
             </div>
             <div class="features-list">
-                <div class="feature-item">
-                    <img src="{{ asset('images/features/bed.svg') }}">
-                    <p>1 Single Bed</p>
-                </div>
-                <div class="feature-item">
-                    <img src="{{ asset('images/features/bed.svg') }}">
-                    <p>1 Single Bed</p>
-                </div>
-                <div class="feature-item">
-                    <img src="{{ asset('images/features/bed.svg') }}">
-                    <p>1 Single Bed</p>
-                </div>
-                <div class="feature-item">
-                    <img src="{{ asset('images/features/bed.svg') }}">
-                    <p>1 Single Bed</p>
-                </div>
+                @isset($roomType->room_features)
+                    @php $count = 0; @endphp
+                    @foreach($roomType->room_features as $featureId)
+                        @php
+                            if ($count >= 4) break;
+                            $feature = \App\Models\Features::find($featureId);
+                        @endphp
+                        
+                        @if($feature)
+                            <div class="feature-item">
+                                <img src="{{ asset($feature->feature_icon) }}" alt="{{ $feature->feature_name }}">
+                                <p>{{ $feature->feature_name }}</p>
+                            </div>
+                            @php $count++; @endphp
+                        @endif
+                    @endforeach
+                @else
+                    <p>No features available for this room</p>
+                @endisset
             </div>
         </div>
         <hr>
@@ -44,18 +57,13 @@
                 <img src="{{ asset('images/description.svg') }}" width="15px" height="15px">
                 <h6>Description</h6>
             </div>
-            <p id="description-content">
-                Affordable Comfort for Practical Travelers<br>
-
-                The Bembang Standard room is designed for guests seeking a comfortable and budget-friendly stay without compromising on quality. This room type features a well-appointed space with modern amenities to ensure a relaxing experience. Perfect for solo travelers, couples, or business guests, the Bembang Standard offers a cozy atmosphere, making it an excellent choice for short-term stays or transit accommodations.
-                The room includes a plush double bed, ensuring a restful night's sleep, complemented by air conditioning to maintain an optimal temperature. Guests can stay connected with complimentary Wi-Fi and enjoy entertainment on the flat-screen TV with cable channels. A private bathroom with a hot-and-cold shower, fresh towels, and essential toiletries provides added convenience.
-                Whether for a brief overnight stop or a short stay, the Bembang Standard ensures comfort, privacy, and essential amenities at an affordable rate.
-            </p>
+            <p id="description-content">{!! str_replace('\n', '<br>', $roomType->description) !!}</p>
         </div>
-        <div id="see-more-details">
+        <div id="see-more-details" data-bs-toggle="modal" data-bs-target="#view_specific_type_details">
             <p>See More</p>   
             <img src="{{ asset('images/arrow-down.svg') }}" width="20px" height="20px">
         </div>
+       
     </div>
     <button id="edit-photos">
         Edit Images
@@ -111,27 +119,36 @@
         
         <div class="rate-content">
             <div class="rate-item">
-                <h5>P 1,499.00</h5>
+                <h5>P {{ number_format($roomType->rates['checkin_12h'], 2) }}</h5>
                 <p>/12 HRS</p>
             </div>
             <div class="rate-item">
-                <h5>P 1,499.00</h5>
-                <p>/12 HRS</p>
+                <h5>P {{ number_format($roomType->rates['checkin_24h'], 2) }}</h5>
+                <p>/24 HRS</p>
             </div>
             <hr>
             <div class="rate-item" id="part2-rate">
-                <h5>P 1,499.00</h5>
+                <h5>P {{ number_format($roomType->rates['reservation_12h'], 2) }}</h5>
                 <p>/12 HRS</p>
             </div>
             <div class="rate-item">
-                <h5>P 1,499.00</h5>
-                <p>/12 HRS</p>
+                <h5>P {{ number_format($roomType->rates['reservation_24h'], 2) }}</h5>
+                <p>/24 HRS</p>
             </div>
         </div>
-        <button>Edit Rates</button>
+        <button data-bs-toggle="modal" data-bs-target="#editRates">Edit Rates</button>
+    </div>    
     </div>
+    @include('components.type-details-modal', ['modalId' => 'view_specific_type_details', 'title' => $roomType->type_name])
+    @include('components.edit-type-modal', ['modalId' => 'edit-type', 'title' => 'Edit Room Details'])
+    @include('components.features-modal', ['modalId' => 'edit-features', 'title' => 'Add Features'])
+    @include('components.confirm-edit-type-details', ['modalId' => 'confirm-details', 'title' => 'Edit Details'])
+    @include('components.edit-rates-modal', ['modalId' => 'editRates', 'title' => 'Edit Rates'])
+    @include('components.confirm-edit-rates-modal', ['modalId' => 'confirm-rate-edit', 'title' => 'Confirm Changes'])
 @endsection
 @section('extra-scripts')
     <script src="{{ asset('js/management/side-nav.js') }}"></script>
     <script src="{{ asset('js/management/room.js') }}"></script>
+    <script src="{{ asset('js/management/edit-type-modal.js') }}"></script>
+    <script src="{{ asset('js/management/edit-rates.js') }}"></script>
 @endsection

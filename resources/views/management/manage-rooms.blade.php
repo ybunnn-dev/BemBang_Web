@@ -5,10 +5,16 @@
 @endsection
 
 @section('content')
+    <script>
+        // Safely pass PHP data to JavaScript
+        window.allRoomNum = @json($rooms->count());
+    </script>
     <div id="main-label">
         <img src="{{ asset('images/bed-icon.svg') }}">
         <h3>Manage Rooms</h3>
     </div>
+    <button type="button" class="btn btn-primary" id="add-button" data-bs-toggle="modal" data-bs-target="#add-room-modal">Add Room</button>
+    @include('components.add-modal', ['modalId' => 'add-room-modal', 'title' => 'Add Room'])
     <div id="content-card">
         <!-- Labels Row -->
         <div class="input-labels">
@@ -54,7 +60,7 @@
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th scope="col">ROOM #</th>
+                        <th scope="col" class="wan">ROOM #</th>
                         <th scope="col">ROOM TYPE</th>
                         <th scope="col">STATUS</th>
                         <th scope="col">GUEST NAME</th>
@@ -62,91 +68,23 @@
                         <th scope="col">CHECK-OUT</th>
                     </tr>
                 </thead>
+                
                 <tbody>
-                    <tr onclick="gotoSpecificRoom()">
-                        <th scope="row">1001</th>
-                        <td>Bembang Standard</td>
-                        <td><div class="status-div">Available</div></td>
+                    @foreach($rooms as $room)
+                    <tr onclick="gotoSpecificRoom('{{ $room->id }}')">
+                        <th scope="row" class="wan">{{ $room->room_no }}</th>
+                        <td>{{ $room->room_type->type_name }}</td>
+                        <td><div class="status-div">{{ ucfirst($room->status) }}</div></td>
                         <td>John Doe</td>
                         <td>2025-03-21<br><p style="font-size: 13px;">12:00</p></td>
                         <td>2025-03-23 <br><p style="font-size: 13px;">12:00</p></td>
                     </tr>
-                    <tr>
-                        <th scope="row">1002</th>
-                        <td>Bembang Twin</td>
-                        <td><div class="status-div">Reserved</div></td>
-                        <td>Jane Smith</td>
-                        <td>2025-03-21<br><p style="font-size: 13px;">12:00</p></td>
-                        <td>2025-03-23 <br><p style="font-size: 13px;">12:00</p></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">1002</th>
-                        <td>Bembang Twin</td>
-                        <td><div class="status-div">Maintenance</div></td>
-                        <td>Jane Smith</td>
-                        <td>2025-03-21<br><p style="font-size: 13px;">12:00</p></td>
-                        <td>2025-03-23 <br><p style="font-size: 13px;">12:00</p></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">1002</th>
-                        <td>Bembang Twin</td>
-                        <td><div class="status-div">Booking</div></td>
-                        <td>Jane Smith</td>
-                        <td>2025-03-21<br><p style="font-size: 13px;">12:00</p></td>
-                        <td>2025-03-23 <br><p style="font-size: 13px;">12:00</p></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">1002</th>
-                        <td>Bembang Twin</td>
-                        <td><div class="status-div">Cleaning</div></td>
-                        <td>Jane Smith</td>
-                        <td>2025-03-21<br><p style="font-size: 13px;">12:00</p></td>
-                        <td>2025-03-23 <br><p style="font-size: 13px;">12:00</p></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">1002</th>
-                        <td>Bembang Twin</td>
-                        <td><div class="status-div">Maintenance</div></td>
-                        <td>Jane Smith</td>
-                        <td>2025-03-21<br><p style="font-size: 13px;">12:00</p></td>
-                        <td>2025-03-23 <br><p style="font-size: 13px;">12:00</p></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">1002</th>
-                        <td>Bembang Twin</td>
-                        <td><div class="status-div">Maintenance</div></td>
-                        <td>Jane Smith</td>
-                        <td>2025-03-21<br><p style="font-size: 13px;">12:00</p></td>
-                        <td>2025-03-23 <br><p style="font-size: 13px;">12:00</p></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">1002</th>
-                        <td>Bembang Twin</td>
-                        <td><div class="status-div">Maintenance</div></td>
-                        <td>Jane Smith</td>
-                        <td>2025-03-21<br><p style="font-size: 13px;">12:00</p></td>
-                        <td>2025-03-23 <br><p style="font-size: 13px;">12:00</p></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">1002</th>
-                        <td>Bembang Twin</td>
-                        <td><div class="status-div">Maintenance</div></td>
-                        <td>Jane Smith</td>
-                        <td>2025-03-21<br><p style="font-size: 13px;">12:00</p></td>
-                        <td>2025-03-23 <br><p style="font-size: 13px;">12:00</p></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">1002</th>
-                        <td>Bembang Twin</td>
-                        <td><div class="status-div">Maintenance</div></td>
-                        <td>Jane Smith</td>
-                        <td>2025-03-21<br><p style="font-size: 13px;">12:00</p></td>
-                        <td>2025-03-23 <br><p style="font-size: 13px;">12:00</p></td>
-                    </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>
     </div>
+    @include('components.add-room-confirmation')
 @endsection
 @section('extra-scripts')
     <script src="{{ asset('js/management/side-nav.js') }}"></script>

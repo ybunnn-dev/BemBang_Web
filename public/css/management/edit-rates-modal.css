@@ -1,0 +1,106 @@
+#editRates .modal-body{
+    height: 300px;
+    width: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-left: 70px;
+    padding-right: 70px;
+    display: flex;
+    flex-direction: column;
+}
+#editRates .modal-content{
+    font-family: 'Poppins';
+    width: 600px;
+}
+#editRates .modal-dialog {
+    margin-left: 45%;
+    margin-top: 12%;
+    transform: translate(-45%, -12%);
+    margin-bottom: 0;
+}
+#editRates .modal-title{
+    font-family: 'Poppins';
+    font-weight: 600;
+    color: #566A7F;
+    margin-left: 20px;
+}
+#editRates .modal-header{
+    border: none;
+    height: 80px;
+    padding-right: 30px;
+}
+#editRates .modal-header h5{
+    margin-top: 20px;
+    margin-left: 50%;
+    transform: translateX(-50%);
+}
+#editRates .modal-footer{
+    border-top: none;
+    padding-right: 70px;
+    padding-top: 0;
+    padding-bottom: 20px;
+}
+.checkin-rates-labels, .reserve-rates-labels{
+    display: flex;
+    color: #566A7F;
+    font-size: 14px;
+    font-weight: 600;
+    gap: 100px;
+}
+.checkin-rates-labels{
+    margin-top: 30px;
+}
+.reserve-rates-labels{
+    margin-top: 30px;
+    margin-bottom: 0px;
+    gap: 70px;
+}
+.checkin-rates-input, .reserve-rates-input{
+    display: flex;
+    color: #566A7F;
+    gap: 20px;
+}
+.checkin-rates-input input:focus, .reserve-rates-input input:focus{
+    box-shadow: none;
+    color: #566A7F;
+}
+.checkin-rates-input input, .reserve-rates-input input{
+    color: #566A7F;
+}
+
+/* Target the header, body, and footer */
+#confirm-details .modal-dialog {
+    font-family: 'Poppins';
+    margin-top: 15%;
+    transform: translateY(-15%);
+}
+#confirm-details .modal-header,
+#confirm-details .modal-footer {
+    border: none;
+}
+#confirm-details .modal-header h5{ 
+    margin-left: 50%;
+    color: #566A7F;
+    font-weight: 600;
+    transform: translateX(-50%);
+    margin-top: 15px;
+}
+#confirm-details .modal-body{
+    height: 100px;
+    text-align: center;
+    padding-top: 20px;
+    color: #697A8D;
+}
+
+/* Target the buttons */
+#confirm-details button {
+    /* general button styles */
+}
+#confirm-details .modal-footer{
+    padding-right: 50px;
+}
+
+/* Target a specific button by ID */
+#confirm-details #save-edit-modal {
+    /* styles for the save button */
+}

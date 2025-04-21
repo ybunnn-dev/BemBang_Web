@@ -37,28 +37,28 @@
       Deals
       <svg width="1rem" height="1rem" viewBox="0 0 1024 1024" class="icon" id="deal-arrow" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M903.232 256l56.768 50.432L512 768 64 306.432 120.768 256 512 659.072z" fill="#697A8D" /></svg>
     </div>
-    <a class="nav-link active" aria-current="page">
+    <a class="nav-link active" aria-current="page" href="{{ route('management.promo') }}">
       <div id="promos-nav">
         Promotions & Offers
       </div>
     </a>
-    <a class="nav-link active" aria-current="page">
+    <a class="nav-link active" aria-current="page" href="{{ route('management.discounts') }}">
       <div id="discount-nav">
         Discounts
       </div>
     </a>
-    <a class="nav-link active" aria-current="page">
+    <a class="nav-link active" aria-current="page" href="{{ route('management.vouchers') }}">
       <div id="voucher-nav">
         Vouchers
       </div>
     </a>
-    <a class="nav-link active" aria-current="page">
+    <a class="nav-link active" aria-current="page" href="{{ route('management.points') }}">
       <div id="points-nav">
         Loyalty Program
       </div>
     </a>
     <div class="buttons-part3">
-        <a class="nav-link active" aria-current="page">
+        <a class="nav-link active" aria-current="page" href="{{ route('management.messages') }}">
           <div id="msg-nav">
               <svg width="1rem" height="1rem" viewBox="0 0 20 20" class="icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                   <title>message_three_points [#1560]</title>
@@ -87,18 +87,18 @@
               Users
               <svg width="1rem" height="1rem" viewBox="0 0 1024 1024" class="icon" id="user-arrow" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M903.232 256l56.768 50.432L512 768 64 306.432 120.768 256 512 659.072z" fill="#697A8D" /></svg>
         </div>
-        <a class="nav-link active" aria-current="page">
+        <a class="nav-link active" aria-current="page" href="{{ route('management.guest') }}">
               <div id="man-guest-nav">
                   Guest
               </div>
             </a>
-            <a class="nav-link active" aria-current="page">
+            <a class="nav-link active" aria-current="page" href="{{ route('management.employee') }}">
               <div id="employee-nav">
                   Employee
               </div>
             </a>
         <div class="buttons-part4">
-            <a class="nav-link active" aria-current="page">
+            <a class="nav-link active" aria-current="page" href="{{ route('management.performance') }}">
               <div id="perf-nav">
                   <svg version="1.1" width="1rem"  height="1rem" id="_x32_" class="icon" xmlns="http://www.w3.org/2000/svg" 
                   xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xml:space="preserve" fill="currentColor">
@@ -107,13 +107,13 @@
                   Performance
               </div>
             </a>
-            <a class="nav-link active" aria-current="page">
+            <a class="nav-link active" aria-current="page" href="{{ route('management.history') }}">
               <div id="history-nav">
                   <svg viewBox="0 0 16 16" class="icon" width="1rem" height="1rem" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M1.5 1.25a.75.75 0 011.5 0v1.851A7 7 0 111 8a.75.75 0 011.5 0 5.5 5.5 0 101.725-4H5.75a.75.75 0 010 1.5h-3.5a.75.75 0 01-.75-.75v-3.5z"></path> <path d="M8.25 4a.75.75 0 01.75.75v3.763l1.805.802a.75.75 0 01-.61 1.37l-2.25-1A.75.75 0 017.5 9V4.75A.75.75 0 018.25 4z"></path> </g> </g></svg>
                   History
               </div>
             </a>
-            <a class="nav-link active" aria-current="page">
+            <a class="nav-link active" aria-current="page" href="{{ route('management.faq') }}">
               <div id="faq-nav">
               <svg fill="currentColor" class="icon" width="1rem" height="1rem" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12,22A10,10,0,1,0,2,12,10,10,0,0,0,12,22Zm0-2a1.5,1.5,0,1,1,1.5-1.5A1.5,1.5,0,0,1,12,20ZM8,8.994a3.907,3.907,0,0,1,2.319-3.645,4.061,4.061,0,0,1,3.889.316,4,4,0,0,1,.294,6.456,3.972,3.972,0,0,0-1.411,2.114,1,1,0,0,1-1.944-.47,5.908,5.908,0,0,1,2.1-3.2,2,2,0,0,0-.146-3.23,2.06,2.06,0,0,0-2.006-.14,1.937,1.937,0,0,0-1.1,1.8A1,1,0,0,1,8,9Z"/></svg>
                   FAQs

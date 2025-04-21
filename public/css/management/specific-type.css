@@ -25,6 +25,9 @@
 #room-type{
     font-weight: 600;
 }
+.buttons-part2{
+    top: 252px;
+}
 #bookings-nav, 
 #reserve-nav, 
 #msg-nav, 
@@ -169,7 +172,8 @@
     font-size: 14px;
     height: 30px;
     width: 150px;
-    margin-left: 360px;
+    position: absolute;
+    left: 690px;
 }
 .details-card h4 {
     color: #566A7F;

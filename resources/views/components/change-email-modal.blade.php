@@ -7,11 +7,11 @@
       </div>
       <div class="modal-body">
         <label for="formControlInput1" class="form-label" id="formControlInput1Label">ENTER NEW EMAIL</label>
-        <input type="email" class="form-control" id="formControlInput1" placeholder="name@example.com">
+        <input type="email" class="form-control" id="formControlInput1" value="{{ Auth::user()->email }}">
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Confirm</button>
+        <button type="button" class="btn btn-primary" id="email-submit" onclick="insertInput('formControlInput1', 1)" disabled>Confirm</button>
       </div>
     </div>
   </div>

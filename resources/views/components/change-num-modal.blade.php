@@ -7,11 +7,11 @@
       </div>
       <div class="modal-body">
         <label for="formControlInput2" class="form-label" id="formControlInput2Label">ENTER NEW NUMBER</label>
-        <input type="email" class="form-control" id="formControlInput2" placeholder="0931234552">
+        <input type="tel" class="form-control" id="formControlInput2" value="{{ Auth::user()->mobileNumber }}">
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Confirm</button>
+        <button type="button" class="btn btn-primary" id="change-num-confirm" onclick="insertInput('formControlInput2', 2)" disabled>Confirm</button>
       </div>
     </div>
   </div>

@@ -254,3 +254,20 @@
     margin-top: 10%;
     transform: translateY(-10%);
 }
+.buttons-part2{
+    top: 252px;
+}
+.wan{
+    width: 120px;
+}
+#add-button{
+    position: absolute;
+    background-color: #578FCA;
+    color: #f7f7f7;
+    font-family: 'Poppins';
+    font-weight: 600;
+    border: none;
+    height: 30px;
+    font-size: 14px;
+    margin-left: 1150px;
+}

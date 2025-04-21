@@ -14,6 +14,9 @@
     background-color: transparent;
     font-size: 14px;
 }
+.buttons-part2{
+    top: 252px;
+}
 #rooms-nav{
     background-color: #A1E3F9;
     color: #578FCA;
@@ -136,6 +139,10 @@
     top: 110px;
     left: 30px;
     font-size: 14px;
+}
+#room-av{
+    font-weight: 600;
+    color: #578FCA;
 }
 .room-details-head{
     display: flex;

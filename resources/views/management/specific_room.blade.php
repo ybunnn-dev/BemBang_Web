@@ -9,13 +9,13 @@
     <div class="details-card">
         <div class="room-details-head">
             <img src="{{ asset('images/bed-icon-2.svg') }}">
-            <h4>Room #1</h4>
-            <div id="room-status">Available</div>
+            <h4>Room #{{ $room->room_no }}</h4>
+            <div id="room-status">{{ $room->status }}</div>
         </div>
         <p id="room-type-label">ROOM TYPE:</p>
-        <p id="room-type-value">Bembang Standard</p>
+        <p id="room-type-value">{{ $room->room_type->type_name }}</p>
         <p id="guest-num-label">AVAILABLE GUESTS:</p>
-        <p id="guest-num-value">2</p>
+        <p id="guest-num-value">{{ $room->room_type->guest_num }}</p>
 
         <hr id="line1">
 
@@ -41,54 +41,14 @@
         
         <div class="features-content">
             <ul class="feature-list">
-                <li>
-                    <div class="li-content">
-                        <img src="{{ asset('images/wifi.svg') }}" width="15px" height="15px">
-                        <p>Sample Feature</p>
-                    </div>
-                </li>
-                <li>
-                    <div class="li-content">
-                        <img src="{{ asset('images/wifi.svg') }}" width="15px" height="15px">
-                        <p>Sample Feature</p>
-                    </div>
-                </li>
-                <li>
-                    <div class="li-content">
-                        <img src="{{ asset('images/wifi.svg') }}" width="15px" height="15px">
-                        <p>Sample Feature</p>
-                    </div>
-                </li>
-                <li>
-                    <div class="li-content">
-                        <img src="{{ asset('images/wifi.svg') }}" width="15px" height="15px">
-                        <p>Sample Feature</p>
-                    </div>
-                </li>
-                <li>
-                    <div class="li-content">
-                        <img src="{{ asset('images/wifi.svg') }}" width="15px" height="15px">
-                        <p>Sample Feature</p>
-                    </div>
-                </li>
-                <li>
-                    <div class="li-content">
-                        <img src="{{ asset('images/wifi.svg') }}" width="15px" height="15px">
-                        <p>Sample Feature</p>
-                    </div>
-                </li>
-                <li>
-                    <div class="li-content">
-                        <img src="{{ asset('images/wifi.svg') }}" width="15px" height="15px">
-                        <p>Sample Feature</p>
-                    </div>
-                </li>
-                <li>
-                    <div class="li-content">
-                        <img src="{{ asset('images/wifi.svg') }}" width="15px" height="15px">
-                        <p>Sample Feature</p>
-                    </div>
-                </li>
+                @foreach($features as $feature)
+                    <li>
+                        <div class="li-content">
+                            <img src="{{ asset($feature->feature_icon) }}" width="15px" height="15px">
+                            <p>{{ $feature->feature_name }}</p>
+                        </div>
+                    </li>
+                @endforeach
             </ul>
         </div>
     </div>
@@ -100,8 +60,8 @@
             <p>12HRS:</p>
             <p>24HRS:</p>
         </div> 
-        <p id="checkin-12">P 1,499.00</p>
-        <p id="checkin-24">P 2,099.00</p>
+        <p id="checkin-12">P {{ number_format($room->room_type->rates->checkin_12h ,2) }}</p>
+        <p id="checkin-24">P {{ number_format($room->room_type->rates->checkin_24h ,2) }}</p>
     </div>
     <div class="reserve-price">
         <img src="{{ asset('images/price-tag.svg') }}" width="25px" height="25px">
@@ -111,8 +71,8 @@
             <p>12HRS:</p>
             <p>24HRS:</p>
         </div> 
-        <p id="reserve-12">P 1,499.00</p>
-        <p id="reserve-24">P 2,099.00</p>
+        <p id="reserve-12">P {{ number_format($room->room_type->rates->reservation_12h, 2) }}</p>
+        <p id="reserve-24">P {{ number_format($room->room_type->rates->reservation_24h, 2) }}</p>
     </div>
     <div class="action-buttons">
         <ul>

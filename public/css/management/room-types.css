@@ -5,6 +5,9 @@
     margin-top: 30px;
     font-family: 'Poppins';
 }
+.buttons-part2{
+    top: 252px;
+}
 #main-label h3{
     font-weight: 600 !important;
     color: #323643;

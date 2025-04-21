@@ -37,6 +37,7 @@
         <div class="bottom-1"> 
             <div class="stat-card">
                 <h5>Performance</h5>
+                <canvas id="myChart1" width="300px" height="55px"></canvas>
             </div>
             <div class="room-stat-card">
                 <div class="p1">
@@ -86,6 +87,7 @@
                     <img src="{{ asset('images/rankings.svg') }}" width="27px" height="27px">
                     <h5>Top Rooms</h5>
                 </div>
+                <canvas id="topOccupiedRoomsChart" width="400" height="300"></canvas>
             </div>
         </div>
     </div>

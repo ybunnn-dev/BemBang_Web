@@ -6,10 +6,15 @@
 @endsection
 
 @section('scripts')
-    <script src="{{ asset('js/frontdesk-dashboard.js') }}"></script>
+    
 @endsection
 
 @section('content')  
+    <script>
+        window.origEmail = {{ Js::from(Auth::user()->email) }};
+        window.origNum = {{ Js::from(Auth::user()->mobileNumber) }}
+        window.origAdd = {{ Js::from(Auth::user()->address) }}
+    </script>
     <button id="exit-button" data-bs-toggle="modal" data-bs-target="#saveChangesConfirmModal">
         <img src="{{ asset('images/arrow-back.svg') }}" width="14px" height="14px">
         Return
@@ -56,28 +61,30 @@
                     <p>ADDRESS:</p>
                 </div>
                 <div class="details-values">
-                    <p>{{ Auth::user()->first_name }}</p>
-                    <p>{{ Auth::user()->last_name }}</p>
+                    <p>{{ Auth::user()->firstName }}</p>
+                    <p>{{ Auth::user()->lastName}}</p>
                     <div class="button-change">
-                        <p>helloworld@gmail.com</p>
+                        <p id="email_display">{{ Auth::user()->email }}</p>
                         <img src="{{ asset('images/edit.svg') }}" width="15px" id="changeEmailButton" height="15px" data-bs-toggle="modal" data-bs-target="#changeEmailModal">
                     </div>
                     
                     <div class="button-change">
-                        <p>09123456789</p>
+                        <p id="mobileNum_display">{{ Auth::user()->mobileNumber }}</p>
                         <img src="{{ asset('images/edit.svg') }}" width="15px" height="15px" data-bs-toggle="modal" data-bs-target="#changeNumModal" id="changeNumButton">
                     </div>
                     <div class="button-change2">
-                        <p id="address">Purok 1, Cm. Recto, St. San Julian Irosin Sorsogon 4707</p>
+                        <p id="address">{{ Auth::user()->address }}</p>
                         <img src="{{ asset('images/edit.svg') }}" width="15px" height="15px" data-bs-toggle="modal" data-bs-target="#changeAddressModal" id="changeAddressButton">
                     </div>
                 </div>
-            <div>
-            <div class="action-buttons">
-                <button type="button" class="btn btn-light" id="change-pass" data-bs-toggle="modal" data-bs-target="#changePassModal" id="changePassButton">Change Password</button>
-                <button type="button" class="btn btn-primary" id="save-button" data-bs-toggle="modal" data-bs-target="#confirmPassModal">Save Changes</button>
+                <div>
+                    <div class="action-buttons">
+                        <button type="button" class="btn btn-light" id="change-pass" data-bs-toggle="modal" data-bs-target="#changePassModal" id="changePassButton">Change Password</button>
+                        <button type="button" class="btn btn-primary" id="save-button" data-bs-toggle="modal" data-bs-target="#confirmPassModal">Save Changes</button>
+                    </div>
+                </div>
             </div>
-        </div>
+        </div>  
     </div>
 @endsection
 @include('components.change-email-modal', ['id' => 'changeEmailModal', 'title' => 'Change Email'])
@@ -89,4 +96,5 @@
 
 @section('extra-scripts')
     <script src="{{ asset('js/myprofile.js') }}"></script>
+    <script src="{{ asset('js/profile-edit.js') }}"></script>
 @endsection

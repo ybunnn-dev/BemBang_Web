@@ -1,0 +1,83 @@
+#edit-features .modal-body{
+    height: 480px;
+    width: 100%;
+    
+    padding-left: 40px;
+    padding-right: 40px;
+    display: flex;
+    flex-direction: column;
+}
+.feature-wrapper{
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right: 10px;
+}
+#edit-features .modal-content{
+    font-family: 'Poppins';
+    width: 600px;
+}
+#edit-features .modal-dialog {
+    margin-left: 50%;
+    margin-top: 5%;
+    transform: translate(-50%, -5%);
+    margin-bottom: 0;
+}
+#edit-features .modal-title{
+    font-family: 'Poppins';
+    font-weight: 600;
+    color: #566A7F;
+    margin-left: 20px;
+}
+#edit-features .modal-header{
+    border: none;
+    height: 80px;
+    padding-right: 30px;
+}
+#edit-features .modal-header h5{
+    margin-top: 20px;
+    margin-left: 50%;
+    transform: translateX(-50%);
+}
+#edit-features .modal-footer{
+    border-top: none;
+    padding-right: 70px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+/* Applies only inside the #edit-features modal */
+#edit-features .feature-table {
+    font-family: 'Poppins', sans-serif;
+    width: 100%;
+    margin-top: 10px;
+    color: #697A8D;
+}
+
+#edit-features .feature-table th {
+    font-size: 13px;
+    color: #697A8D;
+    border-bottom: 2px solid #E5E7EB;
+    text-align: left;
+    padding-bottom: 10px;
+}
+
+#edit-features .feature-table td {
+    padding: 12px 10px;
+    font-size: 13px;
+    vertical-align: middle;
+    border-bottom: 1px solid #f0f0f0;
+    color: #697A8D;
+}
+
+#edit-features .feature-name {
+    font-weight: 500;
+    color: #697A8D;
+}
+
+#edit-features .feature-icon {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+}

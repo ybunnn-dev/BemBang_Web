@@ -11,14 +11,14 @@ class RolesController extends Controller
     {
         $user = Auth::user();
 
+        
         if (!$user) {
             return redirect()->route('login')->with('error', 'Unauthorized access.');
         }
-
-        switch ($user->role_id) {
-            case 1:
+        switch ($user->role) {
+            case "manager":
                 return redirect()->route('management.dashboard');
-            case 2:
+            case "receptionist":
                 return redirect()->route('frontdesk.dashboard');
             default:
                 return redirect()->route('home')->with('error', 'Unauthorized role.');

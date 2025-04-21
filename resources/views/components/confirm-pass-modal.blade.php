@@ -8,11 +8,11 @@
       </div>
       <div class="modal-body">
         <label for="formControlInput6" class="form-label" id="formControlInput6Label">ENTER OLD PASSWORD</label>
-        <input type="password" class="form-control" id="formControlInput6" placeholder="Enter here...">
+        <input type="password" class="form-control" id="formControlInput6" placeholder="Enter password">
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Confirm</button>
+        <button type="button" class="btn btn-primary" id="confirmPassModalBtn" disabled>Confirm</button>
       </div>
     </div>
   </div>
