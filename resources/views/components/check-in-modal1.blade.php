@@ -28,14 +28,14 @@
                   </div>
                   <div class="address-gen-label-flex">
                       <label for="formControlInput5" class="form-label" id="address-label">ADDRESS</label>
-                      <label for="gender-select" class="form-label" id="gen-label">SEX</label>
+                      <label for="gender-select" class="form-label" id="gen-label">Gender</label>
                   </div>
                 <div class="address-gen-flex">
                     <input type="text" class="form-control" id="formControlInput5" placeholder="ex. Sagpon, Daraga, Albay">
                     <select class="form-select" aria-label="Default select" id="gender-select">
                       <option selected="">Select Gender</option>
-                      <option value="1">Yes</option>
-                      <option value="2">No</option>
+                      <option value="Male">Male</option>
+                      <option value="Female">Female</option>
                     </select>
                 </div>
                 <div class="separate-flex">
@@ -72,13 +72,13 @@
                         <p>LAST CHECK IN:</p>
                     </div>
                     <div class="existing-user-values">
-                        <p>Leonard</p>
-                        <p>Condat</p>
-                        <p>Yes!</p>
-                        <p>manok@gmail.com</p>
-                        <p>0931245562</p>
+                        <p id="first-name">Leonard</p>
+                        <p id="last-name">Cock</p>
+                        <p id="sex">Yes!</p>
+                        <p id="personal-email">manok@gmail.com</p>
+                        <p id="mobile-number">0931245562</p>
                         <p id="address">Banao, Guinobatan, Albay</p>
-                        <p>March 17, 2025</p>
+                        <p id="last-check-in">March 17, 2025</p>
                     </div>
                   </div>
                   <hr id="ic3hr2">
@@ -91,8 +91,8 @@
                     </div>
 
                     <div class="checkin-dates-flex">
-                        <input type="date" class="form-control" id="checkin-date-input" placeholder="ex. hellobiokid@gmail.com">
-                        <input type="time" class="form-control" id="checkin-time-input" placeholder="ex. 0912345654">
+                        <input type="date" class="form-control" id="checkin-date-input" disabled>
+                        <input type="time" class="form-control" id="checkin-time-input" disabled>
                     </div>
 
                     <div class="checkout-dates-label-flex">
@@ -126,8 +126,8 @@
                     </div>
 
                     <div class="extra-flex">
-                        <input type="number" class="form-control" id="checkout-date-input">
-                        <input type="number" class="form-control" id="checkout-time-input" disabled>
+                        <input type="number" class="form-control" id="guest-num-input">
+                        <input type="number" class="form-control" id="hours-stay-input" disabled>
                     </div>
                     <hr>
               </div>
@@ -144,12 +144,12 @@
                         <p id="output-lname">Manok</p>
                     </div>
                     <div class="output-label-numgen">
-                        <p>SEX</p>
+                        <p>GENDER</p>
                         <p>MOBILE NUMBER</p>
                     </div>
                     <div class="output-values-numgen">
-                        <p>M</p>
-                        <p>091234567</p>
+                        <p id="output-gender">M</p>
+                        <p id="output-mobileNum">091234567</p>
                     </div>
 
                     <p>PERSONAL EMAIL</p>
@@ -166,7 +166,7 @@
 
                     <div class="output-values-checkin">
                         <p id="output-checkin-date">March 17, 2025</p>
-                        <p>8:00 AM</p>
+                        <p id="output-checkin-time">8:00 AM</p>
                     </div>
 
                     <div class="output-label-checkout">
@@ -176,7 +176,7 @@
 
                     <div class="output-values-checkout">
                         <p id="output-checkout-date">March 17, 2025</p>
-                        <p>8:00 PM</p>
+                        <p id="output-checkout-time">8:00 PM</p>
                     </div>
 
                     <div class="output-label-room">
@@ -205,13 +205,10 @@
             <div class="input-content-6">
               <div class="payment-methods">
                 <p>SELECT PAYMENT METHOD</p>
-                <button type="button" class="btn btn-light">
-                  <img src="{{ asset('images/paypal.svg') }}" width="50px" height="50px">Pay using PayPal
-                </button>
-                <button type="button" class="btn btn-light">
+                <button type="button" class="btn btn-light"  id="gcash" onclick="updatePaymentMethod('gcash')">
                   <img src="{{ asset('images/gcash.svg') }}" width="60px" height="60px">Pay using GCash
                 </button>
-                <button type="button" class="btn btn-light">
+                <button type="button" class="btn btn-light" id="cashPayment" onclick="updatePaymentMethod('cashPayment')">
                   <img src="{{ asset('images/cash.svg') }}" width="60px" height="60px">Cash Payment
                 </button>
               </div>
@@ -224,51 +221,10 @@
               </div>
         
               <div class="payment-flex">
-                <p>G-Shock</p>
-                <p>P 1,499.00</p>
-              </div>
-              <hr>
-              
-              <button type="button" class="btn btn-primary" id="select-voucher-qr" onclick="openVoucherScanner()">
-                <img src="{{ asset('images/qr2.svg') }}" width="30px" height="30px">
-                SELECT VOUCHER
-              </button>
-
-              <div class="voucher-details-flex">
-                <p>VOUCHER:</p>
-                <p id="voucher-value">Bembang Newbie 20% OFF</p>
-              </div>
-              <p id="remove-voucher"><u>Remove Voucher</u> </p>
-
-              <hr>
-              <div class="total-amount-flex">
-                <p id="tot-amount-label">TOTAL AMOUNT:</p>
-                <div class="total-amount-value-flex">
-                  <p id="total-amount-value">P 11,750.00</p>
-                  <p id="orig-amount-value">P 11,750.00</p>
-                  <p id="res-amount-value">-P 1,650.00</p>
-                  <p id="discount-amount-value">- P 250.00</p>
-                </div>
+                <p id="payment-method">G-Shock</p>
+                <p id="transactRateValue">P 1,499.00</p>
               </div>
               <hr class="bottom-hr">
-            </div>
-
-            <div class="input-content-8">
-                  <div class="scanner-holder">
-                    <div id="qr-reader2" style="width: 100%; height: 100%;"></div>
-                  </div>
-                  <p>Please position the QR code in front of the camera.</p>
-                  <hr class="bottom-line">
-            </div>
-
-            <div class="input-content-9">
-                <img src="{{ asset('images/paypal.svg') }}" width="50px" height="50px">
-                <h5>Paypal Payment</h5>
-                <label for="acc-name-paypal" class="form-label">ACCOUNT NAME</label>
-                <input type="text" class="form-control" id="acc-name-paypal" placeholder="Ron Peter Vakal">
-
-                <label for="acc-email-paypal" class="form-label">ACCOUNT EMAIL</label>
-                <input type="email" class="form-control" id="acc-email-paypal" placeholder="name@example.com">
             </div>
 
             <div class="input-content-10">

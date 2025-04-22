@@ -8,6 +8,7 @@
     <script>
         // Safely pass PHP data to JavaScript
         window.allRoomNum = @json($rooms->count());
+        console.log(@json($rooms));
     </script>
     <div id="main-label">
         <img src="{{ asset('images/bed-icon.svg') }}">

@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Frontdesk\FrontdeskDashboardController;
+use App\Http\Controllers\GuestController;
 use App\Http\Controllers\MongoRoomController;
 use App\Http\Controllers\Management\RoomTypeController;
 use App\Http\Controllers\RolesController;
@@ -11,6 +12,7 @@ use Illuminate\Support\Facades\Log;
 use App\Models\MongoRoomType;
 use Illuminate\Http\Request;
 use App\Http\Controllers\SpecificRoomController;
+use App\Http\Controllers\CheckinController;
 use App\Http\Controllers\MongoMembership;
 
 use MongoDB\BSON\ObjectId;
@@ -83,6 +85,9 @@ Route::prefix('frontdesk')->middleware(['auth', 'verified'])->group(function () 
 
 // Management Dashboard Route with Authentication
 Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/get-guests', [GuestController::class, 'getGuests'])->name('get-guest');
+    Route::get('/get-checkin-data', [CheckinController::class, 'getCheckInDetails'])->name('get-checkin-data');
+
     Route::get('/management/dashboard', function () {
         return view('management.dashboard'); // Uses layouts/management.blade.php
     })->name('management.dashboard');
