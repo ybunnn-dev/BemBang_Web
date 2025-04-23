@@ -17,7 +17,7 @@
         <h3>Dashboard</h3>
     </div>
     <div id="msg_content">
-        <h4>Welcome, {{ Auth::user()->first_name }}!</h4>
+        <h4>Welcome, {{ Auth::user()->firstName }}!</h4>
         <p>We're excited to have you on the team! Your skills are invaluable, and we’re confident you’ll make a great impact. Here’s to a successful future together!</p>
         <img src="{{ asset('images/welcomevai.png') }}">
     </div>

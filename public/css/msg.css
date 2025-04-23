@@ -10,6 +10,9 @@
 #msg-nav .icon path {
     fill: #578FCA !important;
 }
+#dashnav{
+    margin-top: 120px !important;
+}
 #bookings-nav, 
 #reserve-nav, 
 #guest-nav, 

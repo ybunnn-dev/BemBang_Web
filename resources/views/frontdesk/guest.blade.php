@@ -10,6 +10,11 @@
 @endsection
 
 @section('content')  
+    <script>
+        document.addEventListener("DOMContentLoaded", function (){
+            console.log(@json($guests));
+        });
+    </script>
     <div id="main-label">
         <img src="{{ asset('images/profile.svg') }}">
         <h3>Guests</h3>
@@ -71,115 +76,44 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr onclick="window.location.href='/frontdesk/current-guest'">
-                        <th scope="row" class="guest-id-column2">1001</th>
-                        <td class="guest-name-column2">Giannis Akoynagtatampo</td>
+                @foreach($guests as $guest)
+                    @php
+                        $latestTransaction = collect($guest->transaction_details)
+                            ->sortByDesc('created_at')
+                            ->first();
+                            // Parse the date with Carbon if it exists
+                        $transactionDate = isset($latestTransaction['created_at']) 
+                            ? \Carbon\Carbon::parse($latestTransaction['created_at'])
+                            : null;
+                    @endphp
+                    <tr onclick="window.location.href='/frontdesk/current-guest/{{ $guest->_id}}'">
+                        <th scope="row" class="guest-id-column2">{{ $guest->_id }}</th>
+                        <td class="guest-name-column2">{{ $guest->firstName . ' ' . $guest->lastName }}</td>
                         <td>
                             <div class="membership-type">
-                                <img src="{{ asset('images/elite-icon.svg') }}" width="20px" height="20px">
-                                <p>ELITE</p>
+                            <img src="{{ 
+                                match(strtolower($guest->membership_details->membership_name ?? '')) {
+                                    'explorer' => asset('images/explorer-icon.svg'),
+                                    'regular' => asset('images/regular-icon.svg'),
+                                    'expert' => asset('images/expert-icon.svg'),
+                                    'prime' => asset('images/prime-icon.svg'),
+                                    'elite' => asset('images/elite-icon.svg'),
+                                    default => asset('images/default-icon.svg') // Fallback icon
+                                }
+                            }}" width="20px" height="20px" alt="{{ $guest->membership_details->membership_name ?? 'Standard' }} membership">
+                                <p>{{ $guest->membership_details->membership_name }}</p>
                             </div>
                         </td>   
-                        <td><div class="status-div">Reservation</div></td>
-                        <td>2025-03-23 <br><p style="font-size: 13px;">12:00</p></td>
+                        <td>    
+                            <div class="status-div">{{ $latestTransaction['transaction_type'] ?? 'N/A' }}</div>
+                        </td>
+                        <td>{{ $transactionDate ? $transactionDate->format('M d, Y') : 'No date' }}<br>
+                            <p style="font-size: 13px;">
+                                {{ $transactionDate ? $transactionDate->format('h:i A') : 'No time' }}
+                            </p>
+                        </td>
                     </tr>
-                    <tr onclick="window.location.href='/frontdesk/room-details'">
-                        <th scope="row" class="guest-id-column2">1001</th>
-                        <td class="guest-name-column2">Giannis Akoynagtatampo</td>
-                        <td>
-                            <div class="membership-type">
-                                <img src="{{ asset('images/elite-icon.svg') }}" width="20px" height="20px">
-                                <p>ELITE</p>
-                            </div>
-                        </td>   
-                        <td><div class="status-div">Reservation</div></td>
-                        <td>2025-03-23 <br><p style="font-size: 13px;">12:00</p></td>
-                    </tr>
-                    <tr onclick="window.location.href='/frontdesk/room-details'">
-                        <th scope="row" class="guest-id-column2">1001</th>
-                        <td class="guest-name-column2">Giannis Akoynagtatampo</td>
-                        <td>
-                            <div class="membership-type">
-                                <img src="{{ asset('images/elite-icon.svg') }}" width="20px" height="20px">
-                                <p>ELITE</p>
-                            </div>
-                        </td>   
-                        <td><div class="status-div">Reservation</div></td>
-                        <td>2025-03-23 <br><p style="font-size: 13px;">12:00</p></td>
-                    </tr>
-                    <tr onclick="window.location.href='/frontdesk/room-details'">
-                        <th scope="row" class="guest-id-column2">1001</th>
-                        <td class="guest-name-column2">Giannis Akoynagtatampo</td>
-                        <td>
-                            <div class="membership-type">
-                                <img src="{{ asset('images/elite-icon.svg') }}" width="20px" height="20px">
-                                <p>ELITE</p>
-                            </div>
-                        </td>   
-                        <td><div class="status-div">Reservation</div></td>
-                        <td>2025-03-23 <br><p style="font-size: 13px;">12:00</p></td>
-                    </tr>
-                    <tr onclick="window.location.href='/frontdesk/room-details'">
-                        <th scope="row" class="guest-id-column2">1001</th>
-                        <td class="guest-name-column2">Giannis Akoynagtatampo</td>
-                        <td>
-                            <div class="membership-type">
-                                <img src="{{ asset('images/elite-icon.svg') }}" width="20px" height="20px">
-                                <p>ELITE</p>
-                            </div>
-                        </td>   
-                        <td><div class="status-div">Reservation</div></td>
-                        <td>2025-03-23 <br><p style="font-size: 13px;">12:00</p></td>
-                    </tr>
-                    <tr onclick="window.location.href='/frontdesk/room-details'">
-                        <th scope="row" class="guest-id-column2">1001</th>
-                        <td class="guest-name-column2">Giannis Akoynagtatampo</td>
-                        <td>
-                            <div class="membership-type">
-                                <img src="{{ asset('images/elite-icon.svg') }}" width="20px" height="20px">
-                                <p>ELITE</p>
-                            </div>
-                        </td>   
-                        <td><div class="status-div">Reservation</div></td>
-                        <td>2025-03-23 <br><p style="font-size: 13px;">12:00</p></td>
-                    </tr>
-                    <tr onclick="window.location.href='/frontdesk/room-details'">
-                        <th scope="row" class="guest-id-column2">1001</th>
-                        <td class="guest-name-column2">Giannis Akoynagtatampo</td>
-                        <td>
-                            <div class="membership-type">
-                                <img src="{{ asset('images/elite-icon.svg') }}" width="20px" height="20px">
-                                <p>ELITE</p>
-                            </div>
-                        </td>   
-                        <td><div class="status-div">Reservation</div></td>
-                        <td>2025-03-23 <br><p style="font-size: 13px;">12:00</p></td>
-                    </tr>
-                    <tr onclick="window.location.href='/frontdesk/room-details'">
-                        <th scope="row" class="guest-id-column2">1001</th>
-                        <td class="guest-name-column2">Giannis Akoynagtatampo</td>
-                        <td>
-                            <div class="membership-type">
-                                <img src="{{ asset('images/elite-icon.svg') }}" width="20px" height="20px">
-                                <p>ELITE</p>
-                            </div>
-                        </td>   
-                        <td><div class="status-div">Reservation</div></td>
-                        <td>2025-03-23 <br><p style="font-size: 13px;">12:00</p></td>
-                    </tr>
-                    <tr onclick="window.location.href='/frontdesk/room-details'">
-                        <th scope="row" class="guest-id-column2">1001</th>
-                        <td class="guest-name-column2">Giannis Akoynagtatampo</td>
-                        <td>
-                            <div class="membership-type">
-                                <img src="{{ asset('images/elite-icon.svg') }}" width="20px" height="20px">
-                                <p>ELITE</p>
-                            </div>
-                        </td>   
-                        <td><div class="status-div">Reservation</div></td>
-                        <td>2025-03-23 <br><p style="font-size: 13px;">12:00</p></td>
-                    </tr>
-
+                @endforeach
                 </tbody>
             </table>
         </div>

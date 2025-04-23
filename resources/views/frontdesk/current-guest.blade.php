@@ -10,6 +10,11 @@
 @endsection
 
 @section('content')
+    <script>
+        document.addEventListener("DOMContentLoaded", function (){
+            console.log(@json($guest));
+        });
+    </script>
     <button id="exit-button" onclick="goBackToGuestList()">
         <img src="{{ asset('images/arrow-back.svg') }}" width="14px" height="14px">
         Return
@@ -17,12 +22,21 @@
     <div class="guest-info-card">
         <div class="profile-pic-holder">
             <div id="profile-pic">
-                <img src="{{ asset('images/giannis.jpg') }}" alt="Profile Picture">
+                <img src="{{ asset('images/fanut.jpg') }}" alt="Profile Picture">
             </div>
-            <h5>Giannis Akoynagtatampo</h5>
+            <h5>{{ $guest->firstName . ' ' . $guest->lastName }}</h5>
             <div class="membership-type">
-                <img src="{{ asset('images/elite-icon.svg') }}" width="20px" height="20px">
-                <p>BEMBANG ELITE</p>
+            <img src="{{ 
+                    match(strtolower($guest->membership_details->membership_name ?? '')) {
+                        'explorer' => asset('images/explorer-icon.svg'),
+                        'regular' => asset('images/regular-icon.svg'),
+                        'expert' => asset('images/expert-icon.svg'),
+                        'prime' => asset('images/prime-icon.svg'),
+                        'elite' => asset('images/elite-icon.svg'),
+                        default => asset('images/default-icon.svg') // Fallback icon
+                    }
+                }}" width="20px" height="20px" alt="{{ $guest->membership_details->membership_name ?? 'Standard' }} membership">
+            <p>BEMBANG {{ isset($guest->membership_details->membership_name) ? strtoupper($guest->membership_details->membership_name) : 'NOT YET JOINED' }}</p>
             </div>
         </div>
         <div class="guest-info-title">
@@ -37,11 +51,11 @@
             <p>ADDRESS:</p>
         </div>
         <div class="info-values">
-            <p>Giannis</p>
-            <p>Akoynagtatampo</p>
-            <p>hellokim@gmail.com</p>
-            <p>0912345567</p>
-            <p>Purok 1, Cm. Recto, St. San Julian Irosin Sorsogon 4707</p>
+            <p>{{ $guest->firstName }}</p>
+            <p>{{ $guest->lastName }}</p>
+            <p>{{ $guest->email }}</p>
+            <p>{{ $guest->mobileNumber }}</p>
+            <p>{{ $guest->address }}</p>
         </div>
     </div>
     <div class="current-transact-card">
@@ -67,7 +81,7 @@
             <img src="{{ asset('images/guest-icons/booking.svg') }}" width="35px" height="35px" id="checkin-icon">
             <img src="{{ asset('images/guest-icons/reserve.svg') }}" width="35px" height="35px" id="checkin-icon">
         </div>
-        <p id="checkin-value">999</p>
+        <p id="checkin-value">{{ $guest->checkin_count }}</p>
         <p id="act-checkin-label">Check Ins</p>
 
         <p id="book-value">999</p>

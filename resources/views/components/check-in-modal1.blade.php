@@ -234,7 +234,7 @@
                 <input type="text" class="form-control" id="acc-name-gcash" placeholder="Ron Peter Vakal">
 
                 <label for="acc-num-gcash" class="form-label">ACCOUNT NUMBER</label>
-                <input type="tel" class="form-control" id="acc-num-gcash" placeholder="0987656234">
+                <input type="text" class="form-control" id="refNo" placeholder="098765546234">
             </div>
 
             <div class="input-content-11">

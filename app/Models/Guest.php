@@ -5,11 +5,12 @@ namespace App\Models;
 use MongoDB\Laravel\Eloquent\Model;
 use MongoDB\Laravel\Relations\BelongsTo;
 use Illuminate\Support\Facades\DB; 
+use MongoDB\BSON\ObjectId;
 
 class Guest extends Model
 {
     protected $connection = 'mongodb';
-    protected $collection = 'guest';
+    protected $collection = 'guests';
 
     protected $fillable = [
         'user_id',
@@ -39,7 +40,7 @@ class Guest extends Model
             $client = DB::connection('mongodb')->getMongoClient();
             // Access the database and collection
             $database = $client->bembang_hotel;  // Your DB name
-            $collection = $database->guest;  // Collection name
+            $collection = $database->guests;  // Collection name
 
             // Fetch all documents from the collection
             $documents = $collection->find()->toArray();  // Use the find method for all documents
@@ -89,6 +90,28 @@ class Guest extends Model
                        (empty($voucher['date_expired']) || now()->lt($voucher['date_expired']));
             });
     }
+public static function getSpecificGuest($id){
+    try {
+        $client = DB::connection('mongodb')->getMongoClient();
+        $database = $client->bembang_hotel;
+        $collection = $database->guests;
+        
+        // Convert string ID to ObjectId if needed
+        try {
+            $objectId = new ObjectId($id);
+            $document = $collection->findOne(['_id' => $objectId]);
+        } catch (\Exception $e) {
+            // If ID isn't valid ObjectId format, try as string
+            $document = $collection->findOne(['_id' => $id]);
+        }
+        
+        return $document ? (object)$document : null;
+        
+    } catch (\Exception $e) {
+        Log::error("MongoDB find room error: " . $e->getMessage());
+        return null;
+    }
+}
 
     /**
      * Check if guest qualifies for conditional vouchers

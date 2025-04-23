@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;  // To access DB facade for direct MongoDB qu
 use Illuminate\Support\Str; // Add this import
 use MongoDB\BSON\ObjectId;
 use Illuminate\Support\Facades\Log;
-
+use MongoDB\Laravel\Eloquent\Casts\ObjectId as CastsObjectId;
 
 class Membership extends Model
 {
@@ -79,4 +79,24 @@ class Membership extends Model
             return collect([]);  // Return empty collection in case of error
         }
     }
+    public static function getSpecificMembership($id)
+    {
+        try {
+           
+            $memId = new \MongoDB\BSON\ObjectId($id);
+            $collection = DB::getMongoDB()->selectCollection('membership');
+            $document = $collection->findOne(['_id' => $memId]);
+            
+            return collect([$document]);
+            
+        } catch (\Exception $e) {
+            Log::error("MongoDB query error: " . $e->getMessage(), [
+                'id' => $id,
+                'error' => $e->getTraceAsString()
+            ]);
+            return collect([]);
+        }
+    }
+
+
 }

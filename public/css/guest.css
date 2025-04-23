@@ -6,7 +6,7 @@ h4{
     font-weight: bold !important;
 }
 #dashnav{
-    margin-top: 120px;
+    margin-top: 120px !important;
 }
 #guest-nav{
     background-color: #A1E3F9;
@@ -268,14 +268,18 @@ h4{
     font-weight: 600;
 }
 .guest-id-column{
-    width: 150px; /* Adjust as needed */
+    width: 180px; /* Adjust as needed */
     min-width: 100px;
 }
 .guest-id-column2{
-    width: 150px; /* Adjust as needed */
+    width: 180px; /* Adjust as needed */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     min-width: 100px;
+    padding-right: 20px !important;
 }
 .guest-name-column2, .guest-name-column{
-    width: 250px; /* Adjust as needed */
+    width: 220px; /* Adjust as needed */
     min-width: 100px;
 }

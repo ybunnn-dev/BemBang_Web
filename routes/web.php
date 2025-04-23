@@ -64,14 +64,10 @@ Route::prefix('frontdesk')->middleware(['auth', 'verified'])->group(function () 
         return view('frontdesk.msg');
     })->name('frontdesk.msg');
     
-    // Route for frontdesk/guest.blade.php
-    Route::get('/frontdesk/guest', function () {
-        return view('frontdesk.guest');
-    })->name('frontdesk.guest');
-    
-    Route::get('/current-guest', function () {
-        return view('frontdesk.current-guest');
-    })->name('frontdesk.current-guest');
+    Route::get('/frontdesk/guest', [GuestController::class, 'index'])->name('frontdesk.guest');
+
+    Route::get('/current-guest/{id}', [GuestController::class, 'gotoSpecificGuest'])
+    ->name('frontdesk.current-guest');
     
     Route::get('/guest-history', function () {
         return view('frontdesk.guest-history');

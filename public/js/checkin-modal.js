@@ -1,7 +1,7 @@
 let scanner;
 let modal_part = 1;
 const transactRate = document.getElementById('transactRateValue');  // "P 1,499.00"
-const payMethod = document.getElementById('total-amount-value');
+const payMethod = document.getElementById('payment-method');
 
 const userFirstName = document.getElementById('first-name');
 const userLastName = document.getElementById('last-name');
@@ -68,17 +68,6 @@ document.addEventListener("DOMContentLoaded", function () {
             checkoutTimeInput.value && 
             typeSelect.value && 
             typeSelect.value !== '' // Ensure a room type is actually selected
-    }
-
-    function checkAllFieldsFilled2() {
-        return checkinDateInput.value && 
-            checkinTimeInput.value && 
-            checkoutDateInput.value && 
-            checkoutTimeInput.value && 
-            typeSelect.value && 
-            typeSelect.value !== '', // Ensure a room type is actually selected
-            guestNumInput.value &&
-            guestNumInput.value <= guestNumInput.max
     }
 
     function mergeDateTime(dateInput, timeInput) {
@@ -333,6 +322,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Add event listeners
     fnameInput.addEventListener('input', handleNameInput);
     lnameInput.addEventListener('input', handleNameInput);
+
     async function fetchGuests() {
         try {
             const response = await fetch('/get-guests');
@@ -345,12 +335,10 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-
-
     // Function to start scanning
     function startScanner() {
         // Choose the correct QR reader based on modal_part
-        const qrReaderDiv = (modal_part === 2 ? document.querySelector("#checkInModal1 #qr-reader") : document.querySelector("#checkInModal1 #qr-reader2"));
+        const qrReaderDiv =  document.querySelector("#checkInModal1 #qr-reader");
         
         if (!scanner) {
             scanner = new Html5Qrcode(qrReaderDiv.id); // Use dynamic element ID
@@ -401,7 +389,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Ensure that qr-reader2 adjusts layout properly when modal is shown
     document.querySelector("#checkInModal1").addEventListener("shown.bs.modal", function () {
         setTimeout(() => {
-            const qrReaderDiv = (modal_part === 2 ? document.querySelector("#checkInModal1 #qr-reader") : document.querySelector("#checkInModal1 #qr-reader2"));
+            const qrReaderDiv =  document.querySelector("#checkInModal1 #qr-reader");
             qrReaderDiv.style.width = '100%'; // Ensure the scanner div takes full width
             qrReaderDiv.style.height = '100%'; // Adjust height accordingly
         }, 300); // Wait a bit to ensure modal is fully shown before recalculating layout
@@ -716,7 +704,7 @@ function modal_switch_next() {
                 "" // New subtitle text
             );
             transactRate.textContent = `P ${computedAmount.toLocaleString('en-PH')}.00`;
-            payMethod.textContent = paymentMethod;
+            payMethod.textContent = paymentMethod === 'cashPayment' ? 'Cash Payment' : 'GCash';
             modal_part = 7;
             break;
         case 7:

@@ -9,9 +9,143 @@ use App\Models\Voucher;
 use Illuminate\Http\Request;
 use MongoDB\BSON\ObjectId;
 use MongoDB\BSON\UTCDateTime;
+use App\Models\Membership;
 
 class GuestController extends Controller
 {
+    public function index()
+    {
+        try {
+            $guests = Guest::allGuests();
+            Log::info("Guests retrieved", ['count' => $guests->count()]);
+
+            // Attach transactions, vouchers, and memberships to guests
+            $guests->each(function ($guest) {
+                // Convert _id to string if it's an ObjectId
+                $guestId = $guest->_id instanceof ObjectId ? (string) $guest->_id : (string) $guest->_id;
+                Log::debug('Fetching transactions for guest', ['guest_id' => $guestId]);
+                
+                $guest->transaction_details = $this->getGuestTransactions($guestId);
+                $guest->voucher_details = [];
+                $guest->last_checkin = $this->getRecentCheckin($guest->transaction_details);
+                $guest->address = $guest->address ?? 'Not provided';
+                
+                // Get membership if guest has a membership_id
+                if (isset($guest->membership_id)) {
+                    $guest->membership_details = Membership::getSpecificMembership($guest->membership_id)->first();
+                } else {
+                    $guest->membership_details = null;
+                }
+            });
+
+            // Collect all unique voucher IDs
+            $allVoucherIds = $guests->flatMap(function ($guest) {
+                return collect($guest->user_vouchers ?? [])
+                    ->map(function ($userVoucher) {
+                        return $this->normalizeVoucherId($userVoucher['voucher_id'] ?? null);
+                    })
+                    ->filter();
+            })->unique()->values();
+
+            Log::debug('Extracted Voucher IDs', ['voucher_ids' => $allVoucherIds->toArray()]);
+            Log::info("Voucher IDs processed");
+
+            // Get all vouchers in one query
+            $vouchers = $allVoucherIds->isNotEmpty() ? Voucher::whereIn('_id', $allVoucherIds)->get()->keyBy('_id') : collect();
+
+            // Attach vouchers to guests
+            $guests->each(function ($guest) use ($vouchers) {
+                $guest->voucher_details = collect($guest->user_vouchers ?? [])->map(function ($userVoucher) use ($vouchers) {
+                    return [
+                        'voucher_details' => $vouchers->get($this->normalizeVoucherId($userVoucher['voucher_id'] ?? null)),
+                        'status' => $userVoucher['status'] ?? null,
+                        'date_claimed' => $userVoucher['date_claimed'] ?? null,
+                        'date_expired' => $userVoucher['date_expired'] ?? null,
+                    ];
+                })->toArray();
+            });
+
+            // Log the final data
+            Log::channel('single')->info("Final Aggregated Guest Data:", [
+                'timestamp' => now()->toDateTimeString(),
+                'data' => $guests->toArray()
+            ]);
+
+            return view('frontdesk.guest', [
+                'guests' => $guests,
+                'memberships' => $guests->pluck('membership_details')->filter()
+            ]);
+        } catch (\Exception $e) {
+            Log::error('Failed to fetch guests', ['error' => $e->getMessage()]);
+            return view('frontdesk.guest', [
+                'guests' => collect(),
+                'memberships' => collect(),
+                'error' => 'Failed to fetch guests'
+            ]);
+        }
+    }
+   public function gotoSpecificGuest($id)
+    {
+        try {
+            // Get the specific guest
+            $guest = Guest::getSpecificGuest($id);
+            
+            // Get guest details
+            $guest->transaction_details = $this->getGuestTransactions($guest->_id);
+            $guest->voucher_details = [];
+            $guest->last_checkin = $this->getRecentCheckin($guest->transaction_details);
+            $guest->address = $guest->address ?? 'Not provided';
+            
+            // Get membership if exists
+            if (isset($guest->membership_id)) {
+                $guest->membership_details = Membership::getSpecificMembership($guest->membership_id)->first();
+            } else {
+                $guest->membership_details = null;
+            }
+            
+            // Process vouchers
+            $voucherIds = collect($guest->user_vouchers ?? [])
+                ->map(function ($userVoucher) {
+                    return $this->normalizeVoucherId($userVoucher['voucher_id'] ?? null);
+                })
+                ->filter()
+                ->unique()
+                ->values();
+            
+            // Get voucher details
+            $vouchers = $voucherIds->isNotEmpty() 
+                ? Voucher::whereIn('_id', $voucherIds)->get()->keyBy('_id') 
+                : collect();
+            
+            $guest->voucher_details = collect($guest->user_vouchers ?? [])->map(function ($userVoucher) use ($vouchers) {
+                return [
+                    'voucher_details' => $vouchers->get($this->normalizeVoucherId($userVoucher['voucher_id'] ?? null)),
+                    'status' => $userVoucher['status'] ?? null,
+                    'date_claimed' => $userVoucher['date_claimed'] ?? null,
+                    'date_expired' => $userVoucher['date_expired'] ?? null,
+                ];
+            })->toArray();
+            
+             
+            return view('frontdesk.current-guest', [
+                'guest' => $guest,
+                'latestTransaction' => collect($guest->transaction_details)
+                    ->sortByDesc('created_at')
+                    ->first()
+            ]);
+            
+        } catch (\Exception $e) {
+            Log::error('Failed to fetch guest', [
+                'id' => $id,
+                'error' => $e->getMessage()
+            ]);
+            
+            return view('frontdesk.current-guest', [
+                'error' => 'Failed to fetch guest details',
+                'guest' => null
+            ]);
+        }
+    }
     public function getGuests()
     {
         try {
