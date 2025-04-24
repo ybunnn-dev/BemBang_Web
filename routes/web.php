@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\SpecificRoomController;
 use App\Http\Controllers\CheckinController;
 use App\Http\Controllers\MongoMembership;
+use App\Http\Controllers\TransactionController;
 
 use MongoDB\BSON\ObjectId;
 use Illuminate\Support\Facades\DB;
@@ -42,6 +43,8 @@ Route::prefix('frontdesk')->middleware(['auth', 'verified'])->group(function () 
 
     Route::get('/dashboard', [FrontdeskDashboardController::class, 'index'])
         ->name('frontdesk.dashboard');
+
+    Route::post('/transactions', [TransactionController::class, 'store']);
 
     // Add additional routes inside this group
     Route::get('/view-rooms', function () {

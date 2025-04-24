@@ -1,16 +1,48 @@
 <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="confirmationModalLabel">Confirm Changes</h5>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content" style="border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); padding: 10px;">
+      <div class="modal-header border-0 pb-0 pt-4 px-4">
+        <h5 class="modal-title w-100 text-center" id="confirmationModalLabel" 
+            style="font-family: 'Poppins', sans-serif; font-weight: 700; color: #566A7F; font-size: 22px; letter-spacing: -0.2px;">
+          Confirm Changes
+        </h5>
       </div>
-      <div class="modal-body">
-        <p>You are about to add a new room with type: <strong id="confirmRoomTypeName"></strong></p>
-        <p>Room Number: <strong id="confirmRoomNumber"></strong></p>
+      <div class="modal-body pt-3 pb-4 px-4">
+        <div style="background-color: #f8f9fa; border-radius: 12px; padding: 20px; margin-bottom: 10px;">
+          <div class="mb-3 text-center">
+            <span style="font-family: 'Poppins', sans-serif; color: #697A8D; font-size: 15px;">
+              Room Type
+            </span>
+            <div id="confirmRoomTypeName" style="font-family: 'Poppins', sans-serif; color: #566A7F; font-weight: 600; font-size: 18px; margin-top: 5px;">
+              Standard Room
+            </div>
+          </div>
+          <div class="text-center">
+            <span style="font-family: 'Poppins', sans-serif; color: #697A8D; font-size: 15px;">
+              Room Number
+            </span>
+            <div id="confirmRoomNumber" style="font-family: 'Poppins', sans-serif; color: #566A7F; font-weight: 600; font-size: 18px; margin-top: 5px;">
+              301
+            </div>
+          </div>
+        </div>
+        <p class="text-center" style="font-family: 'Poppins', sans-serif; color: #697A8D; font-size: 14px; margin-top: 15px;">
+          Are you sure you want to add this room?
+        </p>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-        <button type="button" class="btn btn-primary" id="finalConfirm">Confirm</button>
+      <div class="modal-footer border-0 pt-0 px-4 pb-4 justify-content-center gap-3">
+        <button type="button" class="btn btn-light px-4 py-2" data-bs-dismiss="modal"
+                style="font-family: 'Poppins', sans-serif; font-weight: 600; 
+                       background-color: #f7f7f7; border: 1px solid #578FCA; 
+                       color: #578FCA; border-radius: 8px; min-width: 120px;">
+          Cancel
+        </button>
+        <button type="button" class="btn btn-primary px-4 py-2" id="finalConfirm"
+                style="font-family: 'Poppins', sans-serif; font-weight: 600; 
+                       background-color: #578FCA; color: #ffffff; border: none; 
+                       border-radius: 8px; min-width: 120px;">
+          Confirm
+        </button>
       </div>
     </div>
   </div>

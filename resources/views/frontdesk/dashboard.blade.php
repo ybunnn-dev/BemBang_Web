@@ -12,6 +12,9 @@
 @endsection
 
 @section('content')
+    <script>
+        const userId = "{{ Auth::user()->_id }}";
+    </script>
     <div id="main-label">
         <img src="{{ asset('images/dashboard-log.svg') }}">
         <h3>Dashboard</h3>
@@ -206,6 +209,8 @@
         <p id="qrlowermsg">Instant Transaction</p>
     </div>
     @include('components.qr-scanner-modal', ['modalId' => 'qr-modal', 'title' => 'Scan QR Code'])
+    @include('components.invoice-modal')
+    @include('components.confirm_transaction', ['modalId' => 'confirm-transact', 'title' => 'Confirm-Transaction'])
     @php
         $modalId = $modalId ?? 'defaultModalId';
     @endphp

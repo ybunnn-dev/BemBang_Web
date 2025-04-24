@@ -28,7 +28,7 @@
                   </div>
                   <div class="address-gen-label-flex">
                       <label for="formControlInput5" class="form-label" id="address-label">ADDRESS</label>
-                      <label for="gender-select" class="form-label" id="gen-label">Gender</label>
+                      <label for="gender-select" class="form-label" id="gen-label">GENDER</label>
                   </div>
                 <div class="address-gen-flex">
                     <input type="text" class="form-control" id="formControlInput5" placeholder="ex. Sagpon, Daraga, Albay">
@@ -65,7 +65,7 @@
                     <div class="existing-user-labels">
                         <p>FIRST NAME:</p>
                         <p>LAST NAME:</p>
-                        <p>SEX:</p>
+                        <p>GENDER:</p>
                         <p>PERSONAL EMAIL:</p>
                         <p>MOBILE NUMBER:</p>
                         <p>ADDRESS:</p>
@@ -233,8 +233,8 @@
                 <label for="acc-name-gcash" class="form-label">ACCOUNT NAME</label>
                 <input type="text" class="form-control" id="acc-name-gcash" placeholder="Ron Peter Vakal">
 
-                <label for="acc-num-gcash" class="form-label">ACCOUNT NUMBER</label>
-                <input type="text" class="form-control" id="refNo" placeholder="098765546234">
+                <label for="acc-num-gcash" class="form-label">REFERENCE NUMBER</label>
+                <input type="text" class="form-control" id="acc-num-gcash" placeholder="0987656234">
             </div>
 
             <div class="input-content-11">
@@ -247,23 +247,16 @@
                     <p>CHANGE</p>
                 </div>
                 <div class="amount-values">
-                    <p>P 1,499.00</p>
-                    <p>P 2,000.00</p>
+                    <p id="amount-value">P 1,499.00</p>
+                    <p id="change">P 0.00</p>
                 </div>
-            </div>
-
-            <div class="input-content-12">
-                <img src="{{ asset('images/time.gif') }}" width="200px" height="200px">
-                <h5>Payment Pending</h5>
-                <p>Waiting for payment completion. <br>If already paid, please wait for confirmation.</p>
-                
             </div>
         </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" id="prev-button" onclick="modal_switch_prev()">Previous</button>
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="cancel-button">Cancel</button>
-        <button type="button" class="btn btn-primary" id="next-button" onclick="modal_switch_next()">Next</button>
+        <button type="button" class="btn btn-primary" id="next-button" disabled onclick="modal_switch_next()">Next</button>
         <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="confirm-button">Confirm</button>
       </div>
     </div>
