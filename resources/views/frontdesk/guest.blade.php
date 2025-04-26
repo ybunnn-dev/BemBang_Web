@@ -98,10 +98,10 @@
                                     'expert' => asset('images/expert-icon.svg'),
                                     'prime' => asset('images/prime-icon.svg'),
                                     'elite' => asset('images/elite-icon.svg'),
-                                    default => asset('images/default-icon.svg') // Fallback icon
+                                    default => asset('images/leaf.svg') // Fallback icon
                                 }
                             }}" width="20px" height="20px" alt="{{ $guest->membership_details->membership_name ?? 'Standard' }} membership">
-                                <p>{{ $guest->membership_details->membership_name }}</p>
+                                <p>{{ $guest->membership_details->membership_name ?? 'Not Yet Joined' }}</p>
                             </div>
                         </td>   
                         <td>    

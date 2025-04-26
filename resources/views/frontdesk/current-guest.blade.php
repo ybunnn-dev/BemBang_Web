@@ -33,10 +33,17 @@
                         'expert' => asset('images/expert-icon.svg'),
                         'prime' => asset('images/prime-icon.svg'),
                         'elite' => asset('images/elite-icon.svg'),
-                        default => asset('images/default-icon.svg') // Fallback icon
+                        default => asset('images/leaf.svg') // Fallback icon
                     }
                 }}" width="20px" height="20px" alt="{{ $guest->membership_details->membership_name ?? 'Standard' }} membership">
-            <p>BEMBANG {{ isset($guest->membership_details->membership_name) ? strtoupper($guest->membership_details->membership_name) : 'NOT YET JOINED' }}</p>
+                <p>
+                    
+                    @if(isset($guest->membership_details->membership_name))
+                        <span>BEMBANG {{ strtoupper($guest->membership_details->membership_name) }}</span>
+                    @else
+                        <span>NOT YET JOINED</span>
+                    @endif
+                </p>
             </div>
         </div>
         <div class="guest-info-title">

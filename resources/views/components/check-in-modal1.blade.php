@@ -51,6 +51,7 @@
                 <hr class="bottom-line">
               </div>
 
+              <!--a qr code scanner will riderect to part 3 if succes-->
               <div class="input-content-2">
                   <div class="scanner-holder">
                     <div id="qr-reader" style="width: 100%; height: 100%;"></div>
@@ -59,6 +60,7 @@
                   <hr class="bottom-line">
               </div>
 
+              <!-- you can skip this part-->
               <div class="input-content-3">
                   <hr id="ic3hr1">
                   <div class="ic3-container">
@@ -84,6 +86,7 @@
                   <hr id="ic3hr2">
               </div>
 
+              <!--checkin input-->
               <div class="input-content-4">
                     <div class="checkin-dates-label-flex">
                         <label for="formControlInput7" class="form-label">CHECK IN DATE</label>
@@ -131,7 +134,7 @@
                     </div>
                     <hr>
               </div>
-
+              <!--re confirming-->
               <div class="input-content-5">
                 <hr>
                 <div class="output-flex">
@@ -201,7 +204,8 @@
                 </div>
                 <hr>
             </div>
-
+          
+            <!--choosing a payment method-->
             <div class="input-content-6">
               <div class="payment-methods">
                 <p>SELECT PAYMENT METHOD</p>
@@ -214,6 +218,7 @@
               </div>
             </div>
 
+        <!--Rechecking the payment method if you want, you can merge this instead in the part6-->
             <div class="input-content-7">
               <div class="payment-label-flex">
                 <p>PAYMENT METHOD</p>
@@ -227,6 +232,7 @@
               <hr class="bottom-hr">
             </div>
 
+            <!--for gcash-->
             <div class="input-content-10">
                 <img src="{{ asset('images/gcash.svg') }}" width="50px" height="50px">
                 <h5>GCash Payment</h5>
@@ -237,6 +243,7 @@
                 <input type="text" class="form-control" id="acc-num-gcash" placeholder="0987656234">
             </div>
 
+            <!--for cash payment-->
             <div class="input-content-11">
                 <img src="{{ asset('images/cash.svg') }}" width="50px" height="50px">
                 <h5>Cash Payment</h5>

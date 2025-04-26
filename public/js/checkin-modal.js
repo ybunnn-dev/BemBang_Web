@@ -117,6 +117,7 @@ document.addEventListener("DOMContentLoaded", function () {
         };
         return values;
     }
+
     function getSchedule(id) {
         // Log the input for debugging
         console.log("Fetching schedule for room type:", id);
@@ -225,6 +226,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 let specificRoom = checkinData.all_types.find(type => {
                     return value.roomType.id === type._id.$oid
                 });
+
                 console.log("specificRoom: ", specificRoom);
                 guestNumInput.max = specificRoom.guest_num;
                 roomNoInput.value = selectedRoom.room_no;
@@ -715,7 +717,6 @@ function prepareTransactionData() {
         address: currentGuest.mobileNumber,
         level: 1
     }
-    // Base transaction structure
     // Base transaction structure
     const transactionData = {
         is_guest: isExist,

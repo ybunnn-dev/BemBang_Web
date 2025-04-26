@@ -210,7 +210,9 @@
     </div>
     @include('components.qr-scanner-modal', ['modalId' => 'qr-modal', 'title' => 'Scan QR Code'])
     @include('components.invoice-modal')
-    @include('components.confirm_transaction', ['modalId' => 'confirm-transact', 'title' => 'Confirm-Transaction'])
+    @include('components.confirm_transaction', ['modalId' => 'confirm-transact', 'title' => 'Confirm Transaction'])
+    @include('components.confirm_reserve', ['modalId' => 'confirm-reserve', 'title' => 'Confirm Transaction'])
+    @include('components.confirm_book', ['modalId' => 'confirm-book', 'title' => 'Confirm- Transaction'])
     @php
         $modalId = $modalId ?? 'defaultModalId';
     @endphp

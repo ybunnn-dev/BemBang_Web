@@ -149,6 +149,7 @@
     gap: 20px;
 }
 #book-modal .address-gen-label-flex {
+    margin-top: 20px;
     gap: 200px;
 }
 
@@ -167,7 +168,7 @@
     gap: 230px;
 }
 
-#book-modal #gender-select {
+#book-gender-select{
     font-family: 'Poppins';
     font-size: 14px;
     color: #697A8D;
@@ -209,7 +210,7 @@
     margin-top: 10px;
 }
 
-#book-modal #qr-ask-label {
+#book-qr-ask-label {
     font-family: 'Poppins';
     font-size: 13px;
     color: #697A8D;
@@ -218,7 +219,7 @@
     transform: translateX(-55%);
 }
 
-#book-modal #qr-button-book {
+#book-qr-button {
     display: flex;
     gap: 10px;
     height: 60px !important;
@@ -388,8 +389,8 @@
     margin-top: -10px;
 }
 
-#book-modal #output-email, 
-#book-modal #output-address {
+#book-output-email, 
+#book-output-address {
     font-size: 18px;
     font-weight: 600;
     color: #566A7F;
@@ -416,7 +417,7 @@
     gap: 250px;
 }
 
-#book-modal #output-fname {
+#book-output-fname {
     max-width: 150px;
     width: 100%;
 }
@@ -425,8 +426,8 @@
     gap: 185px;
 }
 
-#book-modal #output-checkin-date, 
-#book-modal #output-checkout-date {
+#book-output-checkin-date, 
+#book-output-checkout-date {
     max-width: 150px;
     width: 100%;
 }
@@ -444,7 +445,7 @@
     gap: 205px;
 }
 
-#book-modal #output-room-type {
+#book-output-room-type {
     max-width: 200px;
     width: 100%;
 }
@@ -457,7 +458,7 @@
     gap: 160px;
 }
 
-#book-modal #output-guest-num {
+#book-output-guest-num {
     max-width: 100px;
     width: 100%;
 }

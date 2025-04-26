@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use MongoDB\Driver\Manager;
 use MongoDB\Driver\Query;
 use App\Models\Guest;
+use App\Models\Membership;
 
 class TransactionController extends Controller
 {
@@ -79,14 +80,43 @@ class TransactionController extends Controller
                 ], 404);
             }
 
-            // Fetch membership details (stubbed; replace with actual query)
+            // Fetch membership details and log
             $membership = null;
             if (isset($thisGuest->membership_id)) {
-                $membershipQuery = new Query(['_id' => new \MongoDB\BSON\ObjectId($thisGuest->membership_id)]);
-                $membershipCursor = $manager->executeQuery('bembang_hotel.memberships', $membershipQuery);
-                $membership = $membershipCursor->toArray()[0] ?? null;
+                $membership = Membership::getSpecificMembership($thisGuest->membership_id);
+                Log::debug('TransactionController::store - Retrieved membership', [
+                    'membership_id' => $thisGuest->membership_id,
+                    'membership' => $membership ? json_encode($membership, JSON_PRETTY_PRINT) : null
+                ]);
+            } else {
+                Log::debug('TransactionController::store - No membership_id for guest', [
+                    'guest_id' => $input['guest_id']
+                ]);
             }
-            $membership_points = $membership ? ($membership->check_in_points ?? 0) : 0;
+
+            $membership_points = 0;
+            if ($membership && !empty($membership)) {
+                // Access the first membership object
+                $membership_data = $membership[0]; // Get the first item in the array
+            
+                // Use current_status from $input (not $request['current-status'])
+                switch ($input['current_status'] ?? 'checked-in') {
+                    case 'checked-in':
+                        $membership_points = $membership_data->check_in_points ?? 0;
+                        break;
+                    case 'booked':
+                        $membership_points = $membership_data->booking_points ?? 0;
+                        break;
+                    case 'reserved':
+                        $membership_points = $membership_data->reservation_points ?? 0;
+                        break;
+                    default:
+                        Log::warning('TransactionController::store - Unknown current_status', [
+                            'current_status' => $input['current_status']
+                        ]);
+                }
+            }
+
             Log::info('TransactionController::store - Retrieved membership points', [
                 'guest_id' => $input['guest_id'],
                 'points' => $membership_points
@@ -108,7 +138,6 @@ class TransactionController extends Controller
                     'timestamp' => Carbon::now()->toDateTimeString(),
                     'points_earned' => $membership_points
                 ]],
-                'meta' => $input['meta'] ?? [],
                 'created_at' => Carbon::now()->toDateTimeString(),
                 'updated_at' => Carbon::now()->toDateTimeString()
             ];
@@ -138,16 +167,19 @@ class TransactionController extends Controller
                 'attributes' => $transaction->attributes
             ]);
 
+
             // Update room status to occupied
-            $bulk = new \MongoDB\Driver\BulkWrite();
-            $bulk->update(
-                ['_id' => new \MongoDB\BSON\ObjectId($input['room_id'])],
-                ['$set' => ['status' => 'occupied']],
-                ['multi' => false]
-            );
-            $result = $manager->executeBulkWrite('bembang_hotel.rooms', $bulk);
-            if ($result->getModifiedCount() === 0) {
-                Log::warning('TransactionController::store - Failed to update room status', ['room_id' => $input['room_id']]);
+            if(!$request['current-status'] == 'checked-in'){
+                $bulk = new \MongoDB\Driver\BulkWrite();
+                $bulk->update(
+                    ['_id' => new \MongoDB\BSON\ObjectId($input['room_id'])],
+                    ['$set' => ['status' => 'occupied']],
+                    ['multi' => false]
+                );
+                $result = $manager->executeBulkWrite('bembang_hotel.rooms', $bulk);
+                if ($result->getModifiedCount() === 0) {
+                    Log::warning('TransactionController::store - Failed to update room status', ['room_id' => $input['room_id']]);
+                }
             }
 
             // Update guest points

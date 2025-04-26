@@ -30,6 +30,9 @@ Route::get('/mongo-check', function () {
     }
 });
 
+Route::get('/', function(){
+    return view('auth/login');
+})->name('def');
 
 Route::get('/home', function () {
     return view('auth/login');

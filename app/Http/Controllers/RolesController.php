@@ -13,8 +13,9 @@ class RolesController extends Controller
 
         
         if (!$user) {
-            return redirect()->route('login')->with('error', 'Unauthorized access.');
+            return redirect()->route('home')->with('error', 'Unauthorized access.');
         }
+        
         switch ($user->role) {
             case "manager":
                 return redirect()->route('management.dashboard');
