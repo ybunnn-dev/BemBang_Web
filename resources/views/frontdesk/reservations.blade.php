@@ -11,6 +11,12 @@
 @endsection
 
 @section('content')  
+    <script>
+        document.addEventListener("DOMContentLoaded", function (){
+            reserves = @json($reservation);
+            console.log(reserves);
+        });
+    </script>
     <div id="main-label">
         <img src="{{ asset('images/reserve2.svg') }}">
         <h3>Reservations</h3>
@@ -68,30 +74,6 @@
                         <td>8</td>
                         <td>Bembang Standard</td>
                         <td>John Doe</td>
-                        <td>2025-03-21<br><p style="font-size: 13px;">12:00</p></td>
-                        <td>2025-03-23 <br><p style="font-size: 13px;">12:00</p></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">1002</th>
-                        <td>10</td>
-                        <td>Bembang Twin</td>
-                        <td>Jane Smith</td>
-                        <td>2025-03-21<br><p style="font-size: 13px;">12:00</p></td>
-                        <td>2025-03-23 <br><p style="font-size: 13px;">12:00</p></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">1002</th>
-                        <td>11</td>
-                        <td>Bembang Twin</td>
-                        <td>Jane Smith</td>
-                        <td>2025-03-21<br><p style="font-size: 13px;">12:00</p></td>
-                        <td>2025-03-23 <br><p style="font-size: 13px;">12:00</p></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">1002</th>
-                        <td>13</td>
-                        <td>Bembang Twin</td>
-                        <td>Jane Smith</td>
                         <td>2025-03-21<br><p style="font-size: 13px;">12:00</p></td>
                         <td>2025-03-23 <br><p style="font-size: 13px;">12:00</p></td>
                     </tr>

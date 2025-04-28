@@ -196,6 +196,7 @@ document.addEventListener("DOMContentLoaded", function () {
         else if (hoursStay <= 24) return 24; // 1-day flat rate
         else return Math.ceil(hoursStay / 12) * 12; // Beyond 24h → round up to nearest 12h
       }
+      
       /**  Then compute mo na si bayad  ** */
       function computeRate(hoursStay, rate12h, rate24h) {
         // First, determine which rate blocks apply
@@ -769,14 +770,14 @@ function prepareTransactionData() {
     }
 
     console.log("Prepared Transaction Data:", transactionData);
-    return transactionData;
+    //return transactionData;
 }
 
 async function completeTransaction() {
     // 1. Prepare the transaction data
     const data = prepareTransactionData();
     console.log('Transaction data:', data);
-    
+    /*
     try {
         // 2. Get CSRF token from meta tag
         const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
@@ -850,7 +851,7 @@ async function completeTransaction() {
             submitBtn.disabled = false;
             submitBtn.innerHTML = 'Complete Transaction';
         }
-    }
+    }*/
 }
 function user_qr() {
     switchContent(
@@ -1534,4 +1535,6 @@ document.addEventListener('DOMContentLoaded', function() {
     
     cashAmountInput.addEventListener('input', validateCashPayment);
 });
+
+
 

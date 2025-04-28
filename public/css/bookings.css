@@ -211,6 +211,11 @@ h4{
     max-height: 400px; /* Controls tbody height */
     overflow-y: auto; /* Makes tbody scrollable */
 }
+.book-id{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
 
 .table-container thead, 
 .table-container tbody tr {
@@ -273,4 +278,87 @@ h4{
 #checkInModal1, #book-modal, #reserve-modal{
     margin-top: 10%;
     transform: translateY(-10%);
+}
+
+#checkInBook{
+    font-family: 'Poppins';
+}
+#checkInBook .badge-booked {
+    background-color: #f0ad4e;
+    color: white;
+}
+#checkInBook .booking-detail-label {
+    font-weight: 600;
+    color: #495057;
+}
+#checkInBook .booking-id {
+    background-color: #f8f9fa;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 14px;
+    color: #6c757d;
+}
+#checkInBook .modal-header {
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #e9ecef;
+}
+#checkInBook .modal-body {
+    height: 500px;
+    overflow-y: auto;
+    padding-right: 15px;
+}
+#checkInBook .guest-info {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+#checkInBook .room-info {
+    background-color: #e9f0fd;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+#checkInBook .stay-info {
+    background-color: #e8f5e9;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+#checkInBook .payment-info {
+    background-color: #fff3e0;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+#checkInBook .action-buttons {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 15px;
+}
+/* Custom scrollbar styling */
+#checkInBook .modal-body{
+    padding-left: 30px;
+    padding-right: 30px;
+}
+#checkInBook .modal-footer{
+    padding-right: 30px;
+}
+#checkInBook .modal-body::-webkit-scrollbar {
+    width: 8px;
+}
+#checkInBook .modal-body::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+#checkInBook .modal-body::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+#checkInBook .modal-body::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+#checkInBook .modal-footer button{
+    width: 120px !important;
 }

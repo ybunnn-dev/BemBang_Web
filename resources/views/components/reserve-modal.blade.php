@@ -11,31 +11,31 @@
           <div class="contents">
               <div class="input-content-1">
                   <div class="namelabel-flex">
-                      <label for="formControlInput2" class="form-label">FIRST NAME</label>
-                      <label for="formControlInput2" class="form-label">LAST NAME</label>
+                      <label for="reserve-fname-input" class="form-label">FIRST NAME</label>
+                      <label for="reserve-lname-input" class="form-label">LAST NAME</label>
                   </div>
                   <div class="name-flex">
-                      <input type="text" class="form-control" id="fname-input" placeholder="ex. Peter">
-                      <input type="text" class="form-control" id="lname-input" placeholder="ex. Vakla">
+                      <input type="text" class="form-control" id="reserve-fname-input" placeholder="ex. Peter">
+                      <input type="text" class="form-control" id="reserve-lname-input" placeholder="ex. Vakla">
                   </div>
                 <div class="contactLabel-flex">
-                    <label for="formControlInput2" class="form-label">EMAIL</label>
-                    <label for="formControlInput2" class="form-label">MOBILE NO.</label>
+                    <label for="reserve-email-input" class="form-label">EMAIL</label>
+                    <label for="reserve-mnum-input" class="form-label">MOBILE NO.</label>
                 </div>
                 <div class="contact-flex">
-                    <input type="email" class="form-control" id="email-input" placeholder="ex. hellobiokid@gmail.com">
-                    <input type="tel" class="form-control" id="mnum-input" placeholder="ex. 0912345654">
+                    <input type="email" class="form-control" id="reserve-email-input" placeholder="ex. hellobiokid@gmail.com">
+                    <input type="tel" class="form-control" id="reserve-mnum-input" placeholder="ex. 0912345654">
                   </div>
                   <div class="address-gen-label-flex">
-                      <label for="formControlInput5" class="form-label" id="address-label">ADDRESS</label>
-                      <label for="gender-select" class="form-label" id="gen-label">SEX</label>
+                      <label for="reserve-address-input" class="form-label" id="address-label">ADDRESS</label>
+                      <label for="reserve-gender-select" class="form-label" id="gen-label">SEX</label>
                   </div>
                 <div class="address-gen-flex">
-                    <input type="text" class="form-control" id="formControlInput5" placeholder="ex. Sagpon, Daraga, Albay">
-                    <select class="form-select" aria-label="Default select" id="gender-select">
+                    <input type="text" class="form-control" id="reserve-address-input" placeholder="ex. Sagpon, Daraga, Albay">
+                    <select class="form-select" aria-label="Default select" id="reserve-gender-select">
                       <option selected="">Select Gender</option>
-                      <option value="1">Yes</option>
-                      <option value="2">No</option>
+                      <option value="1">Male</option>
+                      <option value="2">Female</option>
                     </select>
                 </div>
                 <div class="separate-flex">
@@ -53,7 +53,7 @@
 
               <div class="input-content-2">
                   <div class="scanner-holder">
-                    <div id="qr-reader5" style="width: 100%; height: 100%;"></div>
+                    <div id="qr-reader-reserve" style="width: 100%; height: 100%;"></div>
                   </div>
                   <p>Please position the QR code in front of the camera.</p>
                   <hr class="bottom-line">
@@ -72,13 +72,13 @@
                         <p>LAST CHECK IN:</p>
                     </div>
                     <div class="existing-user-values">
-                        <p>Leonard</p>
-                        <p>Condat</p>
-                        <p>Yes!</p>
-                        <p>manok@gmail.com</p>
-                        <p>0931245562</p>
-                        <p id="address">Banao, Guinobatan, Albay</p>
-                        <p>March 17, 2025</p>
+                        <p id="reserve-existing-fname">Leonard</p>
+                        <p id="reserve-existing-lname">Condat</p>
+                        <p id="reserve-existing-gender">Male</p>
+                        <p id="reserve-existing-email">manok@gmail.com</p>
+                        <p id="reserve-existing-mobile">0931245562</p>
+                        <p id="reserve-existing-address">Banao, Guinobatan, Albay</p>
+                        <p id="reserve-existing-lastcheckin">March 17, 2025</p>
                     </div>
                   </div>
                   <hr id="ic3hr2">
@@ -86,48 +86,48 @@
 
               <div class="input-content-4">
                     <div class="checkin-dates-label-flex">
-                        <label for="formControlInput7" class="form-label">CHECK IN DATE</label>
-                        <label for="formControlInput8" class="form-label">CHECK IN TIME</label>
+                        <label for="reserve-checkin-date-input" class="form-label">CHECK IN DATE</label>
+                        <label for="reserve-checkin-time-input" class="form-label">CHECK IN TIME</label>
                     </div>
 
                     <div class="checkin-dates-flex">
-                        <input type="date" class="form-control" id="checkin-date-input" placeholder="ex. hellobiokid@gmail.com">
-                        <input type="time" class="form-control" id="checkin-time-input" placeholder="ex. 0912345654">
+                        <input type="date" class="form-control" id="reserve-checkin-date-input">
+                        <input type="time" class="form-control" id="reserve-checkin-time-input">
                     </div>
 
                     <div class="checkout-dates-label-flex">
-                        <label for="formControlInput9" class="form-label">CHECK OUT DATE</label>
-                        <label for="formControlInput10" class="form-label">CHECK OUT TIME</label>
+                        <label for="reserve-checkout-date-input" class="form-label">CHECK OUT DATE</label>
+                        <label for="reserve-checkout-time-input" class="form-label">CHECK OUT TIME</label>
                     </div>
 
                     <div class="checkout-dates-flex">
-                        <input type="date" class="form-control" id="checkout-date-input" placeholder="ex. hellobiokid@gmail.com">
-                        <input type="time" class="form-control" id="checkout-time-input" placeholder="ex. 0912345654">
+                        <input type="date" class="form-control" id="reserve-checkout-date-input">
+                        <input type="time" class="form-control" id="reserve-checkout-time-input">
                     </div>
 
                     <div class="roomtypes-label-flex">
-                        <label for="formControlInput7" class="form-label">ROOM TYPE</label>
-                        <label for="formControlInput8" class="form-label">ASSIGNED ROOM NUMBER</label>
+                        <label for="reserve-room-type" class="form-label">ROOM TYPE</label>
+                        <label for="reserve-room-no" class="form-label">ASSIGNED ROOM NUMBER</label>
                     </div>
 
                     <div class="room-types-flex">
-                        <select class="form-select" aria-label="Default select" id="room-type">
+                        <select class="form-select" aria-label="Default select" id="reserve-room-type">
                           <option selected="">Open this select menu</option>
                           <option value="1">One</option>
                           <option value="2">Two</option>
                           <option value="3">Three</option>
                         </select>
-                        <input type="text" class="form-control" id="room-no" disabled>
+                        <input type="text" class="form-control" id="reserve-room-no" disabled>
                     </div>
 
                     <div class="extra-details-label-flex">
-                        <label for="formControlInput9" class="form-label">NUMBER OF GUEST</label>
-                        <label for="formControlInput10" class="form-label">HOURS STAY</label>
+                        <label for="reserve-guest-num" class="form-label">NUMBER OF GUEST</label>
+                        <label for="reserve-hours-stay" class="form-label">HOURS STAY</label>
                     </div>
 
                     <div class="extra-flex">
-                        <input type="number" class="form-control" id="checkout-date-input">
-                        <input type="number" class="form-control" id="checkout-time-input" disabled>
+                        <input type="number" class="form-control" id="reserve-guest-num">
+                        <input type="number" class="form-control" id="reserve-hours-stay" disabled>
                     </div>
                     <hr>
               </div>
@@ -140,22 +140,22 @@
                         <p>LAST NAME</p>
                     </div>
                     <div class="output-values-name">
-                        <p id="output-fname">Leonard</p>
-                        <p id="output-lname">Manok</p>
+                        <p id="reserve-output-fname">Leonard</p>
+                        <p id="reserve-output-lname">Manok</p>
                     </div>
                     <div class="output-label-numgen">
                         <p>SEX</p>
                         <p>MOBILE NUMBER</p>
                     </div>
                     <div class="output-values-numgen">
-                        <p>M</p>
-                        <p>091234567</p>
+                        <p id="reserve-output-gender">M</p>
+                        <p id="reserve-output-mobile">091234567</p>
                     </div>
 
                     <p>PERSONAL EMAIL</p>
-                    <p id="output-email">manok@gmail.com</p>
+                    <p id="reserve-output-email">manok@gmail.com</p>
                     <p>ADDRESS</p>
-                    <p id="output-address">Sagpon, Daraga, Albay</p>
+                    <p id="reserve-output-address">Sagpon, Daraga, Albay</p>
 
                     <hr width="500px;">
 
@@ -165,8 +165,8 @@
                     </div>
 
                     <div class="output-values-checkin">
-                        <p id="output-checkin-date">March 17, 2025</p>
-                        <p>8:00 AM</p>
+                        <p id="reserve-output-checkin-date">March 17, 2025</p>
+                        <p id="reserve-output-checkin-time">8:00 AM</p>
                     </div>
 
                     <div class="output-label-checkout">
@@ -175,8 +175,8 @@
                     </div>
 
                     <div class="output-values-checkout">
-                        <p id="output-checkout-date">March 17, 2025</p>
-                        <p>8:00 PM</p>
+                        <p id="reserve-output-checkout-date">March 17, 2025</p>
+                        <p id="reserve-output-checkout-time">8:00 PM</p>
                     </div>
 
                     <div class="output-label-room">
@@ -185,8 +185,8 @@
                     </div>
 
                     <div class="output-values-room">
-                        <p id="output-room-type">Bembang Standard</p>
-                        <p id="output-room-no" >ROOM #12</p>
+                        <p id="reserve-output-room-type">Bembang Standard</p>
+                        <p id="reserve-output-room-no">ROOM #12</p>
                     </div>
 
                     <div class="output-label-guestrate">
@@ -195,8 +195,8 @@
                     </div>
 
                     <div class="output-values-guestrate">
-                        <p id="output-guest-num">2</p>
-                        <p id="output-rate">P 1,499.00</p>
+                        <p id="reserve-output-guest-num">2</p>
+                        <p id="reserve-output-rate">P 1,499.00</p>
                     </div>
                 </div>
                 <hr>
@@ -205,13 +205,10 @@
             <div class="input-content-6">
               <div class="payment-methods">
                 <p>SELECT PAYMENT METHOD</p>
-                <button type="button" class="btn btn-light">
-                  <img src="{{ asset('images/paypal.svg') }}" width="50px" height="50px">Pay using PayPal
-                </button>
-                <button type="button" class="btn btn-light">
+                <button type="button" class="btn btn-light" id="reserve-gcash-btn">
                   <img src="{{ asset('images/gcash.svg') }}" width="60px" height="60px">Pay using GCash
                 </button>
-                <button type="button" class="btn btn-light">
+                <button type="button" class="btn btn-light" id="reserve-cash-btn">
                   <img src="{{ asset('images/cash.svg') }}" width="60px" height="60px">Cash Payment
                 </button>
               </div>
@@ -224,83 +221,34 @@
               </div>
         
               <div class="payment-flex">
-                <p>G-Shock</p>
-                <p>P 1,499.00</p>
+                <p id="reserve-payment-method">G-Cash</p>
+                <p id="reserve-total-amount">P 1,499.00</p>
               </div>
               <hr>
-              
-              <button type="button" class="btn btn-primary" id="select-voucher-qr-reserve" onclick="openVoucherScannerReserve()">
-                <img src="{{ asset('images/qr2.svg') }}" width="30px" height="30px">
-                SELECT VOUCHER
-              </button>
-
-              <div class="voucher-details-flex">
-                <p>VOUCHER:</p>
-                <p id="voucher-value">Bembang Newbie 20% OFF</p>
-              </div>
-              <p id="remove-voucher"><u>Remove Voucher</u> </p>
-
-              <hr>
-              <div class="total-amount-flex">
-                <p id="tot-amount-label">TOTAL AMOUNT:</p>
-                <div class="total-amount-value-flex">
-                  <p id="total-amount-value">P 11,750.00</p>
-                  <p id="orig-amount-value">P 11,750.00</p>
-                  <p id="res-amount-value">-P 1,650.00</p>
-                  <p id="discount-amount-value">- P 250.00</p>
-                </div>
-              </div>
-              <hr class="bottom-hr">
             </div>
-
-            <div class="input-content-8">
-                  <div class="scanner-holder">
-                    <div id="qr-reader6" style="width: 100%; height: 100%;"></div>
-                  </div>
-                  <p>Please position the QR code in front of the camera.</p>
-                  <hr class="bottom-line">
-            </div>
-
-            <div class="input-content-9">
-                <img src="{{ asset('images/paypal.svg') }}" width="50px" height="50px">
-                <h5>Paypal Payment</h5>
-                <label for="acc-name-paypal" class="form-label">ACCOUNT NAME</label>
-                <input type="text" class="form-control" id="acc-name-paypal" placeholder="Ron Peter Vakal">
-
-                <label for="acc-email-paypal" class="form-label">ACCOUNT EMAIL</label>
-                <input type="email" class="form-control" id="acc-email-paypal" placeholder="name@example.com">
-            </div>
-
             <div class="input-content-10">
                 <img src="{{ asset('images/gcash.svg') }}" width="50px" height="50px">
                 <h5>GCash Payment</h5>
-                <label for="acc-name-gcash" class="form-label">ACCOUNT NAME</label>
-                <input type="text" class="form-control" id="acc-name-gcash" placeholder="Ron Peter Vakal">
+                <label for="reserve-acc-name-gcash" class="form-label">ACCOUNT NAME</label>
+                <input type="text" class="form-control" id="reserve-acc-name-gcash" placeholder="Ron Peter Vakal">
 
-                <label for="acc-num-gcash" class="form-label">ACCOUNT NUMBER</label>
-                <input type="tel" class="form-control" id="acc-num-gcash" placeholder="0987656234">
+                <label for="reserve-acc-num-gcash" class="form-label">ACCOUNT NUMBER</label>
+                <input type="tel" class="form-control" id="reserve-acc-num-gcash" placeholder="0987656234">
             </div>
 
             <div class="input-content-11">
                 <img src="{{ asset('images/cash.svg') }}" width="50px" height="50px">
                 <h5>Cash Payment</h5>
-                <label for="cass-amount" class="form-label">ENTER AMOUNT (PHP)</label>
-                <input type="number" class="form-control" id="cash-amount" placeholder="Enter amount">
+                <label for="reserve-cash-amount" class="form-label">ENTER AMOUNT (PHP)</label>
+                <input type="number" class="form-control" id="reserve-cash-amount" placeholder="Enter amount">
                 <div class="amount-labels">
                     <p>TOTAL AMOUNT</p>
                     <p>CHANGE</p>
                 </div>
                 <div class="amount-values">
-                    <p>P 1,499.00</p>
-                    <p>P 2,000.00</p>
+                    <p id="reserve-total-amount-cash">P 1,499.00</p>
+                    <p id="reserve-change-amount">P 2,000.00</p>
                 </div>
-            </div>
-
-            <div class="input-content-12">
-                <img src="{{ asset('images/time.gif') }}" width="200px" height="200px">
-                <h5>Payment Pending</h5>
-                <p>Waiting for payment completion. <br>If already paid, please wait for confirmation.</p>
-                
             </div>
         </div>
       </div>

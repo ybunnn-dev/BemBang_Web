@@ -1,6 +1,76 @@
 let scanner_reserve;
 let modal_part_reserve = 1;
 
+// Input Content 1 - Guest Details
+const reserveFnameInput = document.getElementById("reserve-fname-input");
+const reserveLnameInput = document.getElementById("reserve-lname-input");
+const reserveEmailInput = document.getElementById("reserve-email-input");
+const reserveMnumInput = document.getElementById("reserve-mnum-input");
+const reserveAddressInput = document.getElementById("reserve-address-input");
+const reserveGenderSelect = document.getElementById("reserve-gender-select");
+const reserveQrButton = document.getElementById("qr-button-reserve");
+
+// Input Content 2 - QR Scanner
+const reserveQrReader = document.getElementById("qr-reader-reserve");
+
+// Input Content 3 - Existing User Details
+const reserveExistingFname = document.getElementById("reserve-existing-fname");
+const reserveExistingLname = document.getElementById("reserve-existing-lname");
+const reserveExistingGender = document.getElementById("reserve-existing-gender");
+const reserveExistingEmail = document.getElementById("reserve-existing-email");
+const reserveExistingMobile = document.getElementById("reserve-existing-mobile");
+const reserveExistingAddress = document.getElementById("reserve-existing-address");
+const reserveExistingLastCheckin = document.getElementById("reserve-existing-lastcheckin");
+
+// Input Content 4 - Reservation Details
+const reserveCheckinDate = document.getElementById("reserve-checkin-date-input");
+const reserveCheckinTime = document.getElementById("reserve-checkin-time-input");
+const reserveCheckoutDate = document.getElementById("reserve-checkout-date-input");
+const reserveCheckoutTime = document.getElementById("reserve-checkout-time-input");
+const reserveRoomType = document.getElementById("reserve-room-type");
+const reserveRoomNo = document.getElementById("reserve-room-no");
+const reserveGuestNum = document.getElementById("reserve-guest-num");
+const reserveHoursStay = document.getElementById("reserve-hours-stay");
+
+// Input Content 5 - Summary
+const reserveOutputFname = document.getElementById("reserve-output-fname");
+const reserveOutputLname = document.getElementById("reserve-output-lname");
+const reserveOutputGender = document.getElementById("reserve-output-gender");
+const reserveOutputMobile = document.getElementById("reserve-output-mobile");
+const reserveOutputEmail = document.getElementById("reserve-output-email");
+const reserveOutputAddress = document.getElementById("reserve-output-address");
+const reserveOutputCheckinDate = document.getElementById("reserve-output-checkin-date");
+const reserveOutputCheckinTime = document.getElementById("reserve-output-checkin-time");
+const reserveOutputCheckoutDate = document.getElementById("reserve-output-checkout-date");
+const reserveOutputCheckoutTime = document.getElementById("reserve-output-checkout-time");
+const reserveOutputRoomType = document.getElementById("reserve-output-room-type");
+const reserveOutputRoomNo = document.getElementById("reserve-output-room-no");
+const reserveOutputGuestNum = document.getElementById("reserve-output-guest-num");
+const reserveOutputRate = document.getElementById("reserve-output-rate");
+
+// Input Content 6 - Payment Buttons
+const reserveGcashBtn = document.getElementById("reserve-gcash-btn");
+const reserveCashBtn = document.getElementById("reserve-cash-btn");
+
+// Input Content 7 - Payment Summary
+const reservePaymentMethod = document.getElementById("reserve-payment-method");
+const reserveTotalAmount = document.getElementById("reserve-total-amount");
+
+// Input Content 10 - GCash Payment
+const reserveAccNameGcash = document.getElementById("reserve-acc-name-gcash");
+const reserveAccNumGcash = document.getElementById("reserve-acc-num-gcash");
+
+// Input Content 11 - Cash Payment
+const reserveCashAmount = document.getElementById("reserve-cash-amount");
+const reserveTotalAmountCash = document.getElementById("reserve-total-amount-cash");
+const reserveChangeAmount = document.getElementById("reserve-change-amount");
+
+// Footer Buttons
+const reservePrevButton = document.getElementById("prev-button-reserve");
+const reserveCancelButton = document.getElementById("cancel-button-reserve");
+const reserveNextButton = document.getElementById("next-button-reserve");
+
+
 document.addEventListener("DOMContentLoaded", function () {
     let scanner_reserve = null; // Declare scanner_reserve variable
 

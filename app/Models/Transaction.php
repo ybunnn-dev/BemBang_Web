@@ -13,7 +13,7 @@ use Carbon\Carbon;
 class Transaction
 {
     protected $connection = 'mongodb';
-    protected $collection = 'transaction';
+    protected $collection = 'transactions';
     protected $manager;
     protected $database = 'bembang_hotel';
 
@@ -124,7 +124,28 @@ class Transaction
     {
         $this->attributes['voucher_id'] = $value instanceof ObjectId ? (string) $value : $value;
     }
-
+    public static function getBookingTransaction()
+    {
+        try {
+            $instance = new self();
+            $filter = [
+                'transaction_type' => 'Booking',
+                'current_status' => 'booked'
+            ];
+            
+            $query = new Query($filter);
+            $cursor = $instance->manager->executeQuery("{$instance->database}.{$instance->collection}", $query);
+            $bookings = $cursor->toArray();
+            
+            if (count($bookings) > 0) {
+                return $bookings;
+            } else {
+                return ['error' => 'No booking transactions found'];
+            }
+        } catch (\MongoDB\Driver\Exception\Exception $e) {
+            return ['error' => 'Database error: ' . $e->getMessage()];
+        }
+    }
     public static function getTransactionSchedules()
     {
         try {
@@ -159,7 +180,28 @@ class Transaction
             return [];
         }
     }
-
+    public static function getReservationTransaction()
+    {
+        try {
+            $instance = new self();
+            $filter = [
+                'transaction_type' => 'Reservation',
+                'current_status' => 'reserved'
+            ];
+            
+            $query = new Query($filter);
+            $cursor = $instance->manager->executeQuery("{$instance->database}.{$instance->collection}", $query);
+            $bookings = $cursor->toArray();
+            
+            if (count($bookings) > 0) {
+                return $bookings;
+            } else {
+                return ['error' => 'No booking transactions found'];
+            }
+        } catch (\MongoDB\Driver\Exception\Exception $e) {
+            return ['error' => 'Database error: ' . $e->getMessage()];
+        }
+    }
     public static function getTransactPerGuest($guestId)
     {
         try {

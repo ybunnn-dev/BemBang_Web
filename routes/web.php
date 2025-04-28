@@ -15,10 +15,15 @@ use App\Http\Controllers\SpecificRoomController;
 use App\Http\Controllers\CheckinController;
 use App\Http\Controllers\MongoMembership;
 use App\Http\Controllers\TransactionController;
-
+use App\Models\Transaction;
 use MongoDB\BSON\ObjectId;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\BookingController;
 
+// For web-based check-in (if needed)
+Route::post('/bookings/checkin', [BookingController::class, 'checkin'])
+    ->name('bookings.checkin.web')
+    ->middleware('auth'); // Add auth middleware if needed
 Route::get('/mongo-check', function () {
     try {
         $count = MongoRoomType::count();
@@ -58,13 +63,10 @@ Route::prefix('frontdesk')->middleware(['auth', 'verified'])->group(function () 
         return view('frontdesk.specific_room');
     })->name('frontdesk.room-details');
 
-    Route::get('/bookings', function () {
-        return view('frontdesk.bookings');
-    })->name('frontdesk.bookings');
+   // Assuming you have a BookingController with the getBooking method
+    Route::get('/bookings', [TransactionController::class, 'getBooking'])->name('frontdesk.bookings');
 
-    Route::get('/reservations', function () {
-        return view('frontdesk.reservations');
-    })->name('frontdesk.reservations');
+    Route::get('/reservations', [TransactionController::class, 'getReservation'])->name('frontdesk.reservations');
 
     Route::get('/frontdesk/msg', function () {
         return view('frontdesk.msg');

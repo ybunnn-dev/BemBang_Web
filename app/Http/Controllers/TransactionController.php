@@ -11,6 +11,8 @@ use MongoDB\Driver\Manager;
 use MongoDB\Driver\Query;
 use App\Models\Guest;
 use App\Models\Membership;
+use App\Models\Rooms;
+use MongoDB\BSON\ObjectId;
 
 class TransactionController extends Controller
 {
@@ -100,8 +102,8 @@ class TransactionController extends Controller
                 $membership_data = $membership[0]; // Get the first item in the array
             
                 // Use current_status from $input (not $request['current-status'])
-                switch ($input['current_status'] ?? 'checked-in') {
-                    case 'checked-in':
+                switch ($input['current_status']) {
+                    case 'confirmed':
                         $membership_points = $membership_data->check_in_points ?? 0;
                         break;
                     case 'booked':
@@ -169,7 +171,7 @@ class TransactionController extends Controller
 
 
             // Update room status to occupied
-            if(!$request['current-status'] == 'checked-in'){
+            if(!$request['current-status'] == 'confirmed'){
                 $bulk = new \MongoDB\Driver\BulkWrite();
                 $bulk->update(
                     ['_id' => new \MongoDB\BSON\ObjectId($input['room_id'])],
@@ -231,6 +233,187 @@ class TransactionController extends Controller
                 'message' => 'Failed to create transaction',
                 'debug' => ['error' => $e->getMessage()]
             ], 500);
+        }
+    }
+    public function getReservation()
+    {
+        // Get transactions and convert to collection
+        $transactions = collect(Transaction::getReservationTransaction());
+        
+        $enhancedTransactions = $transactions->map(function ($transaction) {
+            // Ensure we're working with an object
+            $transaction = is_array($transaction) ? (object)$transaction : $transaction;
+            
+            // Get related data
+            $guest = Guest::getSpecificGuest($this->extractId($transaction->guest_id));
+            $room = Rooms::getSpecificRoom($this->extractId($transaction->room_id));
+            
+            // Process dates - handle both object and array stay_details
+            $stayDetails = $transaction->stay_details ?? (object)[];
+            $checkinDateTime = $this->parseMongoDateToArray(
+                is_object($stayDetails) ? ($stayDetails->expected_checkin ?? null) : ($stayDetails['expected_checkin'] ?? null)
+            );
+            $checkoutDateTime = $this->parseMongoDateToArray(
+                is_object($stayDetails) ? ($stayDetails->expected_checkout ?? null) : ($stayDetails['expected_checkout'] ?? null)
+            );
+            
+            // Process payment amount - handle both object and array meta
+            $meta = $transaction->meta ?? (object)[];
+            $amount = is_object($meta) ? ($meta->original_rate ?? 0) : ($meta['original_rate'] ?? 0);
+            
+            // Handle guest data (could be array or object)
+        
+            // Handle room data (could be array or object)
+            $roomNo = is_array($room) ? ($room['room_no'] ?? 'N/A') : ($room->room_no ?? 'N/A');
+            $roomTypeName = is_array($room) 
+                ? ($room['room_type_details']['type_name'] ?? 'N/A') 
+                : ($room->room_type_details->type_name ?? 'N/A');
+            
+            return [
+                'id' => $this->extractId($transaction->_id),
+                'short_id' => substr($this->extractId($transaction->_id), -8),
+                'guest' => $guest,
+                'room' => [
+                    'number' => $roomNo,
+                    'type' => $roomTypeName
+                ],
+                'checkin' => [
+                    'date' => $checkinDateTime['date'],
+                    'time' => $checkinDateTime['time']
+                ],
+                'checkout' => [
+                    'date' => $checkoutDateTime['date'],
+                    'time' => $checkoutDateTime['time']
+                ],
+                'status' => $transaction->current_status,
+                'amount' => number_format($amount, 2),
+                'raw_data' => $transaction
+            ];
+        });
+        
+        return view('frontdesk.reservations', [
+            'reservation' => $enhancedTransactions
+        ]);
+    }
+    public function getBooking()
+    {
+        // Get transactions and convert to collection
+        $transactions = collect(Transaction::getBookingTransaction());
+        
+        $enhancedTransactions = $transactions->map(function ($transaction) {
+            // Ensure we're working with an object
+            $transaction = is_array($transaction) ? (object)$transaction : $transaction;
+            
+            // Get related data
+            $guest = Guest::getSpecificGuest($this->extractId($transaction->guest_id));
+            $room = Rooms::getSpecificRoom($this->extractId($transaction->room_id));
+            
+            // Process dates - handle both object and array stay_details
+            $stayDetails = $transaction->stay_details ?? (object)[];
+            $checkinDateTime = $this->parseMongoDateToArray(
+                is_object($stayDetails) ? ($stayDetails->expected_checkin ?? null) : ($stayDetails['expected_checkin'] ?? null)
+            );
+            $checkoutDateTime = $this->parseMongoDateToArray(
+                is_object($stayDetails) ? ($stayDetails->expected_checkout ?? null) : ($stayDetails['expected_checkout'] ?? null)
+            );
+            
+            // Process payment amount - handle both object and array meta
+            $meta = $transaction->meta ?? (object)[];
+            $amount = is_object($meta) ? ($meta->original_rate ?? 0) : ($meta['original_rate'] ?? 0);
+            
+            // Handle guest data (could be array or object)
+        
+            // Handle room data (could be array or object)
+            $roomNo = is_array($room) ? ($room['room_no'] ?? 'N/A') : ($room->room_no ?? 'N/A');
+            $roomTypeName = is_array($room) 
+                ? ($room['room_type_details']['type_name'] ?? 'N/A') 
+                : ($room->room_type_details->type_name ?? 'N/A');
+            
+            return [
+                'id' => $this->extractId($transaction->_id),
+                'short_id' => substr($this->extractId($transaction->_id), -8),
+                'guest' => $guest,
+                'room' => [
+                    'number' => $roomNo,
+                    'type' => $roomTypeName
+                ],
+                'checkin' => [
+                    'date' => $checkinDateTime['date'],
+                    'time' => $checkinDateTime['time']
+                ],
+                'checkout' => [
+                    'date' => $checkoutDateTime['date'],
+                    'time' => $checkoutDateTime['time']
+                ],
+                'status' => $transaction->current_status,
+                'amount' => number_format($amount, 2),
+                'raw_data' => $transaction
+            ];
+        });
+        
+        return view('frontdesk.bookings', [
+            'bookings' => $enhancedTransactions
+        ]);
+    }
+    
+    // Helper method to extract ID from either ObjectId, array, or string
+    protected function extractId($id)
+    {
+        if (is_object($id)) {
+            return (string)$id;
+        }
+        if (is_array($id) && isset($id['$oid'])) {
+            return $id['$oid'];
+        }
+        return $id;
+    }
+    
+    protected function parseMongoDateToArray($dateField)
+    {
+        if (!$dateField) {
+            return [
+                'date' => 'N/A',
+                'time' => ''
+            ];
+        }
+        
+        try {
+            // Handle different date field formats
+            if (is_array($dateField)) {
+                // Format: ['$date' => ['$numberLong' => 'timestamp']]
+                $milliseconds = $dateField['$date']['$numberLong'] ?? null;
+            } elseif (is_object($dateField) && isset($dateField->{'$date'})) {
+                // Format: {$date: {$numberLong: 'timestamp'}}
+                $milliseconds = $dateField->{'$date'}->{'$numberLong'} ?? null;
+            } elseif (is_object($dateField) && $dateField instanceof \MongoDB\BSON\UTCDateTime) {
+                // Format: MongoDB\BSON\UTCDateTime object
+                return [
+                    'date' => $dateField->toDateTime()->format('Y-m-d'),
+                    'time' => $dateField->toDateTime()->format('H:i')
+                ];
+            } else {
+                $milliseconds = null;
+            }
+    
+            if ($milliseconds !== null) {
+                $carbon = \Carbon\Carbon::createFromTimestampMs($milliseconds);
+                return [
+                    'date' => $carbon->format('Y-m-d'),
+                    'time' => $carbon->format('H:i')
+                ];
+            }
+    
+            // Fallback for unexpected formats
+            return [
+                'date' => 'N/A',
+                'time' => ''
+            ];
+            
+        } catch (\Exception $e) {
+            return [
+                'date' => 'N/A',
+                'time' => ''
+            ];
         }
     }
 }

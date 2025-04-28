@@ -7,10 +7,15 @@
 @endsection
 
 @section('scripts')
-    <script src="{{ asset('js/frontdesk-dashboard.js') }}"></script>
+    
 @endsection
 
 @section('content')  
+    <script>
+        document.addEventListener("DOMContentLoaded", function (){
+            books = @json($bookings);
+        });
+    </script>
     <div id="main-label">
         <img src="{{ asset('images/booking2.svg') }}">
         <h3>Bookings</h3>
@@ -63,42 +68,28 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr onclick="window.location.href='/frontdesk/room-details'">
-                        <th scope="row">1001</th>
-                        <td>8</td>
-                        <td>Bembang Standard</td>
-                        <td>John Doe</td>
-                        <td>2025-03-21<br><p style="font-size: 13px;">12:00</p></td>
-                        <td>2025-03-23 <br><p style="font-size: 13px;">12:00</p></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">1002</th>
-                        <td>10</td>
-                        <td>Bembang Twin</td>
-                        <td>Jane Smith</td>
-                        <td>2025-03-21<br><p style="font-size: 13px;">12:00</p></td>
-                        <td>2025-03-23 <br><p style="font-size: 13px;">12:00</p></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">1002</th>
-                        <td>11</td>
-                        <td>Bembang Twin</td>
-                        <td>Jane Smith</td>
-                        <td>2025-03-21<br><p style="font-size: 13px;">12:00</p></td>
-                        <td>2025-03-23 <br><p style="font-size: 13px;">12:00</p></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">1002</th>
-                        <td>13</td>
-                        <td>Bembang Twin</td>
-                        <td>Jane Smith</td>
-                        <td>2025-03-21<br><p style="font-size: 13px;">12:00</p></td>
-                        <td>2025-03-23 <br><p style="font-size: 13px;">12:00</p></td>
-                    </tr>
+                    @foreach($bookings as $booking)
+                        <tr onclick="checkinExistingBook('{{ $booking['id'] }}')">
+                            <th scope="row" class="book-id" style="max-width: 150px;">{{ $booking['id'] }}</th>
+                            <td class="room-no">{{ $booking['room']['number'] }}</td>
+                            <td>{{ $booking['room']['type'] }}</td>
+                            <td>{{ $booking['guest']['firstName'] . ' ' . $booking['guest']['lastName'] }}</td>
+                            <td>
+                                {{ $booking['checkin']['date'] }}<br>
+                                <p style="font-size: 13px;">{{ $booking['checkin']['time'] ?: '12:00' }}</p>
+                            </td>
+                            <td>
+                                {{ $booking['checkout']['date'] }}<br>
+                                <p style="font-size: 13px;">{{ $booking['checkout']['time'] ?: '12:00' }}</p>
+                            </td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>
     </div>
+    @include('components.checkin-book', ['modalId' => 'checkInBook'])
+    @include('components.confirm-checkin-book', ['modalId' => 'confirm-check-book'])
 @endsection
 
 @section('extra-scripts')
@@ -106,5 +97,6 @@
     <script src="{{ asset('js/checkin-modal.js') }}"></script>
     <script src="{{ asset('js/book-modal.js') }}"></script>
     <script src="{{ asset('js/reserve-modal.js') }}"></script>
+    <script src="{{ asset('js/checkin-book.js') }}"></script>
 @endsection
 
