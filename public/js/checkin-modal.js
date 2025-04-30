@@ -777,7 +777,7 @@ async function completeTransaction() {
     // 1. Prepare the transaction data
     const data = prepareTransactionData();
     console.log('Transaction data:', data);
-    /*
+    
     try {
         // 2. Get CSRF token from meta tag
         const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
@@ -851,7 +851,7 @@ async function completeTransaction() {
             submitBtn.disabled = false;
             submitBtn.innerHTML = 'Complete Transaction';
         }
-    }*/
+    }
 }
 function user_qr() {
     switchContent(

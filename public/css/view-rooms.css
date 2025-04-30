@@ -223,6 +223,7 @@ h4{
 .table.table-hover tbody td:not(:nth-child(5)):not(:nth-child(6)),
 .table.table-hover tbody th:nth-child(1) {
     padding-top: 20px; /* Adjust as needed */
+    padding-bottom: 20px;
 }
 .table-container{
     margin-left: 20px;

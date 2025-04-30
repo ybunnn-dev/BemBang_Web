@@ -13,9 +13,9 @@
     <body>
         <div class="container" id="login-box">
             <div id="msg-container">
-                <h2>Welcome, <br>Team Bembang!</h2>
-                <p>Welcome to a brand-new day. Wishing you a productive and successful day ahead. Good luck!</p>
-                <button type="button" class="btn btn-primary">Get Started!</button>
+                <h2>Welcome, <br>Team Peter!</h2>
+                <p>Welcome to a brand-new day. Wishing you a productive and successful day ahead. Good luck! Yahoo, Biokid!</p>
+                <button type="button" class="btn btn-primary">Book Responsibly</button>
             </div>
             <div id="form-container">
             <form id="loginForm" action="{{ route('login') }}" method="POST">
@@ -32,7 +32,7 @@
             <div id="logo-container">
                 <div id="logo">
                     <img src="{{ asset('images/hotel-logo.svg') }}" id="logo-hotel">
-                    <h1>Bembang</h1>
+                    <h1>Peter's</h1>
                     <h1>Hotel</h1>
                 </div>
             </div>

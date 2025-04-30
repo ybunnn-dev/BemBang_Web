@@ -27,22 +27,22 @@
     <div id="info_content">
         <div id="avail-room">
             <img src="{{ asset('images/avaiable-icon.svg') }}" width="70px" height="70px">
-            <h1>999</h1>
+            <h1 class="count">{{ $roomCounts['available'] }}</h1>
             <p>Avaiable Rooms</p>
         </div>
         <div id="occupied-room">
             <img src="{{ asset('images/reserved.svg') }}" width="80px" height="80px">
-            <h1>999</h1>
+            <h1 class="count">{{ $roomCounts['occupied'] }}</h1>
             <p>Occupied Rooms</p>
         </div>
         <div id="under-cleaning">
             <img src="{{ asset('images/cleaning.svg') }}" width="70px" height="70px">
-            <h1>999</h1>
+            <h1 class="count">{{ $roomCounts['maintenance'] }}</h1>
             <p>Under Cleaning</p>
         </div>
         <div id="under-maintenance">
             <img src="{{ asset('images/maintenance.svg') }}" width="70px" height="70px">
-            <h1>999</h1>
+            <h1 class="count">{{ $roomCounts['cleaning'] }}</h1>
             <p>Under Cleaning</p>
         </div>
     </div>

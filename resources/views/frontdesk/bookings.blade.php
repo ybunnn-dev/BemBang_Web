@@ -12,9 +12,8 @@
 
 @section('content')  
     <script>
-        document.addEventListener("DOMContentLoaded", function (){
-            books = @json($bookings);
-        });
+         books = @json($bookings);
+         console.log(books);
     </script>
     <div id="main-label">
         <img src="{{ asset('images/booking2.svg') }}">
@@ -68,26 +67,32 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($bookings as $booking)
-                        <tr onclick="checkinExistingBook('{{ $booking['id'] }}')">
-                            <th scope="row" class="book-id" style="max-width: 150px;">{{ $booking['id'] }}</th>
-                            <td class="room-no">{{ $booking['room']['number'] }}</td>
-                            <td>{{ $booking['room']['type'] }}</td>
-                            <td>{{ $booking['guest']['firstName'] . ' ' . $booking['guest']['lastName'] }}</td>
-                            <td>
-                                {{ $booking['checkin']['date'] }}<br>
-                                <p style="font-size: 13px;">{{ $booking['checkin']['time'] ?: '12:00' }}</p>
-                            </td>
-                            <td>
-                                {{ $booking['checkout']['date'] }}<br>
-                                <p style="font-size: 13px;">{{ $booking['checkout']['time'] ?: '12:00' }}</p>
-                            </td>
-                        </tr>
-                    @endforeach
+                @forelse($bookings as $booking)
+                    <tr onclick="checkinExistingBook('{{ $booking['id'] }}')">
+                        <th scope="row" class="book-id" style="max-width: 150px;">{{ $booking['id'] }}</th>
+                        <td class="room-no">{{ $booking['room']['number'] }}</td>
+                        <td>{{ $booking['room']['type'] }}</td>
+                        <td>{{ $booking['guest']['firstName'] . ' ' . $booking['guest']['lastName'] }}</td>
+                        <td>
+                            {{ $booking['checkin']['date'] }}<br>
+                            <p style="font-size: 13px;">{{ $booking['checkin']['time'] ?: '12:00' }}</p>
+                        </td>
+                        <td>
+                            {{ $booking['checkout']['date'] }}<br>
+                            <p style="font-size: 13px;">{{ $booking['checkout']['time'] ?: '12:00' }}</p>
+                        </td>
+                    </tr>
+                @empty
+                    {{-- This section will render when $bookings is empty --}}
+                    <tr>
+                        <td colspan="6" class="text-center">No bookings found</td>
+                    </tr>
+                @endforelse
                 </tbody>
             </table>
         </div>
     </div>
+    @include('components.invoice-modal')
     @include('components.checkin-book', ['modalId' => 'checkInBook'])
     @include('components.confirm-checkin-book', ['modalId' => 'confirm-check-book'])
 @endsection

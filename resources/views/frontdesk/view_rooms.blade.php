@@ -13,6 +13,12 @@
 @endsection
 
 @section('content')  
+    <script>
+        document.addEventListener("DOMContentLoaded", function (){
+            console.log(@json($rooms));
+            
+        });
+    </script>
     <div id="main-label">
         <img src="{{ asset('images/bed-icon.svg') }}">
         <h3>Rooms</h3>
@@ -79,86 +85,80 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr onclick="window.location.href='/frontdesk/room-details'">
-                        <th scope="row">1001</th>
-                        <td>Bembang Standard</td>
-                        <td><div class="status-div">Available</div></td>
-                        <td>John Doe</td>
-                        <td>2025-03-21<br><p style="font-size: 13px;">12:00</p></td>
-                        <td>2025-03-23 <br><p style="font-size: 13px;">12:00</p></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">1002</th>
-                        <td>Bembang Twin</td>
-                        <td><div class="status-div">Reserved</div></td>
-                        <td>Jane Smith</td>
-                        <td>2025-03-21<br><p style="font-size: 13px;">12:00</p></td>
-                        <td>2025-03-23 <br><p style="font-size: 13px;">12:00</p></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">1002</th>
-                        <td>Bembang Twin</td>
-                        <td><div class="status-div">Maintenance</div></td>
-                        <td>Jane Smith</td>
-                        <td>2025-03-21<br><p style="font-size: 13px;">12:00</p></td>
-                        <td>2025-03-23 <br><p style="font-size: 13px;">12:00</p></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">1002</th>
-                        <td>Bembang Twin</td>
-                        <td><div class="status-div">Booking</div></td>
-                        <td>Jane Smith</td>
-                        <td>2025-03-21<br><p style="font-size: 13px;">12:00</p></td>
-                        <td>2025-03-23 <br><p style="font-size: 13px;">12:00</p></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">1002</th>
-                        <td>Bembang Twin</td>
-                        <td><div class="status-div">Cleaning</div></td>
-                        <td>Jane Smith</td>
-                        <td>2025-03-21<br><p style="font-size: 13px;">12:00</p></td>
-                        <td>2025-03-23 <br><p style="font-size: 13px;">12:00</p></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">1002</th>
-                        <td>Bembang Twin</td>
-                        <td><div class="status-div">Maintenance</div></td>
-                        <td>Jane Smith</td>
-                        <td>2025-03-21<br><p style="font-size: 13px;">12:00</p></td>
-                        <td>2025-03-23 <br><p style="font-size: 13px;">12:00</p></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">1002</th>
-                        <td>Bembang Twin</td>
-                        <td><div class="status-div">Maintenance</div></td>
-                        <td>Jane Smith</td>
-                        <td>2025-03-21<br><p style="font-size: 13px;">12:00</p></td>
-                        <td>2025-03-23 <br><p style="font-size: 13px;">12:00</p></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">1002</th>
-                        <td>Bembang Twin</td>
-                        <td><div class="status-div">Maintenance</div></td>
-                        <td>Jane Smith</td>
-                        <td>2025-03-21<br><p style="font-size: 13px;">12:00</p></td>
-                        <td>2025-03-23 <br><p style="font-size: 13px;">12:00</p></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">1002</th>
-                        <td>Bembang Twin</td>
-                        <td><div class="status-div">Maintenance</div></td>
-                        <td>Jane Smith</td>
-                        <td>2025-03-21<br><p style="font-size: 13px;">12:00</p></td>
-                        <td>2025-03-23 <br><p style="font-size: 13px;">12:00</p></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">1002</th>
-                        <td>Bembang Twin</td>
-                        <td><div class="status-div">Maintenance</div></td>
-                        <td>Jane Smith</td>
-                        <td>2025-03-21<br><p style="font-size: 13px;">12:00</p></td>
-                        <td>2025-03-23 <br><p style="font-size: 13px;">12:00</p></td>
-                    </tr>
+                    @foreach($rooms as $room)
+                        <tr onclick="window.location.href='/frontdesk/room-details/{{ $room->id }}'">
+                            <th scope="row">{{ $room->room_no }}</th>
+                            <td>{{ $room->room_type['type_name'] ?? 'N/A' }}</td>
+                            <td>
+                                <div class="status-div {{ strtolower($room->status) }}">
+                                    {{ ucfirst(strtolower($room->status)) }}
+                                </div>
+                            </td>
+                            <td>
+                                {{ ($room->transaction->guest->firstName ?? '') . ' ' . ($room->transaction->guest->lastName ?? '') ?: '--' }}
+                            </td>
+                            <td>
+                            @php
+                                $rawValue = $room->transaction->stay_details['actual_checkin'] ?? null;
+                                $checkinDate = null;
+
+                                if (!empty($rawValue)) {
+                                    if ($rawValue instanceof \MongoDB\BSON\UTCDateTime) {
+                                        $checkinDate = \Carbon\Carbon::instance($rawValue->toDateTime());
+                                    } elseif (is_string($rawValue) && ctype_digit($rawValue)) {
+                                        $checkinDate = \Carbon\Carbon::createFromTimestampMs((int)$rawValue);
+                                    } elseif (is_numeric($rawValue)) {
+                                        $checkinDate = \Carbon\Carbon::createFromTimestampMs((int)$rawValue);
+                                    } elseif (is_array($rawValue) && isset($rawValue['$date']['$numberLong'])) {
+                                        $checkinDate = \Carbon\Carbon::createFromTimestampMs((int)$rawValue['$date']['$numberLong']);
+                                    } else {
+                                        try {
+                                            $checkinDate = \Carbon\Carbon::parse($rawValue);
+                                        } catch (\Exception $e) {
+                                            // invalid format
+                                        }
+                                    }
+                                }
+                            @endphp
+                            @if($checkinDate)
+                                {{ $checkinDate->format('M j, Y') }}<br>
+                                <span style="font-size: 13px;">{{ $checkinDate->format('g:i A') }}</span>
+                            @else
+                                --
+                            @endif
+                            </td>
+                            <td>
+                                @php
+                                    $rawCheckoutValue = $room->transaction->stay_details['expected_checkout'] ?? null;
+                                    $checkoutDate = null;
+
+                                    if (!empty($rawCheckoutValue)) {
+                                        if ($rawCheckoutValue instanceof \MongoDB\BSON\UTCDateTime) {
+                                            $checkoutDate = \Carbon\Carbon::instance($rawCheckoutValue->toDateTime());
+                                        } elseif (is_string($rawCheckoutValue) && ctype_digit($rawCheckoutValue)) {
+                                            $checkoutDate = \Carbon\Carbon::createFromTimestampMs((int)$rawCheckoutValue);
+                                        } elseif (is_numeric($rawCheckoutValue)) {
+                                            $checkoutDate = \Carbon\Carbon::createFromTimestampMs((int)$rawCheckoutValue);
+                                        } elseif (is_array($rawCheckoutValue) && isset($rawCheckoutValue['$date']['$numberLong'])) {
+                                            $checkoutDate = \Carbon\Carbon::createFromTimestampMs((int)$rawCheckoutValue['$date']['$numberLong']);
+                                        } else {
+                                            try {
+                                                $checkoutDate = \Carbon\Carbon::parse($rawCheckoutValue);
+                                            } catch (\Exception $e) {
+                                                // invalid format
+                                            }
+                                        }
+                                    }
+                                @endphp
+                                @if($checkoutDate)
+                                    {{ $checkoutDate->format('M j, Y') }}<br>
+                                    <span style="font-size: 13px;">{{ $checkoutDate->format('g:i A') }}</span>
+                                @else
+                                    --
+                                @endif
+                            </td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>

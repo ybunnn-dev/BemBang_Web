@@ -12,10 +12,10 @@
 
 @section('content')  
     <script>
-        document.addEventListener("DOMContentLoaded", function (){
-            reserves = @json($reservation);
-            console.log(reserves);
-        });
+        
+        reserves = @json($reservation);
+        console.log(reserves);
+    
     </script>
     <div id="main-label">
         <img src="{{ asset('images/reserve2.svg') }}">
@@ -69,23 +69,36 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr onclick="window.location.href='/frontdesk/room-details'">
-                        <th scope="row">1001</th>
-                        <td>8</td>
-                        <td>Bembang Standard</td>
-                        <td>John Doe</td>
-                        <td>2025-03-21<br><p style="font-size: 13px;">12:00</p></td>
-                        <td>2025-03-23 <br><p style="font-size: 13px;">12:00</p></td>
+                    @foreach($reservation as $reserve)
+                    <tr onclick="checkinExistingReserve('{{ $reserve['id'] }}')">
+                        <th scope="row"  class="reserve-id">{{ $reserve['id'] }}</th>
+                        <td>{{ $reserve['room']['number'] }}</td>
+                        <td>{{ $reserve['room']['type'] }}</td>
+                        <td>{{ $reserve['guest']['firstName'] . ' ' . $reserve['guest']['lastName'] }}</td>
+                        <td>
+                            {{ $reserve['checkin']['date'] }}<br>
+                            <p style="font-size: 13px;">{{ $reserve['checkin']['time'] ? date('h:i A', strtotime($reserve['checkin']['time'])) : '12:00 PM' }}</p>
+                        </td>
+                        <td>
+                            {{ $reserve['checkout']['date'] }}<br>
+                            <p style="font-size: 13px;">{{ $reserve['checkout']['time'] ? date('h:i A', strtotime($reserve['checkout']['time'])) : '12:00 PM' }}</p>
+                        </td>
                     </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>
     </div>
+    @include('components.invoice-modal')
+    @include('components.checkin-reserve-pay')
+    @include('components.checkin-reserve')
+    @include('components.confirm-cancel')
 @endsection
 @section('extra-scripts')
     <script src="https://unpkg.com/html5-qrcode"></script>
     <script src="{{ asset('js/checkin-modal.js') }}"></script>
     <script src="{{ asset('js/book-modal.js') }}"></script>
     <script src="{{ asset('js/reserve-modal.js') }}"></script>
+    <script src="{{ asset('js/checkin-reserve.js') }}"></script>
 @endsection
 

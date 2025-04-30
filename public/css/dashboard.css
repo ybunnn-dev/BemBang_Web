@@ -77,6 +77,10 @@ h4{
     color: #697A8D;
     margin-top: 20px;
 }
+.count{
+    width: 70px;
+    text-align: center;
+}
 #msg_content h4{
     margin-left: 60px;
     margin-top: 40px;

@@ -1,5 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Righteous&display=swap');
 
+.reserve-id{
+    max-width: 120px;
+    overflow: hidden;
+    text-wrap: nowrap;
+    text-overflow: ellipsis;
+}
 h4{
     color: #566A7F !important;
     font-family: 'Poppins';
@@ -275,3 +281,382 @@ h4{
     font-weight: 600;
     padding: 0;
 }
+
+
+
+#reserveCheckIn{
+    font-family: 'Poppins';
+}
+
+/* Color Scheme Update */
+#reserveCheckIn .modal-title,
+#reserveCheckIn h5,
+#reserveCheckIn .booking-detail-label {
+    color: #566A7F; /* Darker blue-gray for labels/headers */
+    font-weight: 600;
+}
+#reserveCheckIn hr{
+    color: #566A7F;
+}
+#reserveCheckIn span:not(.badge):not(.booking-detail-label):not(.booking-id),
+#reserveCheckIn #booking-amount {
+    color: #697A8D; /* Lighter blue-gray for values */
+}
+#reserveCheckIn .modal-header h5{
+    margin-left: 350px !important;
+}
+/* Original styles (with minor adjustments) */
+#reserveCheckIn .badge-booked {
+    background-color: #f7f7f7;
+}
+
+#reserveCheckIn .booking-id {
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 14px;
+    color: #6c757d;
+}
+
+#reserveCheckIn .modal-header {
+    border-bottom: 2px solid #e9ecef;
+}
+
+#reserveCheckIn .modal-body {
+    height: 500px;
+    overflow-y: auto;
+    padding: 10px 30px; /* Consolidated padding */
+}
+
+#reserveCheckIn .guest-info {
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+#reserveCheckIn .room-info {
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+#reserveCheckIn .stay-info {
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+#reserveCheckIn .payment-info {
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+/* Action Buttons Styling */
+#reserveCheckIn .action-buttons {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+#reserveCheckIn .action-buttons .btn {
+    padding: 8px 16px;
+    font-weight: 500;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    flex: 1;
+    min-width: 135px;
+    max-width: 170px;
+    text-align: center;
+}
+
+/* Cancel Button */
+#reserveCheckIn #cancel-booking-btn {
+    background-color: #ff3e1d;
+    border-color: #ff3e1d;
+    color: white;
+}
+
+#reserveCheckIn #cancel-booking-btn:hover {
+    background-color: #e03516;
+    border-color: #e03516;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(255, 62, 29, 0.2);
+}
+
+/* Refund Button */
+#reserveCheckIn #refund-booking-btn {
+    background-color: #ffab00;
+    border-color: #ffab00;
+    color: white;
+}
+
+#reserveCheckIn #refund-booking-btn:hover {
+    background-color: #e69a00;
+    border-color: #e69a00;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(255, 171, 0, 0.2);
+}
+
+/* Edit/Approve Button */
+#reserveCheckIn #edit-booking-btn {
+    background-color: #3b7ddd;
+    border-color: #3b7ddd;
+    color: white;
+}
+
+#reserveCheckIn #edit-booking-btn:hover {
+    background-color: #326abc;
+    border-color: #326abc;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(59, 125, 221, 0.2);
+}
+
+/* Check In Button */
+#reserveCheckIn #checkin-btn {
+    background-color: #39da8a;
+    border-color: #39da8a;
+    color: white;
+}
+
+#reserveCheckIn #checkin-btn:hover {
+    background-color: #33c479;
+    border-color: #33c479;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(57, 218, 138, 0.2);
+}
+
+/* Icon styling */
+#reserveCheckIn .action-buttons .btn i {
+    margin-right: 6px;
+    font-size: 14px;
+}
+
+
+#checkin-reserve-payment-modal {
+    font-family: 'Poppins';
+  }
+  
+  #checkin-reserve-payment-modal .modal-dialog {
+    max-width: 600px;
+    margin: 30px auto;
+  }
+  #checkin-reserve-gcash-reference-number:focus, #checkin-reserve-cash-amount:focus{
+    outline: none;
+    box-shadow: none;
+  }
+  #checkin-reserve-payment-modal .modal-content {
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  #checkin-reserve-payment-modal .modal-header {
+    padding-top: 20px;
+    padding-left: 0px;
+    background-color: #fff;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    flex-direction: column;
+    border-bottom: none;
+    align-items: center;
+  }
+  
+  #checkin-reserve-payment-modal .modal-title {
+    color: #566A7F;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+    margin-left: 40%;
+    transform: translateX(-40%);
+  }
+  
+  #checkin-reserve-payment-modal #checkin-reserve-sub-msg {
+    color: #697A8D;
+    font-size: 0.875rem;
+    margin-bottom: 0;
+    margin-left: 40%;
+    transform: translateX(-40%);
+  }
+  
+  #checkin-reserve-payment-modal .modal-body {
+    padding: 50px;
+  }
+  
+  #checkin-reserve-payment-modal .contents {
+    overflow: hidden;
+  }
+  
+  #checkin-reserve-payment-modal .input-content-6, 
+  #checkin-reserve-payment-modal .input-content-7, 
+  #checkin-reserve-payment-modal .input-content-10, 
+  #checkin-reserve-payment-modal .input-content-11 {
+    display: block;
+  }
+  
+  #checkin-reserve-payment-modal .payment-methods {
+    margin-bottom: 20px;
+  }
+  
+  #checkin-reserve-payment-modal .payment-methods p {
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #566A7F;
+  }
+  
+  #checkin-reserve-payment-modal .btn-light {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f7f7f7;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: #566A7F;
+  }
+  
+  #checkin-reserve-payment-modal .btn-light:hover {
+    background-color: #f0f0f0;
+  }
+  
+  #checkin-reserve-payment-modal .btn-light.selected {
+    border: 2px solid #578FCA;
+    background-color: #e6f2ff;
+  }
+  
+  #checkin-reserve-payment-modal .btn-light img {
+    margin-right: 15px;
+  }
+  
+  #checkin-reserve-payment-modal .form-label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #566A7F;
+  }
+  
+  #checkin-reserve-payment-modal .form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 15px;
+  }
+  
+  #checkin-reserve-payment-modal .payment-label-flex {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 500;
+    margin-bottom: 10px;
+    color: #566A7F;
+  }
+  
+  #checkin-reserve-payment-modal .payment-flex {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    color: #697A8D;
+  }
+  
+  #checkin-reserve-payment-modal hr {
+    border: 0;
+    height: 1px;
+    background-color: #ddd;
+    margin: 15px 0;
+  }
+  
+  #checkin-reserve-payment-modal .amount-display {
+    background-color: #f7f7f7;
+    padding: 15px;
+    border-radius: 8px;
+    margin: 15px 0;
+  }
+  
+  #checkin-reserve-payment-modal .amount-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    color: #697A8D;
+  }
+  
+  #checkin-reserve-payment-modal .amount-row.total {
+    font-weight: 600;
+    color: #566A7F;
+    border-top: 1px solid #ddd;
+    padding-top: 8px;
+    margin-top: 8px;
+  }
+  
+  #checkin-reserve-payment-modal .amount-row.change {
+    font-weight: 600;
+    color: #578FCA;
+  }
+  
+  #checkin-reserve-payment-modal .modal-footer {
+    border-top: 1px solid #eee;
+    background-color: #f9f9f9;
+    padding: 1rem 1.5rem;
+    display: flex;
+  }
+  
+  #checkin-reserve-payment-modal .btn-secondary {
+    background-color: #f7f7f7;
+    border-color: #ddd;
+    color: #566A7F;
+  }
+  
+  #checkin-reserve-payment-modal .btn-secondary:hover {
+    background-color: #e9e9e9;
+    border-color: #ccc;
+  }
+  
+  #checkin-reserve-payment-modal .btn-primary {
+    background-color: #578FCA;
+    border-color: #578FCA;
+  }
+  
+  #checkin-reserve-payment-modal .btn-primary:hover {
+    background-color: #4778ae;
+    border-color: #4778ae;
+  }
+  
+  #checkin-reserve-payment-modal .btn-primary:disabled {
+    background-color: #cccccc;
+    border-color: #cccccc;
+  }
+  
+  #checkin-reserve-payment-modal .error-message {
+    color: #dc3545;
+    font-size: 14px;
+    margin-top: -10px;
+    margin-bottom: 15px;
+    display: none;
+  }
+  
+  /* Payment method specific styles */
+  #checkin-reserve-payment-modal #checkin-reserve-gcash-btn, 
+  #checkin-reserve-payment-modal #checkin-reserve-cash-btn {
+    text-align: left;
+  }
+  
+  #checkin-reserve-payment-modal .input-content-10, 
+  #checkin-reserve-payment-modal .input-content-11 {
+    display: none;
+  }
+  
+  #checkin-reserve-payment-modal .input-content-10 h5, 
+  #checkin-reserve-payment-modal .input-content-11 h5 {
+    color: #566A7F;
+    margin: 10px 0;
+    font-weight: 600;
+  }
+  
+  #checkin-reserve-payment-modal .input-content-10 img {
+    display: block;
+    margin: 0 auto;
+  }

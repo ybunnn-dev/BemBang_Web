@@ -5,6 +5,21 @@
 @endsection
 
 @section('content')
+    <script>
+        transactions = @json($transactions);
+    
+        // Count transactions per room type
+        const roomTypeCounts = {};
+        
+        transactions.forEach(transaction => {
+            if (transaction.room_details && transaction.room_details.type_name) {
+                const roomType = transaction.room_details.type_name;
+                roomTypeCounts[roomType] = (roomTypeCounts[roomType] || 0) + 1;
+            }
+        });
+        
+        console.log('Transactions per room type:', roomTypeCounts);
+    </script>
     <div id="main-label">
         <img src="{{ asset('images/dashboard-log.svg') }}">
         <h3>Dashboard</h3>
@@ -12,17 +27,17 @@
     <div class="top-card">
         <div class="checkin-card">
             <img src="{{ asset('images/check-in.svg') }}">
-            <h5>999</h5>
+            <h5>{{ $metrics['active_transactions_count'] }}</h5>
             <p>Total Check Ins</p>
         </div>
         <div class="booking-card">
             <img src="{{ asset('images/book-logo.svg') }}">
-            <h5>999</h5>
+            <h5>{{ $metrics['booking_count'] }}</h5>
             <p>Total Bookings</p>
         </div>
         <div class="reservation-card">
             <img src="{{ asset('images/reserve.svg') }}">
-            <h5>999</h5>
+            <h5>{{ $metrics['reservation_count'] }}</h5>
             <p>Total Reservations</p>
         </div>
         <div class="date-card">
@@ -79,7 +94,16 @@
                 <img src="{{ asset('images/revenue.svg') }}">
                     <div class="revenue-flex">
                     <p>Revenue</p>
-                    <h1>P 100K</h1>
+                    <h1>
+                        P @php
+                            $amount = $metrics['total_revenue'];
+                            if ($amount >= 1000) {
+                            echo number_format($amount / 1000, 1) . 'K';
+                            } else {
+                            echo number_format($amount);
+                            }
+                        @endphp
+                    </h1>
                 </div>
             </div>
             <div class="top-rooms">

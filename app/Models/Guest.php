@@ -94,28 +94,39 @@ class Guest extends Model
                        (empty($voucher['date_expired']) || now()->lt($voucher['date_expired']));
             });
     }
-public static function getSpecificGuest($id){
-    try {
-        $client = DB::connection('mongodb')->getMongoClient();
-        $database = $client->bembang_hotel;
-        $collection = $database->guests;
-        
-        // Convert string ID to ObjectId if needed
+    public static function getSpecificGuest($id)
+    {
         try {
-            $objectId = new ObjectId($id);
-            $document = $collection->findOne(['_id' => $objectId]);
+            $client = DB::connection('mongodb')->getMongoClient();
+            $database = $client->bembang_hotel;
+            $collection = $database->guests;
+            
+            // Proper logging
+            Log::info("bakla", [
+                'id' => $id,
+                'type' => gettype($id),
+                'is_object' => is_object($id) ? get_class($id) : 'not-object'
+            ]);
+            
+            // Convert string ID to ObjectId if needed
+            try {
+                $objectId = new ObjectId($id);
+                $document = $collection->findOne(['_id' => $objectId]);
+            } catch (\Exception $e) {
+                // If ID isn't valid ObjectId format, try as string
+                $document = $collection->findOne(['_id' => $id]);
+            }
+            
+            return $document ? (object)$document : null;
+            
         } catch (\Exception $e) {
-            // If ID isn't valid ObjectId format, try as string
-            $document = $collection->findOne(['_id' => $id]);
+            Log::error("MongoDB find guest error", [
+                'error' => $e->getMessage(),
+                'input_id' => $id
+            ]);
+            return null;
         }
-        
-        return $document ? (object)$document : null;
-        
-    } catch (\Exception $e) {
-        Log::error("MongoDB find room error: " . $e->getMessage());
-        return null;
     }
-}
 
     /**
      * Check if guest qualifies for conditional vouchers

@@ -1,9 +1,9 @@
 <!-- Checkin Modal -->
-<div class="modal fade" id="checkInBook" tabindex="-1" aria-labelledby="checkInBookLabel" aria-hidden="true">
+<div class="modal fade" id="reserveCheckIn" tabindex="-1" aria-labelledby="reserveCheckInLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="checkInBookLabel">Booking Details</h4>
+                <h4 class="modal-title" id="reserveCheckInLabel">Booking Details</h4>
                 <span class="ms-2 booking-id" id="booking-id-display">ID: 6ac7fb6e</span>
                 <h5 class="mb-0"><span class="badge" id="booking-status">Booked</span></h5>
             </div>
@@ -116,9 +116,6 @@
                 <div class="action-buttons mt-4 d-flex justify-content-end gap-2">
                     <button type="button" class="btn btn-danger" id="cancel-booking-btn">
                         <i class="bi bi-x-circle"></i> Cancel Booking
-                    </button>
-                    <button type="button" class="btn btn-warning" id="refund-booking-btn">
-                        <i class="bi bi-arrow-counterclockwise"></i> Refund
                     </button>
                     <button type="button" class="btn btn-primary" id="edit-booking-btn" onclick="approve()">
                         <i class="bi bi-pencil"></i> Approve

@@ -5,6 +5,21 @@
 @endsection
 
 @section('content')
+    <script>
+        transactions = @json($transactions);
+    
+        // Count transactions per room type
+        const roomTypeCounts = {};
+        
+        transactions.forEach(transaction => {
+            if (transaction.room_details && transaction.room_details.type_name) {
+                const roomType = transaction.room_details.type_name;
+                roomTypeCounts[roomType] = (roomTypeCounts[roomType] || 0) + 1;
+            }
+        });
+        
+        console.log('Transactions per room type:', roomTypeCounts);
+    </script>
     <div id="main-label">
         <img src="{{ asset('images/performance.svg') }}">
         <h3>Business Performance</h3>
@@ -26,22 +41,22 @@
         <div class="reports">
             <div class="rev-card">
                 <img src="{{ asset('images/rev.svg') }}">
-                <h5>999</h5>
+                <h5>P {{ number_format($metrics['total_revenue'], 2) }}</h5>
                 <p>Revenue</p>
             </div>
             <div class="checkin-card">
                 <img src="{{ asset('images/check-in.svg') }}">
-                <h5>999</h5>
+                <h5>{{ $metrics['active_transactions_count'] }}</h5>
                 <p>Total Check Ins</p>
             </div>
             <div class="book-card">
                 <img src="{{ asset('images/book-logo.svg') }}">
-                <h5>999</h5>
+                <h5>{{ $metrics['booking_count'] }}</h5>
                 <p>Total Bookings</p>
             </div>
             <div class="reserve-card">
                 <img src="{{ asset('images/reserve.svg') }}">
-                <h5>999</h5>
+                <h5>{{ $metrics['reservation_count'] }}</h5>
                 <p>Total Reservation</p>
             </div>
         </div>

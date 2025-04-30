@@ -1237,7 +1237,7 @@ function isBookingFormValid() {
         });
 
         console.log("bading: ",specificRoom.type_name);
-
+        console.log(selectedBookingRoom);
         document.getElementById('book-room-number').value = selectedBookingRoom.room_no;
         document.getElementById('book-hours-stay').value = computeHoursStay(value.checkinDate, value.checkinTime, value.checkoutDate, value.checkoutTime)
         currentRoomType = specificRoom.type_name;

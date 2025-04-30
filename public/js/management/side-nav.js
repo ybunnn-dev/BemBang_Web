@@ -37,7 +37,7 @@ function show_hide_deals(){
     part3 = buttonsPart3.style.top === '55px' ? 1 : 0;
 
     if (part3 === 1) {
-        buttonsPart3.style.top = "230px";
+        buttonsPart3.style.top = "190px";
         dealArrow.style.transform = "rotate(360deg)";
         console.log("vakla");
         part3 = 0;
@@ -56,12 +56,10 @@ function show_hide_users(){
     if (part4 === 1) {
         buttonsPart4.style.top = "185px";
         userArrow.style.transform = "rotate(360deg)";
-        console.log("vakla");
         part4 = 0;
     } else {
         buttonsPart4.style.top = "105px";
         userArrow.style.transform = "rotate(270deg)";
-        console.log("kim");
         part4 = 1;
     }
 }

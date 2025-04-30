@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use MongoDB\BSON\UTCDateTime;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -13,19 +13,45 @@ use App\Models\Guest;
 use App\Models\Membership;
 use App\Models\Rooms;
 use MongoDB\BSON\ObjectId;
+use Illuminate\Support\Facades\DB;
+use MongoDB\Laravel\Eloquent\Casts\ObjectId as CastsObjectId;
 
 class TransactionController extends Controller
 {
+    
     public function store(Request $request)
     {
-        // Log the incoming request for debugging
+         // Log the incoming request for debugging
         Log::debug('TransactionController::store - Received request', ['request' => $request->all()]);
-        
-        if(!$request['is_guest']){
-            $request['guest_id'] = Guest::createGuest($request->new_guest);
-        }
-        // Normalize guest_id if it's a MongoDB ObjectID
+    
+        // Get all input data
         $input = $request->all();
+        
+        // Check if request is empty or missing required data
+        if (empty($input)) {
+            Log::error('TransactionController::store - Empty request data');
+            return response()->json([
+                'success' => false,
+                'message' => 'No transaction data provided',
+            ], 400);
+        }
+        
+        // Handle guest data properly
+        if (isset($input['is_guest']) && $input['is_guest'] === false) {
+            if (isset($input['new_guest']) && !empty($input['new_guest'])) {
+                // Create a new guest and get the ID
+                $input['guest_id'] = Guest::createGuest($input['new_guest']);
+                Log::debug('TransactionController::store - Created new guest', ['guest_id' => $input['guest_id']]);
+            } else {
+                Log::error('TransactionController::store - Missing new_guest data');
+                return response()->json([
+                    'success' => false,
+                    'message' => 'New guest information is required when is_guest is false',
+                ], 400);
+            }
+        }
+        
+        // Normalize guest_id if it's a MongoDB ObjectID
         if (isset($input['guest_id']['$oid'])) {
             $input['guest_id'] = $input['guest_id']['$oid'];
             Log::debug('TransactionController::store - Normalized guest_id', ['guest_id' => $input['guest_id']]);
@@ -124,26 +150,71 @@ class TransactionController extends Controller
                 'points' => $membership_points
             ]);
 
-            // Prepare the transaction data
+            function parseToUTCDateTime($dateInput) {
+                // If null, return null
+                if ($dateInput === null) {
+                    return null;
+                }
+                
+                // If it's already a timestamp in milliseconds
+                if (is_numeric($dateInput) && strlen($dateInput) >= 12) {
+                    return new UTCDateTime((int)$dateInput);
+                }
+                
+                // Try to parse as ISO format
+                try {
+                    if (is_string($dateInput) && preg_match('/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/', $dateInput)) {
+                        return new UTCDateTime((int)(Carbon::createFromFormat('Y-m-d\TH:i:s.u\Z', $dateInput)->getPreciseTimestamp(3)));
+                    }
+                } catch (\Exception $e) {
+                    Log::warning('Failed to parse date as ISO format: ' . $dateInput, ['error' => $e->getMessage()]);
+                }
+                
+                // Try standard Carbon parsing as fallback
+                try {
+                    return new UTCDateTime((int)(Carbon::parse($dateInput)->getPreciseTimestamp(3)));
+                } catch (\Exception $e) {
+                    Log::error('Failed to parse date: ' . $dateInput, ['error' => $e->getMessage()]);
+                    throw new \Exception('Invalid date format: ' . $dateInput);
+                }
+            }
+           // Prepare stay details with robust date parsing
+            $transactionDataStay = [
+                'stay_details' => [
+                    'actual_checkin' => isset($input['stay_details']['actual_checkin']) 
+                        ? parseToUTCDateTime($input['stay_details']['actual_checkin'])
+                        : null,
+                    'actual_checkout' => isset($input['stay_details']['actual_checkout']) 
+                        ? parseToUTCDateTime($input['stay_details']['actual_checkout'])
+                        : null,
+                    'expected_checkin' => parseToUTCDateTime($input['stay_details']['expected_checkin']),
+                    'expected_checkout' => parseToUTCDateTime($input['stay_details']['expected_checkout']),
+                    'guest_num' => (int)$input['stay_details']['guest_num'],
+                    'stay_hours' => (int)$input['stay_details']['stay_hours'],
+                    'time_allowance' => (int)$input['stay_details']['time_allowance']
+                ]
+            ];
+
+            $guestID = new ObjectId($input['guest_id']);
+            $roomID = new ObjectId($input['room_id']);
             $transactionData = [
-                'guest_id' => $input['guest_id'],
+                'guest_id' => $guestID,
                 'employee_id' => $input['employee_id'],
-                'room_id' => $input['room_id'],
+                'room_id' => $roomID,
                 'voucher_id' => $input['voucher_id'] ?? null,
                 'transaction_type' => $input['transaction_type'],
                 'payments' => $input['payments'],
-                'stay_details' => $input['stay_details'],
+                'stay_details' => $transactionDataStay['stay_details'],
                 'current_status' => $input['current_status'] ?? 'checked-in',
                 'audit_log' => $input['audit_log'] ?? [[
                     'action' => 'checked-in',
                     'by' => $input['employee_id'],
-                    'timestamp' => Carbon::now()->toDateTimeString(),
+                    'timestamp' => new UTCDateTime((int)Carbon::now()->getPreciseTimestamp(3)),
                     'points_earned' => $membership_points
                 ]],
-                'created_at' => Carbon::now()->toDateTimeString(),
-                'updated_at' => Carbon::now()->toDateTimeString()
+                'created_at' => new UTCDateTime((int)Carbon::now()->getPreciseTimestamp(3)),
+                'updated_at' => new UTCDateTime((int)Carbon::now()->getPreciseTimestamp(3)),
             ];
-
             // Log transaction data for debugging
             Log::debug('TransactionController::store - Prepared transaction data', ['data' => $transactionData]);
 
@@ -171,7 +242,7 @@ class TransactionController extends Controller
 
 
             // Update room status to occupied
-            if(!$request['current-status'] == 'confirmed'){
+            if($request['current-status'] == 'confirmed'){
                 $bulk = new \MongoDB\Driver\BulkWrite();
                 $bulk->update(
                     ['_id' => new \MongoDB\BSON\ObjectId($input['room_id'])],
@@ -235,40 +306,211 @@ class TransactionController extends Controller
             ], 500);
         }
     }
+
+    public function getBooking()
+    {
+        try {
+            // Get transactions and safely convert to collection
+            $transactions = collect(Transaction::getBookingTransaction() ?? []);
+            
+            // Return empty collection structure if no transactions
+            if ($transactions->isEmpty()) {
+                return view('frontdesk.bookings', [
+                    'bookings' => collect([]) // Return empty collection
+                ]);
+            }
+    
+            $enhancedTransactions = $transactions->map(function ($transaction) {
+                // Safely handle null transaction
+                if (empty($transaction)) {
+                    return null;
+                }
+    
+                // Ensure we're working with an object
+                $transaction = is_array($transaction) ? (object)$transaction : $transaction;
+                
+                // Initialize default values
+                $guest = ['firstName' => 'N/A', 'lastName' => 'N/A'];
+                $room = ['number' => 'N/A', 'type' => 'N/A'];
+                $checkinDateTime = ['date' => 'N/A', 'time' => 'N/A'];
+                $checkoutDateTime = ['date' => 'N/A', 'time' => 'N/A'];
+                $amount = 0;
+    
+                try {
+                    // Get related data with null checks
+                    if (!empty($transaction->guest_id)) {
+                        $guestId = (string)$transaction->guest_id;
+                        $guestData = Guest::getSpecificGuest($guestId);
+                        if ($guestData) {
+                            $guest = [
+                                'firstName' => $guestData['firstName'] ?? 'N/A',
+                                'lastName' => $guestData['lastName'] ?? 'N/A'
+                            ];
+                        }
+                    }
+    
+                    if (!empty($transaction->room_id)) {
+                        $roomData = Rooms::getSpecificRoom($transaction->room_id);
+                        if ($roomData) {
+                            $room = [
+                                'number' => $roomData['room_no'] ?? 'N/A',
+                                'type' => $roomData['room_type_details']['type_name'] ?? 'N/A'
+                            ];
+                        }
+                    }
+    
+                    // Process dates
+                    $stayDetails = $transaction->stay_details ?? (object)[];
+                    $checkinDateTime = $this->parseMongoDateToArray(
+                        is_object($stayDetails) ? ($stayDetails->expected_checkin ?? null) : ($stayDetails['expected_checkin'] ?? null)
+                    ) ?? ['date' => 'N/A', 'time' => 'N/A'];
+                    
+                    $checkoutDateTime = $this->parseMongoDateToArray(
+                        is_object($stayDetails) ? ($stayDetails->expected_checkout ?? null) : ($stayDetails['expected_checkout'] ?? null)
+                    ) ?? ['date' => 'N/A', 'time' => 'N/A'];
+                    
+                    // Process payment amount
+                    $meta = $transaction->meta ?? (object)[];
+                    $amount = is_object($meta) ? ($meta->original_rate ?? 0) : ($meta['original_rate'] ?? 0);
+    
+                } catch (\Exception $e) {
+                    Log::error("Error processing transaction data: " . $e->getMessage());
+                }
+    
+                return [
+                    'id' => $this->extractId($transaction->_id ?? null) ?? 'N/A',
+                    'short_id' => substr($this->extractId($transaction->_id ?? null) ?? '', -8),
+                    'guest' => $guest,
+                    'room' => $room,
+                    'checkin' => $checkinDateTime,
+                    'checkout' => $checkoutDateTime,
+                    'status' => $transaction->current_status ?? 'N/A',
+                    'amount' => number_format($amount, 2),
+                    'raw_data' => $transaction
+                ];
+            })->filter(); // Remove any null entries from the collection
+    
+            return view('frontdesk.bookings', [
+                'bookings' => $enhancedTransactions
+            ]);
+    
+        } catch (\Exception $e) {
+            Log::error("Error in getBooking: " . $e->getMessage());
+            return view('frontdesk.bookings', [
+                'bookings' => collect([]) // Return empty collection on error
+            ]);
+        }
+    }
+    public function checkout(Request $request)
+    {
+        $client = DB::connection('mongodb')->getMongoClient();
+        $database = $client->bembang_hotel;
+        $transactions = $database->transactions;
+        $rooms = $database->rooms;
+    
+        $validated = $request->validate([
+            'transaction_id' => 'required',
+            'room_id' => 'required',
+        ]);
+    
+        try {
+            // Start MongoDB transaction
+            $session = $client->startSession();
+            $session->startTransaction();
+    
+            // Convert to milliseconds (integer)
+            $timestamp = (int) (now()->timestamp * 1000);
+    
+            // 1. Update the transaction
+            $transactionUpdate = $transactions->updateOne(
+                ['_id' => new ObjectId($validated['transaction_id'])],
+                [
+                    '$set' => [
+                        'current_status' => 'completed',
+                        'stay_details.actual_checkout' => new \MongoDB\BSON\UTCDateTime($timestamp),
+                        'updated_at' => new UTCDateTime($timestamp)
+                    ],
+                    '$push' => [
+                        'audit_log' => [
+                            'action' => 'checked_out',
+                            'by' => auth()->id(),
+                            'timestamp' => new UTCDateTime($timestamp),
+                            '_id' => new ObjectId()
+                        ]
+                    ]
+                ],
+                ['session' => $session]
+            );
+    
+            // 2. Update the room status
+            $roomUpdate = $rooms->updateOne(
+                ['_id' => new ObjectId($validated['room_id'])],
+                [
+                    '$set' => [
+                        'status' => 'available',
+                        'updated_at' => new UTCDateTime($timestamp)
+                    ]
+                ],
+                ['session' => $session]
+            );
+    
+            // Commit transaction
+            $session->commitTransaction();
+    
+            return response()->json([
+                'success' => true,
+                'message' => 'Checkout completed successfully'
+            ]);
+    
+        } catch (\Exception $e) {
+            // Abort transaction on error
+            if (isset($session)) {
+                $session->abortTransaction();
+            }
+    
+            Log::error('Checkout failed: ' . $e->getMessage());
+    
+            return response()->json([
+                'success' => false,
+                'message' => 'Checkout failed: ' . $e->getMessage()
+            ], 500);
+        }
+    }
     public function getReservation()
     {
-        // Get transactions and convert to collection
+        // Set the default timezone to Asia/Manila
+        date_default_timezone_set('Asia/Manila');
+        
         $transactions = collect(Transaction::getReservationTransaction());
         
         $enhancedTransactions = $transactions->map(function ($transaction) {
-            // Ensure we're working with an object
             $transaction = is_array($transaction) ? (object)$transaction : $transaction;
+            $guestId = (string)$transaction->guest_id;
+            $guest = Guest::getSpecificGuest($guestId);
+            $room = Rooms::getSpecificRoom(($transaction->room_id));
             
-            // Get related data
-            $guest = Guest::getSpecificGuest($this->extractId($transaction->guest_id));
-            $room = Rooms::getSpecificRoom($this->extractId($transaction->room_id));
-            
-            // Process dates - handle both object and array stay_details
+            // Process dates with timezone conversion
             $stayDetails = $transaction->stay_details ?? (object)[];
+            
+            // Convert dates to Philippine timezone
             $checkinDateTime = $this->parseMongoDateToArray(
-                is_object($stayDetails) ? ($stayDetails->expected_checkin ?? null) : ($stayDetails['expected_checkin'] ?? null)
-            );
-            $checkoutDateTime = $this->parseMongoDateToArray(
-                is_object($stayDetails) ? ($stayDetails->expected_checkout ?? null) : ($stayDetails['expected_checkout'] ?? null)
+                is_object($stayDetails) ? ($stayDetails->expected_checkin ?? null) : ($stayDetails['expected_checkin'] ?? null),
+                'Asia/Manila' // Pass timezone parameter
             );
             
-            // Process payment amount - handle both object and array meta
+            $checkoutDateTime = $this->parseMongoDateToArray(
+                is_object($stayDetails) ? ($stayDetails->expected_checkout ?? null) : ($stayDetails['expected_checkout'] ?? null),
+                'Asia/Manila' // Pass timezone parameter
+            );
+            
             $meta = $transaction->meta ?? (object)[];
             $amount = is_object($meta) ? ($meta->original_rate ?? 0) : ($meta['original_rate'] ?? 0);
             
-            // Handle guest data (could be array or object)
-        
-            // Handle room data (could be array or object)
             $roomNo = is_array($room) ? ($room['room_no'] ?? 'N/A') : ($room->room_no ?? 'N/A');
             $roomTypeName = is_array($room) 
                 ? ($room['room_type_details']['type_name'] ?? 'N/A') 
                 : ($room->room_type_details->type_name ?? 'N/A');
-            
+    
             return [
                 'id' => $this->extractId($transaction->_id),
                 'short_id' => substr($this->extractId($transaction->_id), -8),
@@ -295,77 +537,23 @@ class TransactionController extends Controller
             'reservation' => $enhancedTransactions
         ]);
     }
-    public function getBooking()
-    {
-        // Get transactions and convert to collection
-        $transactions = collect(Transaction::getBookingTransaction());
-        
-        $enhancedTransactions = $transactions->map(function ($transaction) {
-            // Ensure we're working with an object
-            $transaction = is_array($transaction) ? (object)$transaction : $transaction;
-            
-            // Get related data
-            $guest = Guest::getSpecificGuest($this->extractId($transaction->guest_id));
-            $room = Rooms::getSpecificRoom($this->extractId($transaction->room_id));
-            
-            // Process dates - handle both object and array stay_details
-            $stayDetails = $transaction->stay_details ?? (object)[];
-            $checkinDateTime = $this->parseMongoDateToArray(
-                is_object($stayDetails) ? ($stayDetails->expected_checkin ?? null) : ($stayDetails['expected_checkin'] ?? null)
-            );
-            $checkoutDateTime = $this->parseMongoDateToArray(
-                is_object($stayDetails) ? ($stayDetails->expected_checkout ?? null) : ($stayDetails['expected_checkout'] ?? null)
-            );
-            
-            // Process payment amount - handle both object and array meta
-            $meta = $transaction->meta ?? (object)[];
-            $amount = is_object($meta) ? ($meta->original_rate ?? 0) : ($meta['original_rate'] ?? 0);
-            
-            // Handle guest data (could be array or object)
-        
-            // Handle room data (could be array or object)
-            $roomNo = is_array($room) ? ($room['room_no'] ?? 'N/A') : ($room->room_no ?? 'N/A');
-            $roomTypeName = is_array($room) 
-                ? ($room['room_type_details']['type_name'] ?? 'N/A') 
-                : ($room->room_type_details->type_name ?? 'N/A');
-            
-            return [
-                'id' => $this->extractId($transaction->_id),
-                'short_id' => substr($this->extractId($transaction->_id), -8),
-                'guest' => $guest,
-                'room' => [
-                    'number' => $roomNo,
-                    'type' => $roomTypeName
-                ],
-                'checkin' => [
-                    'date' => $checkinDateTime['date'],
-                    'time' => $checkinDateTime['time']
-                ],
-                'checkout' => [
-                    'date' => $checkoutDateTime['date'],
-                    'time' => $checkoutDateTime['time']
-                ],
-                'status' => $transaction->current_status,
-                'amount' => number_format($amount, 2),
-                'raw_data' => $transaction
-            ];
-        });
-        
-        return view('frontdesk.bookings', [
-            'bookings' => $enhancedTransactions
-        ]);
-    }
-    
-    // Helper method to extract ID from either ObjectId, array, or string
     protected function extractId($id)
     {
-        if (is_object($id)) {
+        // If it's an ObjectId object
+        if (is_object($id) && method_exists($id, '__toString')) {
             return (string)$id;
         }
+        // If it's a standard object, we need to handle it differently
+        if (is_object($id) && !method_exists($id, '__toString')) {
+            // Convert to array, then to JSON if it's a stdClass
+            return json_encode($id);
+        }
+        // If it's an array with $oid key (MongoDB format)
         if (is_array($id) && isset($id['$oid'])) {
             return $id['$oid'];
         }
-        return $id;
+        // If it's already a string or can be cast safely
+        return (string)$id;
     }
     
     protected function parseMongoDateToArray($dateField)
@@ -373,47 +561,187 @@ class TransactionController extends Controller
         if (!$dateField) {
             return [
                 'date' => 'N/A',
-                'time' => ''
+                'time' => '12:00 PM' // Set default time with AM/PM
             ];
         }
         
         try {
-            // Handle different date field formats
+            $timezone = new \DateTimeZone('Asia/Manila');
+            
             if (is_array($dateField)) {
-                // Format: ['$date' => ['$numberLong' => 'timestamp']]
                 $milliseconds = $dateField['$date']['$numberLong'] ?? null;
             } elseif (is_object($dateField) && isset($dateField->{'$date'})) {
-                // Format: {$date: {$numberLong: 'timestamp'}}
                 $milliseconds = $dateField->{'$date'}->{'$numberLong'} ?? null;
-            } elseif (is_object($dateField) && $dateField instanceof \MongoDB\BSON\UTCDateTime) {
-                // Format: MongoDB\BSON\UTCDateTime object
+            } elseif (is_object($dateField) && $dateField instanceof UTCDateTime) {
+                $dateTime = $dateField->toDateTime()->setTimezone($timezone);
                 return [
-                    'date' => $dateField->toDateTime()->format('Y-m-d'),
-                    'time' => $dateField->toDateTime()->format('H:i')
+                    'date' => $dateTime->format('F j, Y'),  // "May 15, 2023"
+                    'time' => $dateTime->format('h:i A')     // "02:30 PM"
                 ];
             } else {
                 $milliseconds = null;
             }
-    
+
             if ($milliseconds !== null) {
-                $carbon = \Carbon\Carbon::createFromTimestampMs($milliseconds);
+                $carbon = \Carbon\Carbon::createFromTimestampMs($milliseconds)
+                            ->setTimezone($timezone);
                 return [
-                    'date' => $carbon->format('Y-m-d'),
-                    'time' => $carbon->format('H:i')
+                    'date' => $carbon->format('F j, Y'),  // Full month name
+                    'time' => $carbon->format('h:i A')    // 12-hour with AM/PM
                 ];
             }
-    
-            // Fallback for unexpected formats
+
             return [
                 'date' => 'N/A',
-                'time' => ''
+                'time' => '12:00 PM'
             ];
             
         } catch (\Exception $e) {
             return [
                 'date' => 'N/A',
-                'time' => ''
+                'time' => '12:00 PM'
             ];
         }
     }
+    public function processPayment(Request $request)
+    {
+        try {
+            Log::info('Received payment data:', $request->all());
+
+            // Validate required fields
+            $validated = $request->validate([
+                'transaction_id' => 'required|string',
+                'guest_id' => 'required|string',
+                'payment' => 'required|array',
+                'payment.method' => 'required|string|in:gcash,cash',
+                'payment.amount' => 'required|numeric',
+                'payment.currency' => 'required|string',
+                'payment.status' => 'required|string',
+                'payment.processed_at' => 'required|string',
+                'update_status' => 'required|string'
+            ]);
+
+            // Get MongoDB client and collections
+            $client = DB::connection('mongodb')->getMongoClient();
+            $database = $client->selectDatabase('bembang_hotel');
+            $transactionsCollection = $database->selectCollection('transactions');
+            $guestsCollection = $database->selectCollection('guests');
+            $membershipsCollection = $database->selectCollection('membership');
+
+            // Extract data
+            $transactionId = $request->input('transaction_id');
+            $guestId = $request->input('guest_id');
+            $payment = $request->input('payment');
+            $updateStatus = $request->input('update_status');
+
+            // Start transaction
+            $session = $client->startSession();
+            $session->startTransaction();
+
+            try {
+                // 1. Update the transaction - push new payment and update status
+                $transactionUpdate = $transactionsCollection->updateOne(
+                    ['_id' => new ObjectId($transactionId)],
+                    [
+                        '$push' => ['payments' => $payment],
+                        '$set' => [
+                            'current_status' => $updateStatus,
+                            'status' => $updateStatus,
+                            'updated_at' => new \MongoDB\BSON\UTCDateTime()
+                        ],
+                        '$addToSet' => [
+                            'audit_log' => [
+                                'action' => 'payment_processed',
+                                'by' => new ObjectId($guestId),
+                                'timestamp' => new UTCDateTime(),
+                                'payment_method' => $payment['method'],
+                                'amount' => $payment['amount']
+                            ]
+                        ]
+                    ],
+                    ['session' => $session]
+                );
+
+                if ($transactionUpdate->getModifiedCount() === 0) {
+                    throw new \Exception("Failed to update transaction");
+                }
+
+                // 2. Get the guest's membership to determine points
+                $guest = $guestsCollection->findOne(
+                    ['_id' => new ObjectId($guestId)],
+                    ['session' => $session]
+                );
+
+                if (!$guest) {
+                    throw new \Exception("Guest not found");
+                }
+
+                $membershipId = $guest['membership_id'] ?? null;
+                
+                if (!$membershipId) {
+                    throw new \Exception("Guest has no membership");
+                }
+
+                // 3. Get membership details to determine check-in points
+                $membership = $membershipsCollection->findOne(
+                    ['_id' => $membershipId],
+                    ['session' => $session]
+                );
+
+                if (!$membership) {
+                    throw new \Exception("Membership not found");
+                }
+
+                $checkInPoints = $membership['check_in_points'] ?? 0;
+
+                // 4. Update guest's points and check-in count
+                $guestUpdate = $guestsCollection->updateOne(
+                    ['_id' => new ObjectId($guestId)],
+                    [
+                        '$inc' => [
+                            'points' => (int)$checkInPoints,
+                            'checkin_count' => 1
+                        ]
+                    ],
+                    ['session' => $session]
+                );
+
+                if ($guestUpdate->getModifiedCount() === 0) {
+                    throw new \Exception("Failed to update guest points");
+                }
+
+                // Commit transaction
+                $session->commitTransaction();
+
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Payment processed successfully',
+                    'data' => [
+                        'transaction_id' => $transactionId,
+                        'payment_method' => $payment['method'],
+                        'amount' => $payment['amount'],
+                        'new_status' => $updateStatus,
+                        'points_added' => $checkInPoints,
+                        'processed_at' => now()->toDateTimeString()
+                    ]
+                ]);
+
+            } catch (\Exception $e) {
+                $session->abortTransaction();
+                throw $e;
+            } finally {
+                $session->endSession();
+            }
+
+        } catch (\Exception $e) {
+            Log::error("Payment processing failed: " . $e->getMessage());
+            
+            return response()->json([
+                'success' => false,
+                'message' => 'Payment processing failed: ' . $e->getMessage()
+            ], 500);
+        }
+    }
+
+    
 }

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Facades\DB; 
 use MongoDB\Driver\Manager;
 use MongoDB\Driver\BulkWrite;
 use MongoDB\Driver\Query;
@@ -130,7 +131,9 @@ class Transaction
             $instance = new self();
             $filter = [
                 'transaction_type' => 'Booking',
-                'current_status' => 'booked'
+                'current_status' => [
+                    '$in' => ['pending', 'booked', 'no show', 'cancelled']
+                ]
             ];
             
             $query = new Query($filter);
@@ -146,6 +149,32 @@ class Transaction
             return ['error' => 'Database error: ' . $e->getMessage()];
         }
     }
+    
+    public static function getReservationTransaction()
+    {
+        try {
+            $instance = new self();
+            $filter = [
+                'transaction_type' => 'Reservation',
+                'current_status' => [
+                    '$in' => ['pending', 'reserved', 'no show', 'cancelled']
+                ]
+            ];
+            
+            $query = new Query($filter);
+            $cursor = $instance->manager->executeQuery("{$instance->database}.{$instance->collection}", $query);
+            $bookings = $cursor->toArray();
+            
+            if (count($bookings) > 0) {
+                return $bookings;
+            } else {
+                return ['error' => 'No booking transactions found'];
+            }
+        } catch (\MongoDB\Driver\Exception\Exception $e) {
+            return ['error' => 'Database error: ' . $e->getMessage()];
+        }
+    }
+
     public static function getTransactionSchedules()
     {
         try {
@@ -180,28 +209,8 @@ class Transaction
             return [];
         }
     }
-    public static function getReservationTransaction()
-    {
-        try {
-            $instance = new self();
-            $filter = [
-                'transaction_type' => 'Reservation',
-                'current_status' => 'reserved'
-            ];
-            
-            $query = new Query($filter);
-            $cursor = $instance->manager->executeQuery("{$instance->database}.{$instance->collection}", $query);
-            $bookings = $cursor->toArray();
-            
-            if (count($bookings) > 0) {
-                return $bookings;
-            } else {
-                return ['error' => 'No booking transactions found'];
-            }
-        } catch (\MongoDB\Driver\Exception\Exception $e) {
-            return ['error' => 'Database error: ' . $e->getMessage()];
-        }
-    }
+
+    
     public static function getTransactPerGuest($guestId)
     {
         try {
@@ -272,6 +281,121 @@ class Transaction
         }
     }
 
+    public static function getSpecificTransaction($roomId)
+    {
+        try {
+            $instance = new self();
+            $timezone = 'Asia/Manila'; // Explicitly set to Philippine time
+            
+            // Convert roomId to ObjectId if it's a string
+            $roomId = is_string($roomId) ? new ObjectId($roomId) : $roomId;
+            
+            // Query for active transactions
+            $filter = [
+                'room_id' => $roomId,
+                'current_status' => ['$in' => ['pending', 'confirmed']]
+            ];
+            
+            $options = [
+                'sort' => ['created_at' => -1],
+                'limit' => 1
+            ];
+            
+            $query = new Query($filter, $options);
+            $cursor = $instance->manager->executeQuery("{$instance->database}.{$instance->collection}", $query);
+            $transactions = $cursor->toArray();
+            
+            if (count($transactions) > 0) {
+                $transaction = $transactions[0];
+                $guest = Guest::getSpecificGuest($transaction->guest_id);
+                
+                // Improved MongoDB date converter with explicit timezone handling
+                $convertDate = function ($date) use ($timezone) {
+                    if (!$date) return null;
+                    
+                    try {
+                        // Handle different MongoDB date formats
+                        if ($date instanceof \MongoDB\BSON\UTCDateTime) {
+                            // Convert MongoDB UTCDateTime to Carbon
+                            return \Carbon\Carbon::createFromTimestamp($date->toDateTime()->getTimestamp())
+                                ->setTimezone($timezone)
+                                ->format('Y-m-d H:i:s');
+                        } elseif (is_object($date) && isset($date->{'$date'})) {
+                            // Handle $date object format
+                            $timestamp = $date->{'$date'};
+                            if (is_numeric($timestamp)) {
+                                $timestamp = (int)($timestamp / 1000); // Convert from milliseconds if needed
+                            }
+                            return \Carbon\Carbon::createFromTimestamp($timestamp)
+                                ->setTimezone($timezone)
+                                ->format('Y-m-d H:i:s');
+                        } elseif (is_array($date) && isset($date['$date'])) {
+                            // Handle $date array format
+                            $timestamp = $date['$date'];
+                            if (is_numeric($timestamp)) {
+                                $timestamp = (int)($timestamp / 1000); // Convert from milliseconds if needed
+                            }
+                            return \Carbon\Carbon::createFromTimestamp($timestamp)
+                                ->setTimezone($timezone)
+                                ->format('Y-m-d H:i:s');
+                        } else {
+                            // Last resort - try to parse whatever we got
+                            return \Carbon\Carbon::parse($date)
+                                ->setTimezone($timezone)
+                                ->format('Y-m-d H:i:s');
+                        }
+                    } catch (\Exception $e) {
+                        \Log::warning('Date conversion failed', [
+                            'date' => json_encode($date),
+                            'error' => $e->getMessage()
+                        ]);
+                        return null;
+                    }
+                };
+                
+                // Preserve the original stay_details structure but with converted dates
+                $stayDetails = (array)$transaction->stay_details;
+                if (isset($stayDetails['expected_checkin'])) {
+                    $stayDetails['expected_checkin'] = $convertDate($stayDetails['expected_checkin']);
+                }
+                if (isset($stayDetails['expected_checkout'])) {
+                    $stayDetails['expected_checkout'] = $convertDate($stayDetails['expected_checkout']);
+                }
+                if (isset($stayDetails['actual_checkin'])) {
+                    $stayDetails['actual_checkin'] = $convertDate($stayDetails['actual_checkin']);
+                }
+                if (isset($stayDetails['actual_checkout'])) {
+                    $stayDetails['actual_checkout'] = $convertDate($stayDetails['actual_checkout']);
+                }
+                
+                // Build response with timezone-adjusted dates
+                return (object) [
+                    'id' => (string) $transaction->_id,
+                    'transaction_type' => $transaction->transaction_type ?? null,
+                    'current_status' => $transaction->current_status ?? null,
+                    'expected_checkin' => $convertDate($transaction->stay_details->expected_checkin ?? null),
+                    'expected_checkout' => $convertDate($transaction->stay_details->expected_checkout ?? null),
+                    'stay_details' => $stayDetails,
+                    'guest' => $guest,
+                    'payments' => isset($transaction->payments) ? (array) $transaction->payments : [],
+                    'created_at' => $convertDate($transaction->created_at ?? null),
+                    'updated_at' => $convertDate($transaction->updated_at ?? null),
+                    'meta' => $transaction->meta,
+                    // Metadata
+                    '_timezone' => $timezone,
+                    '_date_format' => 'Y-m-d H:i:s'
+                ];
+            }
+            
+            return null;
+        } catch (\MongoDB\Driver\Exception\Exception $e) {
+            \Log::error('Transaction lookup failed', [
+                'room_id' => (string) $roomId,
+                'error' => $e->getMessage()
+            ]);
+            return null;
+        }
+    }
     // Stub relationships
     public function guest()
     {

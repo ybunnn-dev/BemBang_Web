@@ -15,7 +15,7 @@
         window.origNum = {{ Js::from(Auth::user()->mobileNumber) }}
         window.origAdd = {{ Js::from(Auth::user()->address) }}
     </script>
-    <button id="exit-button" data-bs-toggle="modal" data-bs-target="#saveChangesConfirmModal">
+    <button id="exit-button" onclick="window.location.href='/management/dashboard'">
         <img src="{{ asset('images/arrow-back.svg') }}" width="14px" height="14px">
         Return
     </button>

@@ -42,11 +42,6 @@
         Promotions & Offers
       </div>
     </a>
-    <a class="nav-link active" aria-current="page" href="{{ route('management.discounts') }}">
-      <div id="discount-nav">
-        Discounts
-      </div>
-    </a>
     <a class="nav-link active" aria-current="page" href="{{ route('management.vouchers') }}">
       <div id="voucher-nav">
         Vouchers

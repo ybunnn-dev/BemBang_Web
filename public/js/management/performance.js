@@ -1,54 +1,107 @@
 var ctx = document.getElementById('myChart').getContext('2d');
+const months = ['January', 'February', 'March', 'April', 'May', 'June'];
+const reservationCounts = Array(6).fill(0);
+const bookingCounts = Array(6).fill(0);
+const checkInCounts = Array(6).fill(0);
+
+// Debug: Log transactions to verify structure
+console.log('Transactions:', transactions);
+
+transactions.forEach(tx => {
+    // Date parsing (handles MongoDB format)
+    const createdAt = tx.created_at?.$date?.$numberLong 
+        ? new Date(parseInt(tx.created_at.$date.$numberLong))
+        : new Date(tx.created_at);
+    
+    const month = createdAt.getMonth(); // 0-11 (Jan-Dec)
+    if (month < 0 || month > 5) return; // Only Jan-Jun
+
+    const status = tx.current_status?.toLowerCase();
+    const type = tx.transaction_type?.toLowerCase();
+
+    // Count all reservations and bookings
+    if (type === 'reservation') reservationCounts[month]++;
+    if (type === 'booking') bookingCounts[month]++;
+
+    // Check if actually checked in (has actual_checkin date)
+    if (tx.stay_details?.actual_checkin) {
+        checkInCounts[month]++;
+    }
+});
+    
+// Debug: Log the counts
+console.log('Reservation Counts:', reservationCounts);
+console.log('Booking Counts:', bookingCounts);
+console.log('CheckIn Counts:', checkInCounts);
 
 var myChart = new Chart(ctx, {
-    type: 'line', // Line chart type
+    type: 'line',
     data: {
-        labels: ['January', 'February', 'March', 'April', 'May', 'June'], // x-axis labels
-        datasets: [{
-            label: 'Check Ins', // Label for the first line
-            data: [12, 19, 3, 5, 2, 3], // Data for the first line
-            borderColor: 'rgba(75, 192, 192, 1)', // Line color
-            backgroundColor: 'rgba(75, 192, 192, 0.2)', // Background color for points
-            fill: false, // Do not fill the area under the line
-            tension: 0.1 // Line smoothness
-        },
-        {
-            label: 'Bookings', // Label for the second line
-            data: [10, 14, 5, 6, 4, 8], // Data for the second line
-            borderColor: 'rgba(153, 102, 255, 1)', // Line color for the second line
-            backgroundColor: 'rgba(153, 102, 255, 0.2)', // Background color for points
-            fill: false, // Do not fill the area under the line
-            tension: 0.1 // Line smoothness
-        },
-        {
-            label: 'Reservations', // Label for the third line
-            data: [7, 11, 15, 7, 6, 9], // Data for the third line
-            borderColor: 'rgba(255, 159, 64, 1)', // Line color for the third line
-            backgroundColor: 'rgba(255, 159, 64, 0.2)', // Background color for points
-            fill: false, // Do not fill the area under the line
-            tension: 0.1 // Line smoothness
-        }]
+        labels: months,
+        datasets: [
+            {
+                label: 'Check Ins',
+                data: checkInCounts,
+                borderColor: 'rgba(75, 192, 192, 1)',
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderWidth: 2,
+                tension: 0.1
+            },
+            {
+                label: 'Bookings',
+                data: bookingCounts,
+                borderColor: 'rgba(153, 102, 255, 1)',
+                backgroundColor: 'rgba(153, 102, 255, 0.2)',
+                borderWidth: 2,
+                tension: 0.1
+            },
+            {
+                label: 'Reservations',
+                data: reservationCounts,
+                borderColor: 'rgba(255, 159, 64, 1)',
+                backgroundColor: 'rgba(255, 159, 64, 0.2)',
+                borderWidth: 2,
+                tension: 0.1
+            }
+        ]
     },
     options: {
-        responsive: true, // Make the chart responsive
+        responsive: true,
+        plugins: {
+            title: {
+                display: true,
+                text: 'Monthly Transactions'
+            }
+        },
         scales: {
             y: {
-                beginAtZero: true // Y-axis starts at 0
+                beginAtZero: true,
+                title: {
+                    display: true,
+                    text: 'Number of Transactions'
+                }
+            },
+            x: {
+                title: {
+                    display: true,
+                    text: 'Month'
+                }
             }
         }
     }
 });
 
+// Create the chart with real data
 var ctx1 = document.getElementById('occupiedRoomsChart').getContext('2d');
 var occupiedRoomsChart = new Chart(ctx1, {
-    type: 'bar', // Vertical bar chart
+    type: 'bar',
     data: {
-        labels: ['Standard', 'Twin', 'Family', 'Deluxe', 'Suite'], // Room types
+        labels: Object.keys(roomTypeCounts), // Dynamically get room types from your data
         datasets: [{
             label: 'Most Occupied Rooms',
-            data: [30, 45, 40, 25, 35], // Example data: number of occupied rooms
-            backgroundColor: '#003087', // Bar color
-            borderColor: '#003087', // Border color
+            data: Object.values(roomTypeCounts), // Use the actual counts
+            backgroundColor: '#003087',
+            borderColor: '#003087',
             borderWidth: 1
         }]
     },
@@ -56,7 +109,26 @@ var occupiedRoomsChart = new Chart(ctx1, {
         responsive: true,
         scales: {
             y: {
-                beginAtZero: true
+                beginAtZero: true,
+                title: {
+                    display: true,
+                    text: 'Number of Bookings'
+                }
+            },
+            x: {
+                title: {
+                    display: true,
+                    text: 'Room Types'
+                }
+            }
+        },
+        plugins: {
+            tooltip: {
+                callbacks: {
+                    label: function(context) {
+                        return `${context.dataset.label}: ${context.raw}`;
+                    }
+                }
             }
         }
     }

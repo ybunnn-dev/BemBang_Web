@@ -17,6 +17,7 @@ use App\Http\Controllers\MongoMembership;
 use App\Http\Controllers\TransactionController;
 use App\Models\Transaction;
 use MongoDB\BSON\ObjectId;
+use App\Http\Controllers\ManagementController;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\BookingController;
 
@@ -43,6 +44,8 @@ Route::get('/home', function () {
     return view('auth/login');
 })->name('home');
 
+Route::post('/transactions/update-status', [TransactionController::class, 'updateStatus']);
+Route::post('/transactions/checkout', [TransactionController::class, 'checkout']);
 
 Route::prefix('frontdesk')->middleware(['auth', 'verified'])->group(function () {
     Route::get('/', function () {
@@ -54,14 +57,13 @@ Route::prefix('frontdesk')->middleware(['auth', 'verified'])->group(function () 
 
     Route::post('/transactions', [TransactionController::class, 'store']);
 
-    // Add additional routes inside this group
-    Route::get('/view-rooms', function () {
-        return view('frontdesk.view_rooms');
-    })->name('frontdesk.view_rooms');
 
-    Route::get('/room-details', function () {
-        return view('frontdesk.specific_room');
-    })->name('frontdesk.room-details');
+    Route::get('/view-rooms', [MongoRoomController::class, 'frontdeskRoom'])->name('frontdesk.view_rooms');
+    
+    Route::get('/room-details/{id}', [MongoRoomController::class, 'redirectToRoomDetails'])
+    ->name('frontdesk.room-details');
+
+   
 
    // Assuming you have a BookingController with the getBooking method
     Route::get('/bookings', [TransactionController::class, 'getBooking'])->name('frontdesk.bookings');
@@ -87,14 +89,12 @@ Route::prefix('frontdesk')->middleware(['auth', 'verified'])->group(function () 
     
 });
 
+Route::post('/transactions/process-payment', [TransactionController::class, 'processPayment']);
+
 // Management Dashboard Route with Authentication
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/get-guests', [GuestController::class, 'getGuests'])->name('get-guest');
     Route::get('/get-checkin-data', [CheckinController::class, 'getCheckInDetails'])->name('get-checkin-data');
-
-    Route::get('/management/dashboard', function () {
-        return view('management.dashboard'); // Uses layouts/management.blade.php
-    })->name('management.dashboard');
 
     // Add the new route for manage rooms
     Route::get('/management/manage-rooms', [MongoRoomController::class, 'view'])->name('management.manage-rooms');
@@ -150,15 +150,17 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return view('management.faq'); // Uses layouts/management.blade.php
     })->name('management.faq');
 
-    // Performance Route
-    Route::get('/management/performance', function () {
-        return view('management.performance'); // Uses layouts/management.blade.php
-    })->name('management.performance');
+    // In routes/web.php
+    Route::get('/management/performance', [ManagementController::class, 'getPerformance'])
+    ->name('management.performance');
+
+    Route::get('/management/dashboard', [ManagementController::class, 'getPerformanceDashboard'])
+    ->name('management.dashboard');
 
     Route::get('/management/myprofile', function () {
-        return view('management.myprofile'); // Uses layouts/management.blade.php
+        return view('management.myprofile');
     })->name('management.myprofile');
-});
+    });
 
 
 Route::post('/update-type', [RoomTypeController::class, 'update'])->name('management.update-type');

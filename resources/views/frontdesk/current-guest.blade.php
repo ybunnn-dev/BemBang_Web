@@ -22,7 +22,7 @@
     <div class="guest-info-card">
         <div class="profile-pic-holder">
             <div id="profile-pic">
-                <img src="{{ asset('images/fanut.jpg') }}" alt="Profile Picture">
+                <img src="{{ asset('images/vakla.jpg') }}" alt="Profile Picture">
             </div>
             <h5>{{ $guest->firstName . ' ' . $guest->lastName }}</h5>
             <div class="membership-type">
@@ -39,7 +39,7 @@
                 <p>
                     
                     @if(isset($guest->membership_details->membership_name))
-                        <span>BEMBANG {{ strtoupper($guest->membership_details->membership_name) }}</span>
+                        <span>{{ strtoupper($guest->membership_details->membership_name) }}</span>
                     @else
                         <span>NOT YET JOINED</span>
                     @endif
