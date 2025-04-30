@@ -13,6 +13,7 @@
 
 @section('content')
     <script>
+        
         const userId = "{{ Auth::user()->_id }}";
     </script>
     <div id="main-label">

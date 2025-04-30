@@ -10,7 +10,9 @@
     
         // Count transactions per room type
         const roomTypeCounts = {};
-        
+        document.addEventListener('DOMContentLoaded', function(){
+            console.log(@json($metrics));
+        });
         transactions.forEach(transaction => {
             if (transaction.room_details && transaction.room_details.type_name) {
                 const roomType = transaction.room_details.type_name;
@@ -59,14 +61,14 @@
                     <div class="av-room">
                         <img src="{{ asset('images/avaiable-icon.svg') }}" width="70px" height="70px">
                         <div class="room-contents">
-                            <h2>999</h2>
+                            <h2>{{ $metrics['room_status_count']['available'] }}</h2>
                             <p>Available Rooms</p>
                         </div>
                     </div>
                     <div class="oc-room">
                         <img src="{{ asset('images/reserved.svg') }}" width="70px" height="70px">
                         <div class="room-contents">
-                            <h2>999</h2>
+                            <h2>{{ $metrics['room_status_count']['occupied'] }}</h2>
                             <p>Occupied Rooms</p>
                         </div>
                     </div>
@@ -75,14 +77,14 @@
                     <div class="uc-room">
                         <img src="{{ asset('images/cleaning.svg') }}" width="70px" height="70px">
                         <div class="room-contents">
-                            <h2>999</h2>
+                            <h2>{{ $metrics['room_status_count']['cleaning'] }}</h2>
                             <p>Under Cleaning</p>
                         </div>
                     </div>
                     <div class="um-room">
                         <img src="{{ asset('images/maintenance.svg') }}" width="70px" height="70px">
                         <div class="room-contents">
-                            <h2>999</h2>
+                            <h2>{{ $metrics['room_status_count']['maintenance'] }}</h2>
                             <p>Under Maintenance</p>
                         </div>
                     </div>
@@ -95,14 +97,16 @@
                     <div class="revenue-flex">
                     <p>Revenue</p>
                     <h1>
-                        P @php
-                            $amount = $metrics['total_revenue'];
-                            if ($amount >= 1000) {
+                    @php
+                        $amount = $metrics['total_revenue'];
+                        if ($amount >= 1000000) {
+                            echo number_format($amount / 1000000, 1) . 'M';
+                        } elseif ($amount >= 1000) {
                             echo number_format($amount / 1000, 1) . 'K';
-                            } else {
+                        } else {
                             echo number_format($amount);
-                            }
-                        @endphp
+                        }
+                    @endphp
                     </h1>
                 </div>
             </div>

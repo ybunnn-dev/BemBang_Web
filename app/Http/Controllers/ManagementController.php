@@ -531,8 +531,16 @@ class ManagementController extends Controller
                     $colorIndex++;
                 }
             }
-            
+            $rooms = Rooms::getAll();
+            $roomCounts = [
+                'available'   => $rooms->where('status', 'available')->count(),
+                'occupied'    => $rooms->where('status', 'occupied')->count(),
+                'maintenance' => $rooms->where('status', 'maintenance')->count(),
+                'cleaning'    => $rooms->where('status', 'cleaning')->count(),
+            ];
+    
             // Prepare response data
+            Log::info($roomCounts);
             $responseData = [
                 'metrics' => [
                     'booking_count' => $bookingCount,
@@ -542,7 +550,8 @@ class ManagementController extends Controller
                     'booking_percentage' => $bookingPercentage,
                     'reservation_percentage' => $reservationPercentage,
                     'total_revenue' => $totalRevenue,
-                    'room_type_counts' => $roomTypeCounts
+                    'room_type_counts' => $roomTypeCounts,
+                    'room_status_count' => $roomCounts,
                 ],
                 'chart_data' => [
                     'labels' => $days,

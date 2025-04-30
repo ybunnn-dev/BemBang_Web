@@ -138,4 +138,30 @@ class Rooms extends Model
             return collect([]);  // Return empty collection in case of error
         }
     }
+    public static function countAvailability() {
+        $client = DB::connection('mongodb')->getMongoClient();
+        $database = $client->bembang_hotel;
+        $collection = $database->rooms;
+        $rooms = $collection;
+        
+        $counts = [
+            'available' => 0,
+            'occupied' => 0,
+            'maintenance' => 0,
+            'cleaning' => 0,
+            'other' => 0
+        ];
+    
+        foreach ($rooms as $room) {
+            $status = strtolower($room->status ?? 'other');
+            
+            if (isset($counts[$status])) {
+                $counts[$status]++;
+            } else {
+                $counts['other']++;
+            }
+        }
+    
+        return $counts;
+    }
 }
