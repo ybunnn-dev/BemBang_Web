@@ -46,6 +46,8 @@ Route::get('/home', function () {
 
 Route::post('/transactions/update-status', [TransactionController::class, 'updateStatus']);
 Route::post('/transactions/checkout', [TransactionController::class, 'checkout']);
+Route::post('/transactions/cancel', [TransactionController::class, 'cancelTransaction']);
+Route::post('/transactions/refund', [TransactionController::class, 'refundTransaction']);
 
 Route::prefix('frontdesk')->middleware(['auth', 'verified'])->group(function () {
     Route::get('/', function () {
@@ -57,18 +59,15 @@ Route::prefix('frontdesk')->middleware(['auth', 'verified'])->group(function () 
 
     Route::post('/transactions', [TransactionController::class, 'store']);
 
-
     Route::get('/view-rooms', [MongoRoomController::class, 'frontdeskRoom'])->name('frontdesk.view_rooms');
     
     Route::get('/room-details/{id}', [MongoRoomController::class, 'redirectToRoomDetails'])
     ->name('frontdesk.room-details');
 
-   
-
-   // Assuming you have a BookingController with the getBooking method
-    Route::get('/bookings', [TransactionController::class, 'getBooking'])->name('frontdesk.bookings');
-
-    Route::get('/reservations', [TransactionController::class, 'getReservation'])->name('frontdesk.reservations');
+    Route::get('/bookings/{id?}', [TransactionController::class, 'getBooking'])
+    ->name('frontdesk.bookings');
+    
+    Route::get('/reservations/{id?}', [TransactionController::class, 'getReservation'])->name('frontdesk.reservations');
 
     Route::get('/frontdesk/msg', function () {
         return view('frontdesk.msg');
@@ -122,13 +121,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('management.vouchers');
     
     // New route for points
-
     Route::get('/management/points', [MongoMembership::class, 'index'])->name('management.points');
-
-    // New route for messages
-    Route::get('/management/messages', function () {
-        return view('management.msg'); // Uses layouts/management.blade.php
-    })->name('management.messages');
 
      // Guest Route
      Route::get('/management/guest', function () {

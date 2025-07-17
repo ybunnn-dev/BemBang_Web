@@ -114,14 +114,11 @@
                 <hr>
                 <!-- Action Buttons inside modal body -->
                 <div class="action-buttons mt-4 d-flex justify-content-end gap-2">
-                    <button type="button" class="btn btn-danger" id="cancel-booking-btn">
+                    <button type="button" class="btn btn-danger" id="cancel-booking-btn" onclick="cancelConfirm()">
                         <i class="bi bi-x-circle"></i> Cancel Booking
                     </button>
-                    <button type="button" class="btn btn-warning" id="refund-booking-btn">
+                    <button type="button" class="btn btn-warning" id="refund-booking-btn" onclick="refundConfirm()">
                         <i class="bi bi-arrow-counterclockwise"></i> Refund
-                    </button>
-                    <button type="button" class="btn btn-primary" id="edit-booking-btn" onclick="approve()">
-                        <i class="bi bi-pencil"></i> Approve
                     </button>
                     <button type="button" class="btn btn-success" id="checkin-btn" onclick="check_in()">
                         <i class="bi bi-check-circle"></i> Check In

@@ -18,7 +18,7 @@ function hide_show_room_part() {
         roomArrow.style.transform = "rotate(360deg)";
         buttonsPart3.style.top = "55px";
         dealArrow.style.transform = "rotate(270deg)";
-        buttonsPart4.style.top = "105px";
+        buttonsPart4.style.top = "60px";
         userArrow.style.transform = "rotate(270deg)";
         part2 = 0;
         part3 = 1;
@@ -54,11 +54,11 @@ function show_hide_users(){
     const userArrow = document.getElementById('user-arrow');
 
     if (part4 === 1) {
-        buttonsPart4.style.top = "185px";
+        buttonsPart4.style.top = "145px";
         userArrow.style.transform = "rotate(360deg)";
         part4 = 0;
     } else {
-        buttonsPart4.style.top = "105px";
+        buttonsPart4.style.top = "60px";
         userArrow.style.transform = "rotate(270deg)";
         part4 = 1;
     }

@@ -13,7 +13,8 @@
 
 @section('content')
     <script>
-        
+        const transactionsData = @json($transactions);
+        const guests = @json($guests);
         const userId = "{{ Auth::user()->_id }}";
     </script>
     <div id="main-label">

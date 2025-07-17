@@ -22,7 +22,9 @@
     <div class="guest-info-card">
         <div class="profile-pic-holder">
             <div id="profile-pic">
-                <img src="{{ asset('images/vakla.jpg') }}" alt="Profile Picture">
+                <img src="{{ asset('images/yahoo.jpg') }}" alt="Profile Picture" style="width: 100%;
+                    height: 100%;
+                    object-fit: cover;">
             </div>
             <h5>{{ $guest->firstName . ' ' . $guest->lastName }}</h5>
             <div class="membership-type">
@@ -75,7 +77,7 @@
         </div>
         <div class="room-details-values">
             <p>123</p>
-            <p>Bembang Standard</p>
+            <p>Peter Standard</p>
             <div class="status-div">
                 <p>Reservation</p>
             </div>
@@ -91,10 +93,10 @@
         <p id="checkin-value">{{ $guest->checkin_count }}</p>
         <p id="act-checkin-label">Check Ins</p>
 
-        <p id="book-value">999</p>
+        <p id="book-value">9</p>
         <p id="act-book-label">Bookings</p>
         
-        <p id="reserve-value">999</p>
+        <p id="reserve-value">9</p>
         <p id="act-reserve-label">Reservations</p>
     </div>
     <div class="buttons-flex">

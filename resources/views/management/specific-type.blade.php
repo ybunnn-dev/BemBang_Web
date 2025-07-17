@@ -14,6 +14,10 @@
         window.currentFeatures = @json($features->toArray());
         window.all_Features  = @json($all_features->toArray());
         window.allRoom = @json($roomType);
+
+        document.addEventListener('DOMContentLoaded', function(){
+            console.log(@json($rev));
+        });
     </script>
     <button id="exit-button" onclick="goBacktoRoomTypes()"><img src="{{ asset('images/arrow-back.svg') }}" width="14px" height="14px">Return</button>
     <img src="{{ asset($roomType->images[0]) }}" id="room-profile-pic">
@@ -75,43 +79,81 @@
             <h5>Reviews</h5>
         </div>
         <div class="review-count">
-            <h1>4.5</h1>
+            @php
+                $averageRating = $rev->isNotEmpty() ? $rev->avg('rate') : 0;
+                $reviewCount = $rev->count();
+            @endphp
+            <h1>{{ number_format($averageRating, 1) }}</h1>
             <div class="review-stars-num">
                 <div class="stars">
-                    <img src="{{ asset('images/stars/active.svg') }}" width="20px" height="20px">
-                    <img src="{{ asset('images/stars/active.svg') }}" width="20px" height="20px">
-                    <img src="{{ asset('images/stars/active.svg') }}" width="20px" height="20px">
-                    <img src="{{ asset('images/stars/active.svg') }}" width="20px" height="20px">
-                    <img src="{{ asset('images/stars/inactive.svg') }}" width="20px" height="20px">
+                    @php
+                        $fullStars = floor($averageRating);
+                        $hasHalfStar = ($averageRating - $fullStars) >= 0.5;
+                    @endphp
+                    
+                    @for($i = 1; $i <= 5; $i++)
+                        @if($i <= $fullStars)
+                            <img src="{{ asset('images/stars/active.svg') }}" width="20px" height="20px">
+                        @elseif($i == $fullStars + 1 && $hasHalfStar)
+                            <img src="{{ asset('images/stars/half.svg') }}" width="20px" height="20px">
+                        @else
+                            <img src="{{ asset('images/stars/inactive.svg') }}" width="20px" height="20px">
+                        @endif
+                    @endfor
                 </div>
-                <p>500 Reviews</p>
+                <p>{{ $reviewCount }} Review{{ $reviewCount != 1 ? 's' : '' }}</p>
             </div>
         </div>
-        <div class="review-sample">
-            <div class="review-sample-head">
-                <img src="{{ asset('images/wally-bayola.jpg') }}" id="user-img">
-                <div class="user-head">
-                    <p id="user-name">Wally Bayola</p>
-                    <div class="user-items">
-                        <div class="user-stars">
-                            <img src="{{ asset('images/stars/active.svg') }}" width="15px" height="15px">
-                            <img src="{{ asset('images/stars/active.svg') }}" width="15px" height="15px">
-                            <img src="{{ asset('images/stars/active.svg') }}" width="15px" height="15px">
-                            <img src="{{ asset('images/stars/active.svg') }}" width="15px" height="15px">
-                            <img src="{{ asset('images/stars/inactive.svg') }}" width="15px" height="15px">
+        
+        @if($rev->isNotEmpty())
+            @php 
+                $firstReview = $rev->first();
+                // Convert MongoDB UTCDateTime to DateTime and format
+                $createdAt = $firstReview->created_at->toDateTime();
+                $createdAt->setTimezone(new DateTimeZone('Asia/Manila'));
+                $formattedDate = $createdAt->format('F j, Y g:i A');
+            @endphp
+            <div class="review-sample">
+                <div class="review-sample-head">
+                    <img src="{{ asset('images/prof-cir.svg') }}" id="user-img">
+                    <div class="user-head">
+                        <p id="user-name">
+                            @if(isset($firstReview->guest_id->firstName) || isset($firstReview->guest_id->lastName))
+                                {{ trim($firstReview->guest_id->firstName . ' ' . $firstReview->guest_id->lastName) }}
+                            @else
+                                Anonymous
+                            @endif
+                        </p>
+                        <div class="user-items">
+                            <div class="user-stars">
+                                @for($i = 1; $i <= 5; $i++)
+                                    @if($i <= $firstReview->rate)
+                                        <img src="{{ asset('images/stars/active.svg') }}" width="15px" height="15px">
+                                    @else
+                                        <img src="{{ asset('images/stars/inactive.svg') }}" width="15px" height="15px">
+                                    @endif
+                                @endfor
+                            </div>
+                            <p>Posted at {{ $formattedDate }}</p>
                         </div>
-                        <p>Posted at March 1, 2025 6:00 PM</p>
                     </div>
                 </div>
+                <div class="review-sample-body">
+                    <p>{{ $firstReview->comment }}</p>
+                </div>
             </div>
-            <div class="review-sample-body">
-                <p>Dad, I want PC. Here you go my niggwa. Tadaima. Nag-cantunan.</p>
+        @else
+            <div class="review-sample">
+                <p>No reviews yet for this room type.</p>
             </div>
-        </div>
-        <div id="see-more-details2">
-            <p>See More</p>   
-            <img src="{{ asset('images/arrow-down.svg') }}" width="20px" height="20px">
-        </div>
+        @endif
+        
+        @if($rev->count() > 1)
+            <div id="see-more-details2" data-bs-toggle="modal" data-bs-target="#reviewModal">
+                <p>See More</p>   
+                <img src="{{ asset('images/arrow-down.svg') }}" width="20px" height="20px">
+            </div>
+        @endif
     </div>
     <div class="rates-card">
         <img src="{{ asset('images/price-tag.svg') }}" width="20px" height="20px">
@@ -145,6 +187,7 @@
     @include('components.confirm-edit-type-details', ['modalId' => 'confirm-details', 'title' => 'Edit Details'])
     @include('components.edit-rates-modal', ['modalId' => 'editRates', 'title' => 'Edit Rates'])
     @include('components.confirm-edit-rates-modal', ['modalId' => 'confirm-rate-edit', 'title' => 'Confirm Changes'])
+    @include('components.reviews-modal')
 @endsection
 @section('extra-scripts')
     <script src="{{ asset('js/management/side-nav.js') }}"></script>

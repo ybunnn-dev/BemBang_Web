@@ -307,99 +307,117 @@ class TransactionController extends Controller
         }
     }
 
-    public function getBooking()
+    public function getBooking($id = null)  // Make parameter optional
     {
         try {
-            // Get transactions and safely convert to collection
             $transactions = collect(Transaction::getBookingTransaction() ?? []);
             
-            // Return empty collection structure if no transactions
-            if ($transactions->isEmpty()) {
+
+            // Case 1: No ID provided - show all bookings
+            if (empty($id)) {
+                Log::info("Fota ka dipota ka");
                 return view('frontdesk.bookings', [
-                    'bookings' => collect([]) // Return empty collection
+                    'bookings' => $transactions->map(function($t) {
+                        return $this->enhanceTransactionData($t);
+                    })->filter(),
+                    'highlightId' => null
                 ]);
             }
-    
-            $enhancedTransactions = $transactions->map(function ($transaction) {
-                // Safely handle null transaction
-                if (empty($transaction)) {
-                    return null;
-                }
-    
-                // Ensure we're working with an object
-                $transaction = is_array($transaction) ? (object)$transaction : $transaction;
-                
-                // Initialize default values
-                $guest = ['firstName' => 'N/A', 'lastName' => 'N/A'];
-                $room = ['number' => 'N/A', 'type' => 'N/A'];
-                $checkinDateTime = ['date' => 'N/A', 'time' => 'N/A'];
-                $checkoutDateTime = ['date' => 'N/A', 'time' => 'N/A'];
-                $amount = 0;
-    
-                try {
-                    // Get related data with null checks
-                    if (!empty($transaction->guest_id)) {
-                        $guestId = (string)$transaction->guest_id;
-                        $guestData = Guest::getSpecificGuest($guestId);
-                        if ($guestData) {
-                            $guest = [
-                                'firstName' => $guestData['firstName'] ?? 'N/A',
-                                'lastName' => $guestData['lastName'] ?? 'N/A'
-                            ];
-                        }
-                    }
-    
-                    if (!empty($transaction->room_id)) {
-                        $roomData = Rooms::getSpecificRoom($transaction->room_id);
-                        if ($roomData) {
-                            $room = [
-                                'number' => $roomData['room_no'] ?? 'N/A',
-                                'type' => $roomData['room_type_details']['type_name'] ?? 'N/A'
-                            ];
-                        }
-                    }
-    
-                    // Process dates
-                    $stayDetails = $transaction->stay_details ?? (object)[];
-                    $checkinDateTime = $this->parseMongoDateToArray(
-                        is_object($stayDetails) ? ($stayDetails->expected_checkin ?? null) : ($stayDetails['expected_checkin'] ?? null)
-                    ) ?? ['date' => 'N/A', 'time' => 'N/A'];
-                    
-                    $checkoutDateTime = $this->parseMongoDateToArray(
-                        is_object($stayDetails) ? ($stayDetails->expected_checkout ?? null) : ($stayDetails['expected_checkout'] ?? null)
-                    ) ?? ['date' => 'N/A', 'time' => 'N/A'];
-                    
-                    // Process payment amount
-                    $meta = $transaction->meta ?? (object)[];
-                    $amount = is_object($meta) ? ($meta->original_rate ?? 0) : ($meta['original_rate'] ?? 0);
-    
-                } catch (\Exception $e) {
-                    Log::error("Error processing transaction data: " . $e->getMessage());
-                }
-    
-                return [
-                    'id' => $this->extractId($transaction->_id ?? null) ?? 'N/A',
-                    'short_id' => substr($this->extractId($transaction->_id ?? null) ?? '', -8),
-                    'guest' => $guest,
-                    'room' => $room,
-                    'checkin' => $checkinDateTime,
-                    'checkout' => $checkoutDateTime,
-                    'status' => $transaction->current_status ?? 'N/A',
-                    'amount' => number_format($amount, 2),
-                    'raw_data' => $transaction
-                ];
-            })->filter(); // Remove any null entries from the collection
-    
+            
+            // Case 2: ID exists - try to find specific booking
+            $transaction = $transactions->first(function ($t) use ($id) {
+                $t = is_array($t) ? (object)$t : $t;
+                return $this->extractId($t->_id ?? null) === $id;
+            });
+            
+            Log::info("Fota");
+            // Show all bookings but highlight if found
             return view('frontdesk.bookings', [
-                'bookings' => $enhancedTransactions
+                'bookings' => $transactions->map(function($t) {
+                    return $this->enhanceTransactionData($t);
+                })->filter(),
+                'highlightId' => $id
             ]);
-    
+            
         } catch (\Exception $e) {
-            Log::error("Error in getBooking: " . $e->getMessage());
+            Log::error("Error: " . $e->getMessage());
             return view('frontdesk.bookings', [
-                'bookings' => collect([]) // Return empty collection on error
+                'bookings' => collect([]),
+                'highlightId' => null
             ]);
         }
+    }
+    /**
+     * Helper method to process transaction data
+     */
+    private function enhanceTransactionData($transaction)
+    {
+        if (empty($transaction)) {
+            return null;
+        }
+        
+        // Ensure we're working with an object
+        $transaction = is_array($transaction) ? (object)$transaction : $transaction;
+        
+        // Initialize default values
+        $guest = ['firstName' => 'N/A', 'lastName' => 'N/A'];
+        $room = ['number' => 'N/A', 'type' => 'N/A'];
+        $checkinDateTime = ['date' => 'N/A', 'time' => 'N/A'];
+        $checkoutDateTime = ['date' => 'N/A', 'time' => 'N/A'];
+        $amount = 0;
+        
+        try {
+            // Get related data with null checks
+            if (!empty($transaction->guest_id)) {
+                $guestId = (string)$transaction->guest_id;
+                $guestData = Guest::getSpecificGuest($guestId);
+                if ($guestData) {
+                    $guest = [
+                        'firstName' => $guestData['firstName'] ?? 'N/A',
+                        'lastName' => $guestData['lastName'] ?? 'N/A'
+                    ];
+                }
+            }
+            
+            if (!empty($transaction->room_id)) {
+                $roomData = Rooms::getSpecificRoom($transaction->room_id);
+                if ($roomData) {
+                    $room = [
+                        'number' => $roomData['room_no'] ?? 'N/A',
+                        'type' => $roomData['room_type_details']['type_name'] ?? 'N/A'
+                    ];
+                }
+            }
+            
+            // Process dates
+            $stayDetails = $transaction->stay_details ?? (object)[];
+            $checkinDateTime = $this->parseMongoDateToArray(
+                is_object($stayDetails) ? ($stayDetails->expected_checkin ?? null) : ($stayDetails['expected_checkin'] ?? null)
+            ) ?? ['date' => 'N/A', 'time' => 'N/A'];
+            
+            $checkoutDateTime = $this->parseMongoDateToArray(
+                is_object($stayDetails) ? ($stayDetails->expected_checkout ?? null) : ($stayDetails['expected_checkout'] ?? null)
+            ) ?? ['date' => 'N/A', 'time' => 'N/A'];
+            
+            // Process payment amount
+            $meta = $transaction->meta ?? (object)[];
+            $amount = is_object($meta) ? ($meta->original_rate ?? 0) : ($meta['original_rate'] ?? 0);
+            
+        } catch (\Exception $e) {
+            Log::error("Error processing transaction data: " . $e->getMessage());
+        }
+        
+        return [
+            'id' => $this->extractId($transaction->_id ?? null) ?? 'N/A',
+            'short_id' => substr($this->extractId($transaction->_id ?? null) ?? '', -8),
+            'guest' => $guest,
+            'room' => $room,
+            'checkin' => $checkinDateTime,
+            'checkout' => $checkoutDateTime,
+            'status' => $transaction->current_status ?? 'N/A',
+            'amount' => number_format($amount, 2),
+            'raw_data' => $transaction
+        ];
     }
     public function checkout(Request $request)
     {
@@ -476,7 +494,7 @@ class TransactionController extends Controller
             ], 500);
         }
     }
-    public function getReservation()
+    public function getReservation($id = null)
     {
         // Set the default timezone to Asia/Manila
         date_default_timezone_set('Asia/Manila');
@@ -533,9 +551,16 @@ class TransactionController extends Controller
             ];
         });
         
-        return view('frontdesk.reservations', [
-            'reservation' => $enhancedTransactions
-        ]);
+        if($id !== null){
+            return view('frontdesk.reservations', [
+                'reservation' => $enhancedTransactions,
+                'current_id' => $id
+            ]);
+        }else{
+            return view('frontdesk.reservations', [
+                'reservation' => $enhancedTransactions
+            ]);
+        }
     }
     protected function extractId($id)
     {
@@ -742,6 +767,88 @@ class TransactionController extends Controller
             ], 500);
         }
     }
+    public function cancelTransaction(Request $request)
+    {
+        $request->validate([
+            'transaction_id' => 'required|string',
+        ]);
 
+        try {
+            // Get MongoDB collection (using Laravel's MongoDB connection)
+            $collection = DB::connection('mongodb')
+                ->getMongoClient()
+                ->selectDatabase('bembang_hotel')
+                ->selectCollection('transactions');
+
+            $result = $collection->updateOne(
+                ['_id' => new ObjectId($request->transaction_id)],
+                [
+                    '$set' => [
+                        'current_status' => 'cancelled',
+                        'updated_at' => now()->toDateTimeString(),
+                    ],
+                    '$push' => [
+                        'audit_log' => [
+                            'action' => 'cancelled',
+                            'by' => auth()->id(), // If using auth
+                            'timestamp' => now()->toDateTimeString(),
+                            'points_earned' => 0,
+                            '_id' => new ObjectId(),
+                        ],
+                    ],
+                ]
+            );
+
+            if ($result->getModifiedCount() === 0) {
+                return response()->json(['message' => 'Transaction not found or already cancelled'], 404);
+            }
+
+            return response()->json(['success' => true, 'message' => 'Transaction cancelled.']);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Failed to cancel transaction: ' . $e->getMessage()], 500);
+        }
+    }
+    public function refundTransaction(Request $request)
+    {
+        $request->validate([
+            'transaction_id' => 'required|string',
+            'refundValue' => 'required|numeric'
+        ]);
+
+        try {
+            // Get MongoDB collection (using Laravel's MongoDB connection)
+            $collection = DB::connection('mongodb')
+                ->getMongoClient()
+                ->selectDatabase('bembang_hotel')
+                ->selectCollection('transactions');
+
+            $result = $collection->updateOne(
+                ['_id' => new ObjectId($request->transaction_id)],
+                [
+                    '$set' => [
+                        'current_status' => 'refunded',
+                        'updated_at' => now()->toDateTimeString(),
+                    ],
+                    '$push' => [
+                        'audit_log' => [
+                            'action' => 'refunded',
+                            'by' => auth()->id(), // If using auth
+                            'timestamp' => now()->toDateTimeString(),
+                            'points_earned' => 0,
+                            '_id' => new ObjectId(),
+                        ],
+                    ],
+                ]
+            );
+
+            if ($result->getModifiedCount() === 0) {
+                return response()->json(['message' => 'Transaction not found or already cancelled'], 404);
+            }
+
+            return response()->json(['success' => true, 'message' => 'Transaction cancelled.']);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Failed to cancel transaction: ' . $e->getMessage()], 500);
+        }
+    }
     
 }

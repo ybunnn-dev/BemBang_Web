@@ -132,7 +132,7 @@ class Transaction
             $filter = [
                 'transaction_type' => 'Booking',
                 'current_status' => [
-                    '$in' => ['pending', 'booked', 'no show', 'cancelled']
+                    '$in' => ['pending', 'booked', 'no show', 'cancelled', 'refunded']
                 ]
             ];
             
@@ -394,6 +394,103 @@ class Transaction
                 'error' => $e->getMessage()
             ]);
             return null;
+        }
+    }
+    public static function getAllTransact()
+    {
+        try {
+            $instance = new self();
+            $timezone = 'Asia/Manila'; // Explicitly set to Philippine time
+            
+            // Query for all transactions
+            $filter = []; // Empty filter to get all documents
+            $options = [
+                'sort' => ['created_at' => -1] // Sort by most recent first
+            ];
+            
+            $query = new Query($filter, $options);
+            $cursor = $instance->manager->executeQuery("{$instance->database}.{$instance->collection}", $query);
+            $transactions = $cursor->toArray();
+            
+            $convertDate = function ($date) use ($timezone) {
+                if (!$date) return null;
+                
+                try {
+                    if ($date instanceof \MongoDB\BSON\UTCDateTime) {
+                        return \Carbon\Carbon::createFromTimestamp($date->toDateTime()->getTimestamp())
+                            ->setTimezone($timezone)
+                            ->format('Y-m-d H:i:s');
+                    } elseif (is_object($date) && isset($date->{'$date'})) {
+                        $timestamp = $date->{'$date'};
+                        if (is_numeric($timestamp)) {
+                            $timestamp = (int)($timestamp / 1000);
+                        }
+                        return \Carbon\Carbon::createFromTimestamp($timestamp)
+                            ->setTimezone($timezone)
+                            ->format('Y-m-d H:i:s');
+                    } elseif (is_array($date) && isset($date['$date'])) {
+                        $timestamp = $date['$date'];
+                        if (is_numeric($timestamp)) {
+                            $timestamp = (int)($timestamp / 1000);
+                        }
+                        return \Carbon\Carbon::createFromTimestamp($timestamp)
+                            ->setTimezone($timezone)
+                            ->format('Y-m-d H:i:s');
+                    } else {
+                        return \Carbon\Carbon::parse($date)
+                            ->setTimezone($timezone)
+                            ->format('Y-m-d H:i:s');
+                    }
+                } catch (\Exception $e) {
+                    \Log::warning('Date conversion failed', [
+                        'date' => json_encode($date),
+                        'error' => $e->getMessage()
+                    ]);
+                    return null;
+                }
+            };
+            
+            $result = [];
+            foreach ($transactions as $transaction) {
+                $guest = Guest::getSpecificGuest($transaction->guest_id);
+                
+                $stayDetails = (array)$transaction->stay_details;
+                if (isset($stayDetails['expected_checkin'])) {
+                    $stayDetails['expected_checkin'] = $convertDate($stayDetails['expected_checkin']);
+                }
+                if (isset($stayDetails['expected_checkout'])) {
+                    $stayDetails['expected_checkout'] = $convertDate($stayDetails['expected_checkout']);
+                }
+                if (isset($stayDetails['actual_checkin'])) {
+                    $stayDetails['actual_checkin'] = $convertDate($stayDetails['actual_checkin']);
+                }
+                if (isset($stayDetails['actual_checkout'])) {
+                    $stayDetails['actual_checkout'] = $convertDate($stayDetails['actual_checkout']);
+                }
+                
+                $result[] = (object) [
+                    'id' => (string) $transaction->_id,
+                    'transaction_type' => $transaction->transaction_type ?? null,
+                    'current_status' => $transaction->current_status ?? null,
+                    'expected_checkin' => $convertDate($transaction->stay_details->expected_checkin ?? null),
+                    'expected_checkout' => $convertDate($transaction->stay_details->expected_checkout ?? null),
+                    'stay_details' => $stayDetails,
+                    'guest' => $guest,
+                    'payments' => isset($transaction->payments) ? (array) $transaction->payments : [],
+                    'created_at' => $convertDate($transaction->created_at ?? null),
+                    'updated_at' => $convertDate($transaction->updated_at ?? null),
+                    'meta' => $transaction->meta ?? null,
+                    '_timezone' => $timezone,
+                    '_date_format' => 'Y-m-d H:i:s'
+                ];
+            }
+            
+            return $result;
+        } catch (\MongoDB\Driver\Exception\Exception $e) {
+            \Log::error('Failed to fetch all transactions', [
+                'error' => $e->getMessage()
+            ]);
+            return [];
         }
     }
     // Stub relationships

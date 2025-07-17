@@ -1,5 +1,7 @@
  let currentTransaction;
  let currentTransactId;
+ let refundValue;
+ let currentBooking;
 
 function getTransaction(id) {
     // Find the specific booking in the books array
@@ -13,7 +15,6 @@ function populateBookingModal(bookingData) {
     if(bookingData.status === "booked"){
         document.getElementById('booking-status').style.color = "#00FF1E";
         document.getElementById('booking-status').style.border = " 1px solid #00FF1E";
-        document.getElementById('edit-booking-btn').disabled = true;
         document.getElementById('checkin-btn').disabled = false;
         document.getElementById('refund-booking-btn').disabled = true;
     }
@@ -21,20 +22,17 @@ function populateBookingModal(bookingData) {
         document.getElementById('booking-status').style.color = "#FF0B55";
         document.getElementById('booking-status').style.border = "1px solid #FF0B55";
         document.getElementById('checkin-btn').disabled = true;
-        document.getElementById('edit-booking-btn').disabled = true;
         document.getElementById('refund-booking-btn').disabled = false;
     }
     else if(bookingData.status === "refunded"){
         document.getElementById('booking-status').style.color = "#A1E3F9";
         document.getElementById('booking-status').style.border = "1px solid #A1E3F9";
-        document.getElementById('edit-booking-btn').disabled = true;
-        document.getElementById('checkin-btn').disabled = false;
+        document.getElementById('checkin-btn').disabled = true;
         document.getElementById('refund-booking-btn').disabled = true;
     }
     else{
         document.getElementById('booking-status').style.color = "#ffab00";
         document.getElementById('booking-status').style.border = "1px solid #ffab00";
-        document.getElementById('edit-booking-btn').disabled = false;
         document.getElementById('checkin-btn').disabled = false;
         document.getElementById('refund-booking-btn').disabled = true;
     }
@@ -77,6 +75,55 @@ function populateBookingModal(bookingData) {
         document.getElementById('payment-reference').textContent = payment.details.reference_no;
     }
 }
+let refundModal; // Make refundModal accessible globally
+
+async function refundConfirm() {
+    currentTransactId = document.getElementById('booking-id').value;
+    const currentModal = bootstrap.Modal.getInstance(document.getElementById('checkInBook'));
+    if (currentModal) currentModal.hide();
+
+    currentBooking = getTransaction(currentTransactId);
+    const paidAmount = currentBooking.raw_data.meta.total_rate;
+    refundValue = paidAmount * 0.90;
+
+    refundModal = new bootstrap.Modal(document.getElementById('refundModal'));
+    document.getElementById('refundAmountDisplay').textContent = "₱" + refundValue.toFixed(2);
+    refundModal.show();
+}
+
+// Standalone refund processing function
+async function processRefund() {
+    try {
+        const response = await fetch('/transactions/refund', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+            },
+            body: JSON.stringify({
+                transaction_id: currentTransactId,
+                refundValue: refundValue
+            })
+        });
+
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.message || 'Refund failed');
+        
+        alert('Refund processed successfully!');
+        if (refundModal) {
+            refundModal.hide();
+        }
+        window.location.reload();
+    } catch (error) {
+        console.error('Refund error:', error);
+        alert(`Refund failed: ${error.message}`);
+    }
+}
+document.addEventListener('DOMContentLoaded', function(){
+    if(currentId){
+        checkinExistingBook(currentId);
+    }
+});
 
 function checkinExistingBook(bookId){
     console.log(bookId);
@@ -90,6 +137,49 @@ function checkinExistingBook(bookId){
     currentModal.show();
     
 }
+function cancelConfirm(){
+    const thisModal = bootstrap.Modal.getInstance(document.getElementById('checkInBook'));
+
+    if(thisModal){
+      thisModal.hide();
+    }
+    const cancelModal = new bootstrap.Modal(document.getElementById('cancelConfirm'));
+    cancelModal.show();
+}
+async function cancelReserve() {
+  const transactionId = document.getElementById('booking-id').value;
+
+  try {
+    const response = await fetch('/transactions/cancel', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+      },
+      body: JSON.stringify({
+        transaction_id: transactionId,
+      }),
+    });
+
+    const result = await response.json();
+
+    if (response.ok) {
+      alert('Booking cancelled successfully!');
+      location.reload(); // Refresh page
+    } else {
+      alert('Error: ' + result.message);
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    alert('Failed to cancel reservation. Please try again.');
+  }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelector('#finalCancel').addEventListener('click', function() {
+    cancelReserve();
+  });
+});
 
 function check_in(){
     currentModal = bootstrap.Modal.getInstance(document.getElementById('checkInBook'));

@@ -12,10 +12,8 @@
 
 @section('content')  
     <script>
-        
+        current_id = @json($current_id ?? null);
         reserves = @json($reservation);
-        console.log(reserves);
-    
     </script>
     <div id="main-label">
         <img src="{{ asset('images/reserve2.svg') }}">
@@ -93,6 +91,7 @@
     @include('components.checkin-reserve-pay')
     @include('components.checkin-reserve')
     @include('components.confirm-cancel')
+    @include('components.cancel-transact-confirm')
 @endsection
 @section('extra-scripts')
     <script src="https://unpkg.com/html5-qrcode"></script>

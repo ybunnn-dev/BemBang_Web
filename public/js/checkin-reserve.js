@@ -74,6 +74,11 @@ function populateBookingModal(bookingData) {
        document.getElementById('payment-reference').textContent = payment.details.reference_no;
    }
 }
+document.addEventListener('DOMContentLoaded', function(){
+  if(current_id){
+      checkinExistingReserve(current_id);
+  }
+});
 
 function checkinExistingReserve(bookId){
    console.log(bookId);
@@ -107,6 +112,50 @@ function check_in(){
    newModal = new bootstrap.Modal(document.getElementById("checkin-reserve-payment-modal"));
    newModal.show();
 }
+
+function cancelConfirm(){
+    const thisModal = bootstrap.Modal.getInstance(document.getElementById('reserveCheckIn'));
+
+    if(thisModal){
+      thisModal.hide();
+    }
+    const cancelModal = new bootstrap.Modal(document.getElementById('cancelConfirm'));
+    cancelModal.show();
+}
+async function cancelReserve() {
+  const transactionId = document.getElementById('booking-id').value;
+
+  try {
+    const response = await fetch('/transactions/cancel', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+      },
+      body: JSON.stringify({
+        transaction_id: transactionId,
+      }),
+    });
+
+    const result = await response.json();
+
+    if (response.ok) {
+      alert('Reservation cancelled successfully!');
+      location.reload(); // Refresh page
+    } else {
+      alert('Error: ' + result.message);
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    alert('Failed to cancel reservation. Please try again.');
+  }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelector('#finalCancel').addEventListener('click', function() {
+    cancelReserve();
+  });
+});
 
 async function submitPayment() {
     try {
@@ -207,18 +256,6 @@ async function submitPayment() {
       // Consider showing more details to the user or implementing retry logic
     }
 }
-
-function approve(){
-   const currentModal = bootstrap.Modal.getInstance(document.getElementById('reserveCheckIn'));
-
-   if(currentModal){
-       currentModal.hide();
-   }
-   const approveModal = new bootstrap.Modal(document.getElementById('confirmApprove'));
-
-   approveModal.show();
-}
-
 // Function to update payment method selection
 function updatePaymentMethod(method) {
   selectedPaymentMethod = method;

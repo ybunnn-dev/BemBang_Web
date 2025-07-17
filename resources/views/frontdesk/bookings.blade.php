@@ -12,8 +12,13 @@
 
 @section('content')  
     <script>
-         books = @json($bookings);
-         console.log(books);
+        const currentId = @json($highlightId ?? null);
+        
+        document.addEventListener('DOMContentLoaded', function(){
+            console.log("yahoo:", currentId);
+        });
+        books = @json($bookings);
+        console.log(books);
     </script>
     <div id="main-label">
         <img src="{{ asset('images/booking2.svg') }}">
@@ -95,6 +100,8 @@
     @include('components.invoice-modal')
     @include('components.checkin-book', ['modalId' => 'checkInBook'])
     @include('components.confirm-checkin-book', ['modalId' => 'confirm-check-book'])
+    @include('components.cancel-transact-confirm')
+    @include('components.refund')
 @endsection
 
 @section('extra-scripts')

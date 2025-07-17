@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Frontdesk;
 
 use App\Http\Controllers\Controller;
 use App\Models\Rooms;
+use App\Models\Transaction;
+use App\Models\Guest;
 
 class FrontdeskDashboardController extends Controller
 {
@@ -11,6 +13,8 @@ class FrontdeskDashboardController extends Controller
     {
         // Get all rooms (or query only the needed fields)
         $rooms = Rooms::getAll();
+        $transactions = Transaction::getAllTransact();
+        $guests = Guest::allGuests();
 
         // Count rooms by status
         $roomCounts = [
@@ -20,6 +24,6 @@ class FrontdeskDashboardController extends Controller
             'cleaning'    => $rooms->where('status', 'cleaning')->count(),
         ];
 
-        return view('frontdesk.dashboard', compact('roomCounts'));
+        return view('frontdesk.dashboard', compact('roomCounts', 'transactions', 'guests'));
     }
 }

@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="reserveCheckInLabel">Booking Details</h4>
+                <h4 class="modal-title" id="reserveCheckInLabel">Reservation</h4>
                 <span class="ms-2 booking-id" id="booking-id-display">ID: 6ac7fb6e</span>
                 <h5 class="mb-0"><span class="badge" id="booking-status">Booked</span></h5>
             </div>
@@ -114,7 +114,7 @@
                 <hr>
                 <!-- Action Buttons inside modal body -->
                 <div class="action-buttons mt-4 d-flex justify-content-end gap-2">
-                    <button type="button" class="btn btn-danger" id="cancel-booking-btn">
+                    <button type="button" class="btn btn-danger" id="cancel-booking-btn" onclick="cancelConfirm()">
                         <i class="bi bi-x-circle"></i> Cancel Booking
                     </button>
                     <button type="button" class="btn btn-primary" id="edit-booking-btn" onclick="approve()">

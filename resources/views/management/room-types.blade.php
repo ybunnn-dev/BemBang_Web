@@ -5,6 +5,11 @@
 @endsection
 
 @section('content')
+    <script>
+        document.addEventListener('DOMContentLoaded', function(){
+            console.log(@json($roomTypes));
+        });
+    </script>
     <div id="main-label">
         <img src="{{ asset('images/bed-icon.svg') }}">
         <h3>Room Types</h3>
@@ -12,7 +17,7 @@
 
     <div class="main-container-flex">
         <div class="rooms-row1">
-            @foreach ($roomTypes->take(2) as $roomType) <!-- Fetch first 2 room types -->
+            @foreach ($roomTypes->take(2) as $roomType)
             <div class="card1" onclick="gotoSpecificType('{{ $roomType->_id }}')">
                     <div class="contents-flex">
                         <img src="{{ asset($roomType->images[0]) }}" width="140px" height="150px;">
@@ -21,7 +26,13 @@
                             <div class="bembang-values">
                                 <div class="ratings">
                                     <img src="{{ asset('images/star.svg') }}" width="18px" height="18px;">
-                                    <p>yawa</p>
+                                    <p>
+                                        @if(isset($roomType->average_rating))
+                                            {{ $roomType->average_rating }} ({{ count($roomType->reviews) }} Reviews)
+                                        @else
+                                            No reviews yet
+                                        @endif
+                                    </p>
                                 </div>
                                 <div class="guest-num">
                                     <img src="{{ asset('images/users.svg') }}" width="18px" height="18px;">
@@ -39,7 +50,7 @@
             @endforeach
         </div>
         <div class="rooms-row2">
-            @foreach ($roomTypes->skip(2)->take(2) as $roomType) <!-- Fetch next 2 room types -->
+            @foreach ($roomTypes->skip(2)->take(2) as $roomType)
                 <div class="card1" onclick="gotoSpecificType('{{ $roomType->_id }}')">
                     <div class="contents-flex">
                         <img src="{{ asset($roomType->images[0]) }}" width="140px" height="150px;">
@@ -48,7 +59,13 @@
                             <div class="bembang-values">
                                 <div class="ratings">
                                     <img src="{{ asset('images/star.svg') }}" width="18px" height="18px;">
-                                    <p>4.5 (200 Reviews)</p>
+                                    <p>
+                                        @if(isset($roomType->average_rating))
+                                            {{ $roomType->average_rating }} ({{ count($roomType->reviews) }} Reviews)
+                                        @else
+                                            No reviews yet
+                                        @endif
+                                    </p>
                                 </div>
                                 <div class="guest-num">
                                     <img src="{{ asset('images/users.svg') }}" width="18px" height="18px;">
@@ -66,7 +83,7 @@
             @endforeach
         </div>
         <div class="card5" onclick="gotoSpecificType('{{ $roomType->_id }}')">
-            @foreach ($roomTypes->skip(4)->take(1) as $roomType) <!-- Fetch remaining room type -->
+            @foreach ($roomTypes->skip(4)->take(1) as $roomType)
                 <div class="contents-flex">
                     <img src="{{ asset($roomType->images[0]) }}" width="140px" height="150px;">
                     <div class="type-labels">
@@ -74,7 +91,13 @@
                         <div class="bembang-values">
                             <div class="ratings">
                                 <img src="{{ asset('images/star.svg') }}" width="18px" height="18px;">
-                                <p>4.5 (500 Reviews)</p>
+                                <p>
+                                    @if(isset($roomType->average_rating))
+                                        {{ $roomType->average_rating }} ({{ count($roomType->reviews) }} Reviews)
+                                    @else
+                                        No reviews yet
+                                    @endif
+                                </p>
                             </div>
                             <div class="guest-num">
                                 <img src="{{ asset('images/users.svg') }}" width="18px" height="18px;">

@@ -14,15 +14,57 @@ use Illuminate\Support\Facades\Log;
 use MongoDB\BSON\ObjectId;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use MongoDB\Laravel\Eloquent\Model;
-
+use App\Models\Reviews;
 
 class RoomTypeController extends Controller{
     public function index()
     {
-        $roomTypes = MongoRoomType::getAllMongoRoomTypes();  // Custom method from the MongoRoomType model
-
-        // Return the data to the view
-        return view('management.room-types', compact('roomTypes'));
+        // Get all room types
+        $roomTypes = MongoRoomType::getAllMongoRoomTypes();
+        
+        $roomTypesWithReviews = [];
+        
+        foreach ($roomTypes as $roomType) {
+            try {
+                // Ensure we're passing a proper ID
+                $roomTypeId = is_array($roomType['_id']) ? $roomType['_id']['$oid'] : (string)$roomType['_id'];
+                
+                Log::info("Fetching reviews", ['room_id' => $roomTypeId]);
+                
+                // Get reviews for this room type
+                $reviews = Reviews::getReviews($roomTypeId);
+                
+                // Add reviews to room type data
+                $roomTypeWithReviews = $roomType;
+                $roomTypeWithReviews['reviews'] = $reviews;
+                
+                // Calculate average rating - handle both array and object access
+                $roomTypeWithReviews['average_rating'] = $reviews->avg(function($review) {
+                    // Check if review is array or object
+                    if (is_array($review)) {
+                        return (float)($review['rate'] ?? 0);
+                    } else {
+                        return (float)($review->rate ?? 0);
+                    }
+                });
+                
+                $roomTypesWithReviews[] = $roomTypeWithReviews;
+                
+            } catch (\Exception $e) {
+                Log::error("Error processing room", [
+                    'error' => $e->getMessage(),
+                    'room' => $roomType['_id'] ?? null
+                ]);
+                continue;
+            }
+        }
+        
+        // Convert the array to a Laravel Collection
+        $roomTypesCollection = collect($roomTypesWithReviews);
+        
+        return view('management.room-types', [
+            'roomTypes' => $roomTypesCollection
+        ]);
     }
     public function show($id)
     {
@@ -55,11 +97,13 @@ class RoomTypeController extends Controller{
                 }, $featureIds)
             )->get();
             
+            $reviews = Reviews::getReviews($id);
             $all_features = Features::getAllFeatures();
             return view('management.specific-type', [
                 'roomType' => $roomType,
                 'features' => $features,  // <-- Fixed: removed the incorrect $ prefix
-                'all_features' => $all_features
+                'all_features' => $all_features,
+                'rev' => $reviews
             ]);
             
         } catch (\Exception $e) {

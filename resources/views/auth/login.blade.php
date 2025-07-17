@@ -32,7 +32,7 @@
             <div id="logo-container">
                 <div id="logo">
                     <img src="{{ asset('images/hotel-logo.svg') }}" id="logo-hotel">
-                    <h1>Peter's</h1>
+                    <h1>Bembang</h1>
                     <h1>Hotel</h1>
                 </div>
             </div>
